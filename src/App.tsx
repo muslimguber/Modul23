@@ -22,9 +22,6 @@ import {
 } from 'lucide-react';
 import { Material, Theme, UserProgress } from './types';
 import { THEME_PRESETS, ALL_MATERIALS } from './constants';
-import { db, auth } from './lib/firebase';
-import { onAuthStateChanged, signInAnonymously } from 'firebase/auth';
-import { doc, getDoc, setDoc, serverTimestamp, collection, addDoc } from 'firebase/firestore';
 import { IconComponent } from './components/IconComponent';
 import { SidebarItem } from './components/SidebarItem';
 import { StatCard } from './components/StatCard';
@@ -94,27 +91,6 @@ const App = () => {
 
   // --- Effects ---
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        // Fetch progress from Firestore
-        const progressDoc = await getDoc(doc(db, 'progress', user.uid));
-        if (progressDoc.exists()) {
-          const data = progressDoc.data();
-          setProgress(prev => ({
-            ...prev,
-            completedMaterials: data.completedMaterials || [],
-            highScores: data.highScores || {},
-            quizHistory: data.quizHistory || [],
-            isIntroductionCompleted: data.isIntroductionCompleted || false,
-            username: data.username || prev.username
-          }));
-        }
-      }
-    });
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
     const savedUser = homeService.getUser();
     const savedClass = localStorage.getItem('ipa_user_class');
     const savedIsLoggedIn = localStorage.getItem('ipa_is_logged_in') === 'true';
@@ -160,23 +136,8 @@ const App = () => {
   }, [isLoggedIn, username, userClass]);
 
   useEffect(() => {
-    const syncProgress = async () => {
-      if (auth.currentUser && isLoggedIn) {
-        try {
-          await setDoc(doc(db, 'progress', auth.currentUser.uid), {
-            ...progress,
-            userId: auth.currentUser.uid,
-            updatedAt: serverTimestamp()
-          }, { merge: true });
-        } catch (error) {
-          console.error("Error syncing progress to Firebase:", error);
-        }
-      }
-    };
-    
     homeService.saveProgress(progress);
-    syncProgress();
-  }, [progress, isLoggedIn]);
+  }, [progress]);
 
   useEffect(() => {
     localStorage.setItem('ipa_theme', JSON.stringify(theme));
@@ -227,16 +188,11 @@ const App = () => {
   }, [progress.completedMaterials]);
 
   // --- Handlers ---
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (username.trim() && userClass.trim()) {
-      try {
-        if (!auth.currentUser) {
-          await signInAnonymously(auth);
-        }
-        
-        const currentUsername = username.trim();
-        const lastUser = localStorage.getItem('ipa_user');
+      const lastUser = localStorage.getItem('ipa_user');
+      const currentUsername = username.trim();
 
       // If user changed, reset progress
       if (lastUser && lastUser !== currentUsername) {
@@ -261,21 +217,10 @@ const App = () => {
       localStorage.setItem('ipa_user', currentUsername);
       localStorage.setItem('ipa_user_class', userClass);
       localStorage.setItem('ipa_is_logged_in', 'true');
-    } catch (error) {
-      console.error("Firebase Login Error:", error);
-      // Fallback for offline or errors
-      setIsLoggedIn(true);
-      setCurrentView('home');
-    }
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await auth.signOut();
-    } catch (e) {
-      console.error("Sign out error:", e);
-    }
+  const handleLogout = () => {
     setIsLoggedIn(false);
     setCurrentView('home');
     setSelectedMaterialId(null);
@@ -305,24 +250,7 @@ const App = () => {
   };
 
   const submitToRekap = async (materialTitle: string, score: number) => {
-    // 1. Submit to Google Form (existing)
-    googleFormService.submitQuizResult(username, userClass, materialTitle, score);
-
-    // 2. Backup to Firestore
-    if (auth.currentUser) {
-      try {
-        await addDoc(collection(db, 'results'), {
-          userId: auth.currentUser.uid,
-          name: username,
-          userClass: userClass,
-          quizName: materialTitle,
-          score: score,
-          submittedAt: serverTimestamp()
-        });
-      } catch (error) {
-        console.error("Error saving result to Firebase:", error);
-      }
-    }
+    await googleFormService.submitQuizResult(username, userClass, materialTitle, score);
   };
 
   const handleAnswer = (questionId: number, optionId: string) => {
@@ -415,6 +343,13 @@ const App = () => {
       setPasswordInput('');
       setPasswordError(false);
     }
+  };
+
+  const handleModuleRedirect = (num: number, pageNum?: number) => {
+    if (pageNum !== undefined) {
+      localStorage.setItem(`ipa_modul_${num}_active_page`, pageNum.toString());
+    }
+    openModule(num);
   };
 
   const handlePasswordSubmit = (e: React.FormEvent) => {
@@ -737,6 +672,7 @@ const App = () => {
                     userClass={userClass}
                     searchQuery={searchQuery}
                     moduleNumber={activeModule}
+                    onRedirect={handleModuleRedirect}
                     onComplete={() => {
                       setProgress(prev => ({ ...prev, isIntroductionCompleted: true }));
                       setCurrentView('home');
@@ -744,25 +680,25 @@ const App = () => {
                   />
                 )}
                 {activeModule === 2 && (
-                  <Modul2 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onComplete={() => setCurrentView('home')} />
+                  <Modul2 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
                 )}
                 {activeModule === 3 && (
-                  <Modul3 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onComplete={() => setCurrentView('home')} />
+                  <Modul3 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
                 )}
                 {activeModule === 4 && (
-                  <Modul4 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onComplete={() => setCurrentView('home')} />
+                  <Modul4 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
                 )}
                 {activeModule === 5 && (
-                  <Modul5 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onComplete={() => setCurrentView('home')} />
+                  <Modul5 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
                 )}
                 {activeModule === 6 && (
-                  <Modul6 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onComplete={() => setCurrentView('home')} />
+                  <Modul6 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
                 )}
                 {activeModule === 7 && (
-                  <Modul7 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onComplete={() => setCurrentView('home')} />
+                  <Modul7 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
                 )}
                 {activeModule === 8 && (
-                  <Modul8 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onComplete={() => setCurrentView('home')} />
+                  <Modul8 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
                 )}
               </motion.div>
             )}

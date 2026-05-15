@@ -25,6 +25,7 @@ const PRAISES = [
 interface Page {
   id: number;
   title: string;
+  titleSize?: 'sm' | 'base' | 'lg' | 'xl' | '2xl';
   content: string;
   triggerQuestion?: string;
   videoUrl?: string;
@@ -34,7 +35,14 @@ interface Page {
   sheetUrl?: string;
   quiz?: {
     question: string;
-    options: { id: string; text: string; isCorrect: boolean }[];
+    options: { 
+      id: string; 
+      text: string; 
+      isCorrect: boolean;
+      redirectModule?: number;
+      redirectPage?: number;
+      customMessage?: string;
+    }[];
   };
 }
 
@@ -50,6 +58,7 @@ interface ModuleBaseProps {
   moduleNumber: number;
   searchQuery?: string;
   onComplete: () => void;
+  onRedirect?: (moduleNum: number, pageNum?: number) => void;
   service: {
     getIntroduction: () => ModuleData;
   };
@@ -62,6 +71,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
   moduleNumber, 
   searchQuery, 
   onComplete,
+  onRedirect,
   service 
 }) => {
   const data = React.useMemo(() => service.getIntroduction(), [service]);
@@ -88,11 +98,13 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
     show: boolean; 
     type: 'success' | 'error'; 
     praise?: string;
-    message: string 
+    message: string;
+    hideScore?: boolean;
   }>({
     show: false,
     type: 'success',
-    message: ''
+    message: '',
+    hideScore: false
   });
 
   // Load persistence
@@ -135,11 +147,25 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
     
     if (option?.isCorrect) {
       const isSpecificTransition = moduleNumber === 1 && activePage === 0;
+      
+      // Check for custom message or specific redirection message
+      let message = 'Jawabanmu benar! Kamu mendapatkan nilai 100.';
+      let praise = isSpecificTransition ? 'AYO MULAI BELAJAR' : PRAISES[Math.floor(Math.random() * PRAISES.length)];
+      
+      if (option.customMessage) {
+        message = option.customMessage;
+        praise = 'Perhatian!';
+      } else if (option.redirectModule) {
+        message = `ayo kita kerjakan modul ${option.redirectModule} terlebih dahulu`;
+        praise = 'Mulai Modul Lain';
+      }
+
       setShowPopup({
         show: true,
         type: 'success',
-        praise: isSpecificTransition ? 'AYO MULAI BELAJAR' : PRAISES[Math.floor(Math.random() * PRAISES.length)],
-        message: ''
+        praise: praise,
+        message: message,
+        hideScore: !!(option.redirectModule || option.customMessage)
       });
       setCompletedPages(prev => prev.includes(activePage) ? prev : [...prev, activePage]);
     } else {
@@ -154,6 +180,15 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
 
   const handlePopupClick = () => {
     if (showPopup.type === 'success') {
+      const currentPage = data.pages[activePage];
+      const selectedOption = currentPage.quiz?.options.find(o => o.id === quizSelected);
+      
+      if (selectedOption?.redirectModule && onRedirect) {
+        onRedirect(selectedOption.redirectModule, selectedOption.redirectPage);
+        setShowPopup(prev => ({ ...prev, show: false }));
+        return;
+      }
+
       if (activePage < data.pages.length - 1) {
         setActivePage(activePage + 1);
         setQuizActive(false);
@@ -366,7 +401,15 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
             >
               <div className="bg-white/70 backdrop-blur-md p-6 md:p-8 rounded-[2rem] border-2 border-white/60 shadow-xl max-w-2xl mx-auto space-y-6">
                 <div className="text-center space-y-3">
-                  <h1 className="text-2xl font-black text-slate-800 uppercase tracking-tight">{currentPage.title}</h1>
+                  <h1 className={`font-black text-slate-800 uppercase tracking-tight ${
+                    currentPage.titleSize === 'sm' ? 'text-sm' :
+                    currentPage.titleSize === 'base' ? 'text-base' :
+                    currentPage.titleSize === 'lg' ? 'text-lg' :
+                    currentPage.titleSize === 'xl' ? 'text-xl' :
+                    'text-2xl'
+                  }`}>
+                    {currentPage.title}
+                  </h1>
                   {currentPage.triggerQuestion && (
                     <p className="text-sm font-bold italic text-slate-800">"{currentPage.triggerQuestion}"</p>
                   )}
@@ -497,27 +540,33 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                 showPopup.type === 'success' ? '' : 'w-24 h-24 rounded-full bg-rose-50 text-rose-600 border-4 border-rose-100'
               }`}>
                 {showPopup.type === 'success' ? (
-                  <>
-                    <motion.div
-                      initial={{ rotate: -20, scale: 0.5 }}
-                      animate={{ rotate: -10, scale: 1 }}
-                      transition={{ type: 'spring', delay: 0.2 }}
-                    >
-                      <Trophy size={48} className="text-amber-400 fill-amber-400/20" />
-                    </motion.div>
-                    
-                    <div className="relative -ml-2">
-                      <span className="text-8xl font-black italic tracking-tighter" style={{ color: theme.accent, filter: 'brightness(0.8)' }}>100</span>
-                    </div>
+                  !showPopup.hideScore ? (
+                    <>
+                      <motion.div
+                        initial={{ rotate: -20, scale: 0.5 }}
+                        animate={{ rotate: -10, scale: 1 }}
+                        transition={{ type: 'spring', delay: 0.2 }}
+                      >
+                        <Trophy size={48} className="text-amber-400 fill-amber-400/20" />
+                      </motion.div>
+                      
+                      <div className="relative -ml-2">
+                        <span className="text-8xl font-black italic tracking-tighter" style={{ color: theme.accent, filter: 'brightness(0.8)' }}>100</span>
+                      </div>
 
-                    <motion.div
-                      initial={{ rotate: 20, scale: 0.5 }}
-                      animate={{ rotate: 10, scale: 1 }}
-                      transition={{ type: 'spring', delay: 0.2 }}
-                    >
-                      <Trophy size={48} className="text-amber-400 fill-amber-400/20" />
-                    </motion.div>
-                  </>
+                      <motion.div
+                        initial={{ rotate: 20, scale: 0.5 }}
+                        animate={{ rotate: 10, scale: 1 }}
+                        transition={{ type: 'spring', delay: 0.2 }}
+                      >
+                        <Trophy size={48} className="text-amber-400 fill-amber-400/20" />
+                      </motion.div>
+                    </>
+                  ) : (
+                    <div className="w-24 h-24 rounded-full bg-emerald-50 text-emerald-600 border-4 border-emerald-100 flex items-center justify-center">
+                      <CheckCircle2 size={48} />
+                    </div>
+                  )
                 ) : <X size={48} />}
               </div>
               <h3 className={`text-4xl font-black mb-2`} style={{ color: showPopup.type === 'success' ? theme.accent : '#9f1239', filter: showPopup.type === 'success' ? 'brightness(0.6)' : 'none' }}>

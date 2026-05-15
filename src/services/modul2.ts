@@ -9,14 +9,15 @@ export const modul2Service = {
       {
         id: 0,
         title: "APAKAH NILAI MODUL 1 MU SUDAH ADA? JIKA BELUM ADA SEGERA SELESAIKAN MODUL 1",
+        titleSize: 'sm',
         isSheet: true,
         sheetUrl: "https://docs.google.com/spreadsheets/d/1PQywXD1s-NPxnJPzw_vinTG-lvYn24FBQsLP-_LazeY/preview",
-        content: "Silakan cek pada tabel rekap di bawah ini untuk memastikan nilai Modul 1 kamu sudah terekam. Jika belum ada, pastikan kamu telah mengirim nilai di akhir kuis Modul 1.",
+        content: "Jika Nilaimu belum masuk, kerjakan MODUL 1 terlebih dahulu hingga selesai...",
         quiz: {
           question: "Apakah kamu sudah mengecek namamu?",
           options: [
             { id: 'A', text: "Sudah, lanjut ke materi", isCorrect: true },
-            { id: 'B', text: "Sudah, saya akan cek lagi nanti", isCorrect: true }
+            { id: 'B', text: "Saya belum mengerjakan Modul 1", isCorrect: true, redirectModule: 1, redirectPage: 0 }
           ]
         }
       },

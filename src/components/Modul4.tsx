@@ -10,6 +10,7 @@ interface ModulProps {
   moduleNumber: number;
   searchQuery?: string;
   onComplete: () => void;
+  onRedirect?: (moduleNum: number, pageNum?: number) => void;
 }
 
 export const Modul4: React.FC<ModulProps> = (props) => (
