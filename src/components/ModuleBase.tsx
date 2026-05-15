@@ -327,12 +327,14 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                     onLevelChange={(lvl) => setGameLevel(lvl)}
                     onGameComplete={(isFullComplete) => {
                       setCompletedPages(prev => prev.includes(activePage) ? prev : [...prev, activePage]);
-                      setShowPopup({
-                        show: true,
-                        type: 'success',
-                        praise: isFullComplete ? 'KAMU SANG JUARA' : PRAISES[Math.floor(Math.random() * PRAISES.length)],
-                        message: isFullComplete ? 'Luar biasa, ingatanmu sangat tajam!' : ''
-                      });
+                      if (isFullComplete) {
+                        setShowPopup({
+                          show: true,
+                          type: 'success',
+                          praise: 'KAMU SANG JUARA',
+                          message: 'Luar biasa! Kamu telah menyelesaikan semua level. Ayo lanjut ke Kuis Akhir Modul 2.'
+                        });
+                      }
                     }}
                   />
                   
