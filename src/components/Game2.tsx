@@ -45,6 +45,7 @@ const LEVEL_CONFIG: Record<number, { pairs: number; title: string }> = {
 interface Game2Props {
   onGameComplete: (isFullComplete?: boolean) => void;
   onLevelChange?: (level: number) => void;
+  searchQuery?: string;
 }
 
 const shuffle = <T,>(arr: T[]): T[] => {
@@ -56,7 +57,7 @@ const shuffle = <T,>(arr: T[]): T[] => {
   return newArr;
 };
 
-export const Game2: React.FC<Game2Props> = ({ onGameComplete, onLevelChange }) => {
+export const Game2: React.FC<Game2Props> = ({ onGameComplete, onLevelChange, searchQuery }) => {
   const [level, setLevel] = useState(1);
   const [unlockedLevels, setUnlockedLevels] = useState(1);
   const [cards, setCards] = useState<Card[]>([]);
@@ -66,6 +67,15 @@ export const Game2: React.FC<Game2Props> = ({ onGameComplete, onLevelChange }) =
   const [status, setStatus] = useState('Siap mengasah ingatan?');
   const [gameStarted, setGameStarted] = useState(false);
   const timerRef = React.useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (searchQuery === 'xgame2') {
+      setUnlockedLevels(10);
+      setLevel(10);
+      setStatus('🏆 Juara! Mengasah Ingatan Selesai!');
+      onGameComplete(true);
+    }
+  }, [searchQuery, onGameComplete]);
 
   const initGame = useCallback((lvl: number) => {
     if (timerRef.current) clearInterval(timerRef.current);

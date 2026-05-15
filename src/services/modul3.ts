@@ -4,6 +4,20 @@ export const modul3Service = {
     pages: [
       {
         id: 0,
+        title: "NILAI MODUL 2",
+        isSheet: true,
+        sheetUrl: "https://docs.google.com/spreadsheets/d/1BzZ1lxqbmbY36KLjKMpIdItHvcj0S4RR2CgXVhf8f3w/preview",
+        content: "Jika belum ada nilai modul 2 maka kerjakan modul 2 terlebih dahulu",
+        quiz: {
+          question: "Apakah kamu sudah mengecek namamu?",
+          options: [
+            { id: 'A', text: "Sudah, lanjut ke materi", isCorrect: true },
+            { id: 'B', text: "Saya belum mengerjakan Modul 2", isCorrect: true, redirectModule: 2, redirectPage: 0 }
+          ]
+        }
+      },
+      {
+        id: 1,
         title: "📖 PERSIAPAN SEBELUM BERKEBUN",
         content: "Berkebun tidak dimulai saat menanam benih, tetapi dimulai dari persiapan yang baik. Tanaman akan tumbuh subur jika tanah, pupuk, dan alat yang digunakan dipersiapkan dengan benar. Dengan persiapan yang baik, tanaman menjadi lebih sehat, mudah dirawat, dan hasil panennya lebih bagus.",
         quiz: {
@@ -17,7 +31,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 1,
+        id: 2,
         title: "🌱 Mengolah Tanah Sebelum Menanam",
         content: "Tanah adalah tempat hidup tanaman. Karena itu, tanah perlu diolah agar gembur dan memiliki cukup unsur hara.\n\nLangkah sederhana mengolah tanah:\n• Bersihkan rumput liar, batu, atau sampah dari tanah\n• Cangkul atau aduk tanah agar tidak keras\n• Campurkan tanah dengan pupuk kompos atau pupuk kandang\n• Diamkan tanah selama beberapa hari agar unsur haranya menyatu dengan baik\n\nTanah yang gembur membantu akar tanaman tumbuh lebih kuat dan mudah menyerap air.",
         quiz: {
@@ -31,7 +45,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 2,
+        id: 3,
         title: "♻️ Membuat Pupuk Kompos dari Limbah Rumah Tangga",
         content: "Sisa dapur ternyata dapat dijadikan pupuk alami yang baik untuk tanaman. Selain mengurangi sampah, kompos juga membuat tanah menjadi lebih subur.\n\nBahan yang bisa dijadikan kompos:\n• Kulit buah\n• Sisa sayuran\n• Daun kering\n• Ampas teh atau kopi\n• Air cucian beras\n\nCara sederhana membuat kompos:\n1. Siapkan ember atau wadah tertutup\n2. Masukkan sampah sayur, daun kering, dan kulit buah\n3. Siram sedikit air cucian beras agar proses pembusukan lebih cepat\n4. Aduk sesekali\n5. Setelah beberapa minggu, bahan akan berubah menjadi kompos berwarna gelap dan tidak berbau menyengat\n\nKompos membantu tanah menjadi lebih subur secara alami.",
         quiz: {
@@ -45,7 +59,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 3,
+        id: 4,
         title: "🌿 MEMBUAT PUPUK ALAMI DARI BAHAN DI SEKITAR RUMAH",
         content: "Banyak bahan di sekitar rumah yang sebenarnya dapat dimanfaatkan menjadi pupuk alami untuk tanaman. Sisa dapur yang sering dibuang ternyata mengandung zat yang baik untuk membantu pertumbuhan tanaman. Dengan membuat pupuk sendiri, kita dapat mengurangi sampah rumah tangga sekaligus menyuburkan tanaman secara alami.\n\nPupuk alami biasanya lebih aman bagi tanah dan tanaman karena tidak mengandung bahan kimia berlebihan. Selain itu, bahan-bahannya mudah ditemukan dan biaya pembuatannya lebih murah.\n\n🥬 Pupuk dari Sisa Sayur dan Daun\nSisa sayur, daun kering, dan kulit buah dapat diolah menjadi kompos sederhana.\n\nBahan yang digunakan:\n• Sisa sayuran\n• Daun kering\n• Kulit buah\n• Sedikit tanah\n• Air secukupnya\n\nCara membuat:\n1. Siapkan ember atau wadah tertutup\n2. Masukkan sisa sayur dan daun kering secara bergantian\n3. Tambahkan sedikit tanah agar proses pembusukan lebih cepat\n4. Siram sedikit air agar tetap lembap\n5. Tutup wadah dan aduk setiap beberapa hari\n6. Setelah beberapa minggu, bahan akan berubah menjadi kompos berwarna gelap dan tidak berbau menyengat\n\nKompos ini dapat dicampurkan ke tanah agar tanaman tumbuh lebih subur.",
         quiz: {
@@ -59,7 +73,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 4,
+        id: 5,
         title: "🍚 Air Cucian Beras sebagai Pupuk Cair",
         content: "Air cucian beras mengandung zat yang bermanfaat bagi tanaman. Air ini dapat digunakan sebagai pupuk cair alami.\n\nCara menggunakan:\n• Tampung air cucian beras pertama atau kedua\n• Diamkan selama 1–2 hari\n• Siramkan ke tanah tanaman secukupnya\n\nManfaat air cucian beras:\n• Membantu menyuburkan tanah\n• Membantu pertumbuhan akar tanaman\n• Menambah nutrisi alami bagi tanaman\n\nNamun, air cucian beras tidak boleh digunakan terlalu banyak agar tanah tidak menjadi terlalu lembap.",
         quiz: {
@@ -73,7 +87,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 5,
+        id: 6,
         title: "🍌 Pupuk dari Kulit Pisang",
         content: "Kulit pisang mengandung kalium yang baik for pertumbuhan tanaman, terutama membantu pembentukan bunga and buah.\n\nCara membuat:\n1. Potong kecil-kecil kulit pisang\n2. Rendam dalam air selama beberapa hari\n3. Gunakan air rendaman untuk menyiram tanaman\n\nKulit pisang juga dapat dicampurkan langsung ke dalam tanah atau kompos.\n\nManfaat pupuk kulit pisang:\n• Membantu pertumbuhan bunga dan buah\n• Menambah unsur hara pada tanah\n• Mengurangi sampah organik rumah tangga",
         quiz: {
@@ -87,7 +101,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 6,
+        id: 7,
         title: "🥚 Kulit Telur sebagai Sumber Kalsium",
         content: "Kulit telur dapat dimanfaatkan sebagai pupuk alami karena mengandung kalsium yang baik bagi tanaman.\n\nCara membuat:\n1. Cuci kulit telur hingga bersih\n2. Jemur sampai kering\n3. Tumbuk hingga halus\n4. Taburkan di sekitar tanaman atau campurkan ke tanah\n\nManfaat kulit telur:\n• Menambah kalsium pada tanah\n• Membantu pertumbuhan akar dan batang\n• Membantu mengurangi keasaman tanah tertentu",
         quiz: {
@@ -101,7 +115,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 7,
+        id: 8,
         title: "🌾 Manfaat Menggunakan Pupuk Alami",
         content: "Menggunakan pupuk alami memiliki banyak manfaat, antara lain:\n• Mengurangi sampah rumah tangga\n• Membantu menyuburkan tanah secara alami\n• Mengurangi penggunaan bahan kimia berlebihan\n• Membantu tanaman tumbuh lebih sehat\n• Menghemat biaya berkebun\n\nDengan memanfaatkan bahan-bahan di sekitar rumah, kita dapat belajar bahwa sampah organik masih memiliki manfaat bagi kehidupan.",
         quiz: {
@@ -115,7 +129,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 8,
+        id: 9,
         title: "🌾 Mengenal Sekam dan Manfaatnya",
         content: "Sekam adalah kulit padi yang terpisah saat padi digiling. Sekam sering dicampurkan ke tanah untuk membantu tanaman tumbuh lebih baik.\n\nManfaat sekam:\n• Membuat tanah lebih gembur\n• Membantu tanah menyimpan air\n• Membuat akar tanaman lebih mudah berkembang\n• Mengurangi tanah menjadi terlalu padat\n\nSekam biasanya dicampurkan bersama tanah dan pupuk kompos.",
         quiz: {
@@ -129,7 +143,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 9,
+        id: 10,
         title: "🐄 Mengenal Pupuk Kandang",
         content: "Pupuk kandang berasal dari kotoran hewan seperti sapi, kambing, atau ayam yang sudah difermentasi atau dikeringkan.\n\nManfaat pupuk kandang:\n• Menambah unsur hara pada tanah\n• Membantu tanaman tumbuh lebih cepat\n• Membuat tanah lebih subur dalam waktu lama\n\nPupuk kandang yang digunakan sebaiknya sudah matang agar tidak merusak tanaman.",
         quiz: {
@@ -143,7 +157,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 10,
+        id: 11,
         title: "🛠️ Alat-Alat yang Perlu Disiapkan untuk Berkebun",
         content: "Beberapa alat sederhana yang biasa digunakan dalam berkebun:\n• Cangkul kecil atau sekop tangan — untuk menggemburkan tanah\n• Pot atau polybag — tempat menanam tanaman\n• Gembor atau penyiram air — untuk menyiram tanaman\n• Sarung tangan — melindungi tangan saat berkebun\n• Ember — tempat mencampur tanah dan pupuk\n• Sprayer kecil — untuk menyemprot pupuk cair atau mengatasi hama ringan\n\nDengan alat yang sederhana, berkebun tetap bisa dilakukan di rumah.",
         quiz: {
@@ -157,7 +171,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 11,
+        id: 12,
         title: "🌿 Langkah-Langkah Dasar Berkebun",
         content: "1. Menentukan tanaman yang akan ditanam\n2. Menyiapkan pot atau polybag\n3. Mengolah tanah dan mencampur pupuk\n4. Menanam benih\n5. Menyiram tanaman secara teratur\n6. Memberi pupuk tambahan jika diperlukan\n7. Membersihkan rumput liar atau daun kering\n8. Memanen tanaman saat sudah siap dipetik",
         quiz: {
@@ -171,7 +185,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 12,
+        id: 13,
         title: "🥬 Contoh Praktik Berkebun: Menanam Bayam di Pot",
         content: "Bayam termasuk tanaman yang mudah ditanam dan cepat dipanen. Tanaman ini cocok untuk anak-anak yang baru belajar berkebun.\n\n🌱 Menyiapkan Media Tanam\nBahan yang diperlukan:\n• Tanah gembur\n• Sekam\n• Pupuk kompos atau pupuk kandang\n• Pot atau polybag\n\nCampurkan:\n• 2 bagian tanah\n• 1 bagian sekam\n• 1 bagian kompos atau pupuk kandang\nAduk hingga merata lalu masukkan ke dalam pot.",
         quiz: {
@@ -185,7 +199,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 13,
+        id: 14,
         title: "🛒 Membeli Benih",
         content: "Benih bayam dapat dibeli di toko pertanian dengan harga yang terjangkau. Pilih benih yang masih baru dan kemasannya tidak rusak.",
         quiz: {
@@ -199,7 +213,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 14,
+        id: 15,
         title: "🌱 Cara Menanam Bayam",
         content: "1. Buat lubang kecil di permukaan tanah\n2. Taburkan beberapa benih bayam secara merata\n3. Tutup tipis dengan tanah\n4. Siram perlahan menggunakan air secukupnya\n\nLetakkan pot di tempat yang terkena sinar matahari.",
         quiz: {
@@ -213,7 +227,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 15,
+        id: 16,
         title: "💧 Perawatan Tanaman Bayam",
         content: "• Siram pagi atau sore hari agar tanah tetap lembap\n• Jangan menyiram terlalu banyak agar akar tidak membusuk\n• Bersihkan rumput liar di sekitar tanaman\n• Tambahkan kompos atau pupuk cair alami setiap 1–2 minggu sekali\n• Pastikan tanaman mendapat cahaya matahari yang cukup\n\nBayam biasanya sudah dapat dipanen dalam waktu sekitar 3–4 minggu setelah ditanam.",
         quiz: {
@@ -227,7 +241,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 16,
+        id: 17,
         title: "🌟 Pelajaran dari Berkebun",
         content: "Berkebun mengajarkan kita untuk sabar, disiplin, dan bertanggung jawab. Dari sebuah benih kecil, kita belajar bahwa tanaman membutuhkan perhatian dan perawatan agar dapat tumbuh dengan baik dan memberi manfaat bagi kehidupan manusia.",
         quiz: {
@@ -241,7 +255,7 @@ export const modul3Service = {
         }
       },
       {
-        id: 17,
+        id: 18,
         title: "Kuis Akhir Modul 3",
         isFinalQuiz: true,
         content: "Selamat! Kamu telah menyelesaikan materi Persiapan Sebelum Berkebun. Mari uji pemahamanmu secara menyeluruh."

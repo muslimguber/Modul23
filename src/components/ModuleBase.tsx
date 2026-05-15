@@ -323,6 +323,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
               ) : Number(moduleNumber) === 2 ? (
                 <div className="space-y-6">
                   <Game2 
+                    searchQuery={searchQuery}
                     onLevelChange={(lvl) => setGameLevel(lvl)}
                     onGameComplete={(isFullComplete) => {
                       setCompletedPages(prev => prev.includes(activePage) ? prev : [...prev, activePage]);
