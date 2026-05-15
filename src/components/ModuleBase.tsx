@@ -80,8 +80,17 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
   const [completedPages, setCompletedPages] = useState<number[]>([]);
   const [quizActive, setQuizActive] = useState<boolean>(false);
   const [quizSelected, setQuizSelected] = useState<string | null>(null);
+  const [quizDelay, setQuizDelay] = useState(false);
   
   const quizRef = React.useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setQuizDelay(true);
+    const timer = setTimeout(() => {
+      setQuizDelay(false);
+    }, 10000);
+    return () => clearTimeout(timer);
+  }, [activePage, moduleNumber]);
 
   useEffect(() => {
     if (quizActive && quizRef.current) {
@@ -304,7 +313,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
 
                     <ThemeButton
                       theme={theme}
-                      disabled={gameLevel < 4}
+                      disabled={gameLevel < 4 || quizDelay}
                       onClick={() => {
                         setCompletedPages(prev => prev.includes(activePage) ? prev : [...prev, activePage]);
                         if (activePage < data.pages.length - 1) {
@@ -354,7 +363,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
 
                     <ThemeButton
                       theme={theme}
-                      disabled={gameLevel < 4}
+                      disabled={gameLevel < 4 || quizDelay}
                       onClick={() => {
                         setCompletedPages(prev => prev.includes(activePage) ? prev : [...prev, activePage]);
                         if (activePage < data.pages.length - 1) {
@@ -379,6 +388,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                 <div className="mt-8 flex justify-center">
                   <ThemeButton 
                     theme={theme}
+                    disabled={quizDelay}
                     onClick={() => {
                       setCompletedPages(prev => prev.includes(activePage) ? prev : [...prev, activePage]);
                       setShowPopup({
@@ -388,6 +398,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                         message: ''
                       });
                     }}
+                    className="disabled:opacity-50"
                   >
                     Selesaikan Game & Lanjut
                   </ThemeButton>
@@ -456,8 +467,9 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                   {currentPage.quiz && (
                     <ThemeButton 
                       theme={theme}
+                      disabled={quizDelay}
                       onClick={() => setQuizActive(!quizActive)}
-                      className="flex-[2] px-2 text-sm sm:text-base py-3"
+                      className="flex-[2] px-2 text-sm sm:text-base py-3 disabled:opacity-50"
                     >
                       {completedPages.includes(activePage) 
                         ? (quizActive ? 'Tutup Tantangan' : 'Lihat Tantangan')
@@ -470,11 +482,12 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                   {completedPages.includes(activePage) && activePage < data.pages.length - 1 && (
                     <ThemeButton
                       theme={theme}
+                      disabled={quizDelay}
                       onClick={() => {
                         setActivePage(activePage + 1);
                         setQuizActive(false);
                       }}
-                      className="flex-1 px-2 text-sm sm:text-base py-3"
+                      className="flex-1 px-2 text-sm sm:text-base py-3 disabled:opacity-50"
                     >
                       <span className="hidden xs:inline text-white">LANJUT</span>
                       <ChevronRight size={18} className="text-white" />

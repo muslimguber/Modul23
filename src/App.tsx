@@ -170,7 +170,7 @@ const App = () => {
   const isTeacher = username.toLowerCase() === 'gurusmp';
   const modulePasswords: Record<number, string> = {
     2: '121212',
-    3: '121212',
+    3: '133133',
     4: '121212',
     5: '121212',
     6: '121212',
