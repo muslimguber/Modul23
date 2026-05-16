@@ -443,6 +443,29 @@ const App = () => {
             </button>
           </div>
 
+          {/* User Profile */}
+          <div className="flex items-center justify-between mb-3 px-2 py-1.5 bg-white/5 rounded-xl border border-white/5 shadow-inner">
+            <div className="flex items-center gap-2 overflow-hidden">
+              <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                <User size={14} className="opacity-70" />
+              </div>
+              <div className="flex flex-col overflow-hidden text-left">
+                <span className="text-[8px] opacity-40 font-black uppercase tracking-widest leading-none mb-0.5">Pengguna</span>
+                <span className="text-xs font-black truncate opacity-90 leading-none">{username}</span>
+              </div>
+            </div>
+            <button 
+              onClick={() => {
+                setShowLogoutConfirm(true);
+                setSidebarOpen(false);
+              }}
+              className="p-1.5 rounded-lg hover:bg-rose-500/20 text-rose-400/60 hover:text-rose-400 transition-all flex-shrink-0"
+              title="Keluar Sesi"
+            >
+              <LogOut size={16} />
+            </button>
+          </div>
+
           {/* Header Quick Menu (Icons Only) */}
           <div className="flex gap-1 mb-2">
             <button 
@@ -586,41 +609,31 @@ const App = () => {
           )}
         </div>
 
-        {/* Sidebar Footer (Compact) */}
-        <div className="border-t border-white/10">
-          <div className="px-1.5 pb-12 pt-2 flex items-center justify-around gap-0.5">
+        {/* Sidebar Footer (Prominent) */}
+        <div className="border-t border-white/10 px-3 py-4 pb-12">
+          <div className="flex gap-2">
             <button 
               onClick={() => {
                 setShowThemeEditor(true);
                 setSidebarOpen(false);
               }}
-              className="p-1.5 rounded-lg hover:bg-white/10 transition-all opacity-60 hover:opacity-100"
+              className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all text-xs font-black uppercase tracking-wider opacity-80 hover:opacity-100"
               title="Editor Tema"
             >
-              <Palette size={16} />
+              <Palette size={14} />
+              <span>Tema</span>
             </button>
             <button 
               onClick={() => {
                 setShowAbout(true);
                 setSidebarOpen(false);
               }}
-              className="p-1.5 rounded-lg hover:bg-white/10 transition-all opacity-60 hover:opacity-100"
+              className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all opacity-60 hover:opacity-100"
               title="Tentang Aplikasi"
             >
               <Info size={16} />
             </button>
-            <button 
-              onClick={() => {
-                setShowLogoutConfirm(true);
-                setSidebarOpen(false);
-              }}
-              className="p-1.5 rounded-lg hover:bg-red-500/10 text-white hover:text-red-400 transition-all opacity-60 hover:opacity-100"
-              title="Keluar Sesi"
-            >
-              <LogOut size={16} />
-            </button>
           </div>
-          <div className="h-12" />
         </div>
       </motion.aside>
 
