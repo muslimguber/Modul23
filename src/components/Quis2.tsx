@@ -297,10 +297,11 @@ export const Quis2: React.FC<Quis2Props> = ({ theme, username, userClass, onComp
 
               <ThemeButton 
                 theme={theme}
-                variant="ghost"
+                variant={submitStatus?.success ? "primary" : "ghost"}
                 fullWidth
                 disabled={!submitStatus?.success}
                 className={!submitStatus?.success ? 'opacity-50 grayscale cursor-not-allowed' : ''}
+                style={submitStatus?.success ? { backgroundColor: theme.bgMain, background: theme.bgMain, color: '#ffffff' } : {}}
                 onClick={() => {
                   window.open('https://s.shopee.co.id/9ALT8cHtu6', '_blank');
                   onComplete(calculateScore());
@@ -373,12 +374,16 @@ export const Quis2: React.FC<Quis2Props> = ({ theme, username, userClass, onComp
       <div className="flex justify-between items-center gap-4">
         <ThemeButton
           theme={theme}
-          variant="ghost"
           onClick={prevQuestion}
           disabled={currentIndex === 0}
+          className={`${currentIndex === 0 ? 'opacity-50 grayscale cursor-not-allowed' : ''} flex items-center gap-2`}
+          style={currentIndex > 0 
+            ? { backgroundColor: theme.bgMain, background: theme.bgMain, color: '#ffffff' } 
+            : { color: '#94a3b8', border: '2px solid #e2e8f0', backgroundColor: '#f1f5f9' }
+          }
         >
-          <ChevronLeft />
-          <span>Kembali</span>
+          <ChevronLeft size={16} />
+          <span>Sebelumnya</span>
         </ThemeButton>
 
         {currentIndex === totalQuestions - 1 ? (
@@ -387,19 +392,22 @@ export const Quis2: React.FC<Quis2Props> = ({ theme, username, userClass, onComp
             onClick={handleFinish}
             disabled={answeredCount < totalQuestions}
             fullWidth
-            className="flex-1"
+            className="flex-1 flex items-center justify-center gap-2"
+            style={{ backgroundColor: theme.bgMain, background: theme.bgMain, color: '#ffffff' }}
           >
-            Selesaikan Kuis
+            <span>Selesaikan Kuis</span>
+            <CheckCircle2 size={16} />
           </ThemeButton>
         ) : (
           <ThemeButton
             theme={theme}
             onClick={nextQuestion}
             fullWidth
-            className="flex-1"
+            className="flex-1 flex items-center justify-center gap-2"
+            style={{ backgroundColor: theme.bgMain, background: theme.bgMain, color: '#ffffff' }}
           >
-            <span>Lanjut</span>
-            <ChevronRight />
+            <span>Selanjutnya</span>
+            <ChevronRight size={16} />
           </ThemeButton>
         )}
       </div>
@@ -455,6 +463,7 @@ export const Quis2: React.FC<Quis2Props> = ({ theme, username, userClass, onComp
                   onComplete(calculateScore());
                 }}
                 fullWidth
+                style={{ backgroundColor: theme.bgMain, background: theme.bgMain, color: '#ffffff' }}
               >
                 Tutup & Selesai
               </ThemeButton>

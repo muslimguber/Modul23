@@ -296,10 +296,11 @@ export const Quis3: React.FC<Quis3Props> = ({ theme, username, userClass, onComp
 
               <ThemeButton 
                 theme={theme}
-                variant="ghost"
+                variant={submitStatus?.success ? "primary" : "ghost"}
                 fullWidth
                 disabled={!submitStatus?.success}
                 className={!submitStatus?.success ? 'opacity-50 grayscale cursor-not-allowed' : ''}
+                style={submitStatus?.success ? { backgroundColor: theme.bgMain, background: theme.bgMain, color: '#ffffff' } : {}}
                 onClick={() => {
                   window.open('https://s.shopee.co.id/9ALT8cHtu6', '_blank');
                   onComplete(calculateScore());
@@ -374,11 +375,13 @@ export const Quis3: React.FC<Quis3Props> = ({ theme, username, userClass, onComp
       <div className="flex justify-between items-center px-2">
         <ThemeButton
           theme={theme}
-          variant="secondary"
           onClick={prevQuestion}
           disabled={currentIndex === 0}
           className={`${currentIndex === 0 ? 'opacity-50 grayscale cursor-not-allowed' : ''} flex items-center gap-2`}
-          style={{ color: theme.bgMain, border: '2px solid #e2e8f0', backgroundColor: '#ffffff' }}
+          style={currentIndex > 0 
+            ? { backgroundColor: theme.bgMain, background: theme.bgMain, color: '#ffffff' } 
+            : { color: '#94a3b8', border: '2px solid #e2e8f0', backgroundColor: '#f1f5f9' }
+          }
         >
           <ChevronLeft size={16} />
           <span>Sebelumnya</span>
