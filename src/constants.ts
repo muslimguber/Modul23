@@ -2,6 +2,15 @@ import { Theme, Material } from './types';
 
 export const THEME_PRESETS: Theme[] = [
   {
+    name: 'Berkebun',
+    bgMain: '#007A5c',
+    bgSidebar: '#005c45',
+    accent: '#81e6c3',
+    textMain: '#ffffff',
+    textSidebar: '#ffffff',
+    isDark: true,
+  },
+  {
     name: 'Grape',
     bgMain: '#410052',
     bgSidebar: '#2d0039',

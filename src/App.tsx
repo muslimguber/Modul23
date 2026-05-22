@@ -111,7 +111,16 @@ const App = () => {
       setProgress(savedProgress);
     }
     if (savedTheme) {
-      setTheme(JSON.parse(savedTheme));
+      try {
+        const parsed = JSON.parse(savedTheme);
+        if (parsed.name === 'Grape') {
+          setTheme(THEME_PRESETS[0]);
+        } else {
+          setTheme(parsed);
+        }
+      } catch (e) {
+        setTheme(THEME_PRESETS[0]);
+      }
     }
     if (savedView) {
       setCurrentView(savedView as any);
@@ -334,7 +343,7 @@ const App = () => {
   };
 
   const openModule = (num: number) => {
-    if (isTeacher || unlockedModules.has(num) || num === 1) {
+    if (isTeacher || unlockedModules.has(num) || num === 1 || num === 2) {
       setActiveModule(num);
       setCurrentView('modul');
       setSidebarOpen(false);
@@ -540,7 +549,7 @@ const App = () => {
                 >
                   <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${currentView === 'modul' && activeModule === num ? 'bg-white text-indigo-600' : 'bg-white/10'}`}>
                     {currentView === 'modul' && activeModule === num ? <Icons.BookOpen size={18} /> : (
-                      !isTeacher && !unlockedModules.has(num) && num !== 1 ? <Icons.Lock size={14} className="opacity-40" /> : (
+                      !isTeacher && !unlockedModules.has(num) && num !== 1 && num !== 2 ? <Icons.Lock size={14} className="opacity-40" /> : (
                         !logoError ? (
                           <img 
                             src="https://i.ibb.co.com/kVLW5n61/logo-smpn-1-bengkalis-kecil-Copy.png" 
@@ -556,7 +565,7 @@ const App = () => {
                   </div>
                   <div className="flex flex-col items-start">
                     <span className="font-bold text-sm">MODUL {num}</span>
-                    {isTeacher && num !== 1 && (
+                    {isTeacher && num !== 1 && num !== 2 && (
                       <span className="text-[10px] opacity-80 font-mono text-amber-400">pass : {modulePasswords[num]}</span>
                     )}
                   </div>

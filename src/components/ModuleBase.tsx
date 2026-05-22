@@ -490,6 +490,12 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
 
                 {currentPage.videoUrl && <VideoPlayer url={currentPage.videoUrl} title={currentPage.title} />}
                 
+                {currentPage.isSheet && currentPage.content && (
+                  <div className="prose prose-slate max-w-none text-rose-600 bg-rose-50 border border-rose-100 p-4 rounded-2xl whitespace-pre-line font-bold text-center leading-relaxed">
+                    {currentPage.content}
+                  </div>
+                )}
+
                 {currentPage.isSheet && currentPage.sheetUrl && (
                   <div className="space-y-4 my-4">
                     {isTeacher && (
@@ -515,9 +521,11 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                   </div>
                 )}
 
-                <div className="prose prose-slate max-w-none text-slate-700 whitespace-pre-line font-medium leading-relaxed text-justify">
-                  {currentPage.content}
-                </div>
+                {!currentPage.isSheet && (
+                  <div className="prose prose-slate max-w-none text-slate-700 whitespace-pre-line font-medium leading-relaxed text-justify">
+                    {currentPage.content}
+                  </div>
+                )}
 
                 <div className="flex flex-row gap-2 justify-center">
                   {/* Always show back button if not first page */}
