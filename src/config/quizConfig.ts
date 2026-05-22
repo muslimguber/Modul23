@@ -535,232 +535,232 @@ export const QUIZ_MODULE_CONFIGS: Record<number, QuizModuleConfig> = {
     ] 
   },
   3: { 
-    title: "Persiapan Sebelum Berkebun", 
-    formId: '1FAIpQLScCGTABZ1WEovtAL87d8VUFFOEXSj4WAANqannrJlIc_CXXrw', 
+    title: "Tanaman Membutuhkan Pupuk", 
+    formId: '1FAIpQLSfeoXJ6162_Gj7IEagtkJrjR0VvkvW0XL2Kevr_OLO2A5um7w', 
     entryMapping: {
-      name: 'entry.111012139',
-      userClass: 'entry.1530135141',
-      quizName: 'entry.283943708',
-      score: 'entry.1757966967'
+      name: 'entry.637224933',
+      userClass: 'entry.1829667939',
+      quizName: 'entry.247201619',
+      score: 'entry.1430025283'
     },
     questions: [
       {
         id: 1,
-        question: "Mengapa persiapan perlu dilakukan sebelum mulai berkebun?",
+        question: "Tanaman memerlukan pupuk karena ...",
         options: [
-          { id: 'A', text: "Agar tanaman dapat tumbuh tanpa tanah" },
-          { id: 'B', text: "Karena persiapan membantu tanaman tumbuh lebih sehat dan mudah dirawat" },
-          { id: 'C', text: "Agar tanaman tidak membutuhkan cahaya matahari" },
-          { id: 'D', text: "Karena semua tanaman harus dipanen lebih cepat" }
+          { id: 'A', text: "tanah selalu memiliki unsur hara yang cukup" },
+          { id: 'B', text: "unsur hara dalam tanah dapat berkurang setelah digunakan tanaman" },
+          { id: 'C', text: "pupuk membuat tanaman tidak perlu air" },
+          { id: 'D', text: "semua tanaman hanya bisa hidup dengan pupuk kimia" }
         ],
         correctId: 'B'
       },
       {
         id: 2,
-        question: "Apa tujuan utama menggemburkan tanah sebelum menanam?",
+        question: "Salah satu tanda tanaman kekurangan unsur hara adalah ...",
         options: [
-          { id: 'A', text: "Membuat tanah menjadi lebih keras" },
-          { id: 'B', text: "Membantu akar tanaman tumbuh dan menyerap air lebih baik" },
-          { id: 'C', text: "Mengurangi kebutuhan pupuk sepenuhnya" },
-          { id: 'D', text: "Membuat tanah berubah warna" }
+          { id: 'A', text: "daun menjadi hijau segar" },
+          { id: 'B', text: "batang semakin kuat" },
+          { id: 'C', text: "daun menguning dan pertumbuhan lambat" },
+          { id: 'D', text: "bunga tumbuh lebih banyak" }
         ],
-        correctId: 'B'
+        correctId: 'C'
       },
       {
         id: 3,
-        question: "Mengapa tanah perlu dicampur dengan kompos atau pupuk kandang?",
+        question: "Fungsi utama pupuk bagi tanaman adalah ...",
         options: [
-          { id: 'A', text: "Agar tanah memiliki tambahan unsur hara untuk tanaman" },
-          { id: 'B', text: "Agar tanah tidak terkena hujan" },
-          { id: 'C', text: "Agar tanaman tumbuh tanpa air" },
-          { id: 'D', text: "Agar akar tanaman tidak berkembang" }
+          { id: 'A', text: "mengganti air dalam tanah" },
+          { id: 'B', text: "menambah unsur hara untuk pertumbuhan tanaman" },
+          { id: 'C', text: "membuat tanah menjadi kering" },
+          { id: 'D', text: "mengurangi cahaya matahari" }
         ],
-        correctId: 'A'
+        correctId: 'B'
       },
       {
         id: 4,
-        question: "Apa manfaat mendiamkan tanah beberapa hari setelah dicampur pupuk?",
+        question: "Tanaman yang mendapat cukup pupuk biasanya memiliki ciri ...",
         options: [
-          { id: 'A', text: "Agar tanah menjadi lebih kering sepenuhnya" },
-          { id: 'B', text: "Agar unsur hara pada tanah dan pupuk dapat menyatu lebih baik" },
-          { id: 'C', text: "Agar tanah berubah menjadi pasir" },
-          { id: 'D', text: "Agar pupuk kehilangan manfaatnya" }
+          { id: 'A', text: "batang lemah dan mudah roboh" },
+          { id: 'B', text: "daun layu dan pucat" },
+          { id: 'C', text: "pertumbuhan lambat" },
+          { id: 'D', text: "daun hijau segar dan batang kuat" }
         ],
-        correctId: 'B'
+        correctId: 'D'
       },
       {
         id: 5,
-        question: "Bahan berikut yang paling tepat digunakan untuk membuat kompos adalah …",
+        question: "Pupuk alami dapat dibuat dari ...",
         options: [
-          { id: 'A', text: "Plastik bekas dan kaca" },
-          { id: 'B', text: "Sisa sayuran dan daun kering" },
-          { id: 'C', text: "Kaleng bekas dan logam" },
-          { id: 'D', text: "Minyak goreng bekas dan sabun" }
-        ],
-        correctId: 'B'
-      },
-      {
-        id: 6,
-        question: "Mengapa air cucian beras dapat digunakan untuk tanaman?",
-        options: [
-          { id: 'A', text: "Karena membantu menambah nutrisi alami bagi tanaman" },
-          { id: 'B', text: "Karena menggantikan fungsi pupuk sepenuhnya" },
-          { id: 'C', text: "Karena membuat tanah menjadi keras" },
-          { id: 'D', text: "Karena menghilangkan kebutuhan cahaya matahari" }
+          { id: 'A', text: "sisa sayuran dan kulit buah" },
+          { id: 'B', text: "botol kaca dan besi" },
+          { id: 'C', text: "plastik dan kaleng" },
+          { id: 'D', text: "kertas berlapis aluminium" }
         ],
         correctId: 'A'
       },
       {
-        id: 7,
-        question: "Apa fungsi utama sekam pada media tanam?",
+        id: 6,
+        question: "Salah satu keuntungan membuat pupuk sendiri adalah ...",
         options: [
-          { id: 'A', text: "Membuat tanah lebih padat" },
-          { id: 'B', text: "Membantu tanah menjadi lebih gembur dan menyimpan air" },
-          { id: 'C', text: "Menggantikan fungsi pupuk kandang" },
-          { id: 'D', text: "Membuat tanaman tidak perlu disiram" }
+          { id: 'A', text: "membuat sampah organik semakin banyak" },
+          { id: 'B', text: "menghemat biaya dan mengurangi sampah" },
+          { id: 'C', text: "membuat tanaman cepat mati" },
+          { id: 'D', text: "membuat tanah kehilangan unsur hara" }
         ],
         correctId: 'B'
       },
       {
-        id: 8,
-        question: "Mengapa pupuk kandang yang digunakan sebaiknya sudah matang?",
+        id: 7,
+        question: "Sampah organik yang dapat dimanfaatkan menjadi pupuk adalah ...",
         options: [
-          { id: 'A', text: "Agar warnanya lebih cerah" },
-          { id: 'B', text: "Agar tidak merusak akar dan tanaman" },
-          { id: 'C', text: "Agar tanah menjadi lebih keras" },
-          { id: 'D', text: "Agar tanaman tidak memerlukan pupuk lain" }
+          { id: 'A', text: "daun kering dan air cucian beras" },
+          { id: 'B', text: "pecahan kaca dan baterai bekas" },
+          { id: 'C', text: "plastik dan karet" },
+          { id: 'D', text: "kaleng dan besi tua" }
+        ],
+        correctId: 'A'
+      },
+      {
+        id: 8,
+        question: "Pengertian pupuk kompos adalah ...",
+        options: [
+          { id: 'A', text: "pupuk kimia berbentuk cair" },
+          { id: 'B', text: "pupuk alami dari hasil penguraian bahan organik" },
+          { id: 'C', text: "pupuk yang dibuat dari campuran plastik" },
+          { id: 'D', text: "pupuk yang hanya digunakan di sawah" }
         ],
         correctId: 'B'
       },
       {
         id: 9,
-        question: "Apa fungsi polybag dalam kegiatan berkebun?",
+        question: "Berikut yang termasuk bahan pembuatan kompos adalah ...",
         options: [
-          { id: 'A', text: "Tempat menyimpan alat berkebun" },
-          { id: 'B', text: "Wadah untuk menanam dan menampung media tanam" },
-          { id: 'C', text: "Tempat mencampur pupuk cair" },
-          { id: 'D', text: "Alat untuk menggemburkan tanah" }
+          { id: 'A', text: "kulit buah dan daun kering" },
+          { id: 'B', text: "kaca dan logam" },
+          { id: 'C', text: "plastik dan kain" },
+          { id: 'D', text: "baterai dan kabel" }
         ],
-        correctId: 'B'
+        correctId: 'A'
       },
       {
         id: 10,
-        question: "Mengapa penyiraman tanaman perlu dilakukan secara teratur?",
+        question: "Salah satu manfaat pupuk kompos adalah ...",
         options: [
-          { id: 'A', text: "Agar tanaman memperoleh air yang dibutuhkan untuk tumbuh" },
-          { id: 'B', text: "Agar tanah selalu tergenang" },
-          { id: 'C', text: "Agar pupuk cepat hilang dari tanah" },
-          { id: 'D', text: "Agar tanaman tidak terkena matahari" }
+          { id: 'A', text: "membuat tanah menjadi gembur" },
+          { id: 'B', text: "membuat akar sulit tumbuh" },
+          { id: 'C', text: "mengurangi unsur hara tanah" },
+          { id: 'D', text: "membuat tanah semakin keras" }
         ],
         correctId: 'A'
       },
       {
         id: 11,
-        question: "Mengapa bayam cocok dijadikan tanaman latihan bagi pemula?",
+        question: "Pupuk kompos baik digunakan karena ...",
         options: [
-          { id: 'A', text: "Karena bayam membutuhkan lahan luas" },
-          { id: 'B', text: "Karena bayam mudah ditanam dan cepat dipanen" },
-          { id: 'C', text: "Karena bayam hanya dapat tumbuh di sawah" },
-          { id: 'D', text: "Karena bayam tidak memerlukan perawatan" }
+          { id: 'A', text: "mengandung banyak bahan kimia berbahaya" },
+          { id: 'B', text: "dapat merusak tanah dalam waktu singkat" },
+          { id: 'C', text: "aman bagi lingkungan dan mudah dibuat" },
+          { id: 'D', text: "hanya cocok untuk tanaman hias" }
         ],
-        correctId: 'B'
+        correctId: 'C'
       },
       {
         id: 12,
-        question: "Campuran media tanam yang baik untuk bayam adalah …",
+        question: "Langkah yang tepat dalam membuat pupuk kompos adalah ...",
         options: [
-          { id: 'A', text: "Tanah, pasir, dan batu kecil" },
-          { id: 'B', text: "Tanah, sekam, and kompos atau pupuk kandang" },
-          { id: 'C', text: "Tanah liat dan air saja" },
-          { id: 'D', text: "Pasir dan pupuk cair saja" }
+          { id: 'A', text: "membakar semua sampah rumah tangga" },
+          { id: 'B', text: "mengumpulkan bahan organik lalu membiarkannya terurai" },
+          { id: 'C', text: "mencampur plastik dengan tanah" },
+          { id: 'D', text: "menjemur sampah tanpa proses penguraian" }
         ],
         correctId: 'B'
       },
       {
         id: 13,
-        question: "Mengapa benih yang dipilih sebaiknya masih baru?",
+        question: "Pupuk organik cair adalah ...",
         options: [
-          { id: 'A', text: "Agar peluang tumbuhnya lebih baik" },
-          { id: 'B', text: "Agar warna benih lebih menarik" },
-          { id: 'C', text: "Agar tanaman tidak membutuhkan pupuk" },
-          { id: 'D', text: "Agar tanah tidak cepat kering" }
+          { id: 'A', text: "pupuk alami berbentuk cair dari bahan organik" },
+          { id: 'B', text: "pupuk kimia yang dicampur air" },
+          { id: 'C', text: "pupuk dari plastik yang dilelehkan" },
+          { id: 'D', text: "pupuk berbentuk batu" }
         ],
         correctId: 'A'
       },
       {
         id: 14,
-        question: "Mengapa benih bayam perlu ditutup tipis dengan tanah?",
+        question: "Bahan yang dapat digunakan untuk membuat POC adalah ...",
         options: [
-          { id: 'A', text: "Agar benih tidak terkena udara sama sekali" },
-          { id: 'B', text: "Agar benih terlindungi dan dapat tumbuh dengan baik" },
-          { id: 'C', text: "Agar tanah menjadi lebih keras" },
-          { id: 'D', text: "Agar benih cepat membusuk" }
-        ],
-        correctId: 'B'
-      },
-      {
-        id: 15,
-        question: "Apa akibatnya jika tanaman bayam disiram terlalu banyak?",
-        options: [
-          { id: 'A', text: "Daun menjadi lebih tebal" },
-          { id: 'B', text: "Akar tanaman dapat membusuk" },
-          { id: 'C', text: "Tanah menjadi lebih subur" },
-          { id: 'D', text: "Tanaman tumbuh lebih cepat tanpa batas" }
-        ],
-        correctId: 'B'
-      },
-      {
-        id: 16,
-        question: "Mengapa rumput liar di sekitar tanaman perlu dibersihkan?",
-        options: [
-          { id: 'A', text: "Karena dapat mengganggu pertumbuhan tanaman utama" },
-          { id: 'B', text: "Karena rumput liar membuat tanah terlalu subur" },
-          { id: 'C', text: "Karena semua rumput liar beracun" },
-          { id: 'D', text: "Karena rumput liar membuat tanah berubah warna" }
+          { id: 'A', text: "kulit buah dan air cucian beras" },
+          { id: 'B', text: "kaleng dan besi" },
+          { id: 'C', text: "kaca dan plastik" },
+          { id: 'D', text: "pasir dan semen" }
         ],
         correctId: 'A'
       },
       {
-        id: 17,
-        question: "Apa manfaat utama pupuk dari kulit pisang?",
+        id: 15,
+        question: "Pupuk organik cair lebih cepat diserap tanaman karena ...",
         options: [
-          { id: 'A', text: "Membantu pertumbuhan bunga dan buah" },
-          { id: 'B', text: "Membuat tanah menjadi kering" },
-          { id: 'C', text: "Menggantikan fungsi air pada tanaman" },
-          { id: 'D', text: "Mengurangi kebutuhan cahaya matahari" }
+          { id: 'A', text: "bentuk cair memudahkan unsur hara diserap akar dan daun" },
+          { id: 'B', text: "pupuk cair membuat tanah menjadi keras" },
+          { id: 'C', text: "pupuk cair tidak mengandung unsur hara" },
+          { id: 'D', text: "semua tanaman hanya membutuhkan pupuk cair" }
+        ],
+        correctId: 'A'
+      },
+      {
+        id: 16,
+        question: "Salah satu kelebihan pupuk organik cair adalah ...",
+        options: [
+          { id: 'A', text: "sulit digunakan pada tanaman pot" },
+          { id: 'B', text: "membuat tanaman lebih segar dan berdaun lebat" },
+          { id: 'C', text: "menyebabkan tanaman cepat layu" },
+          { id: 'D', text: "membuat tanah menjadi tandus" }
+        ],
+        correctId: 'B'
+      },
+      {
+        id: 17,
+        question: "Cara membuat pupuk organik cair yang benar adalah ...",
+        options: [
+          { id: 'A', text: "merendam bahan organik lalu membiarkannya mengalami peragian" },
+          { id: 'B', text: "membakar sampah organik hingga menjadi abu" },
+          { id: 'C', text: "mencampur plastik dengan air" },
+          { id: 'D', text: "menjemur kulit buah tanpa air" }
         ],
         correctId: 'A'
       },
       {
         id: 18,
-        question: "Mengapa kulit telur dapat dimanfaatkan sebagai pupuk alami?",
+        question: "Persamaan pupuk kompos dan pupuk organik cair adalah ...",
         options: [
-          { id: 'A', text: "Karena mengandung kalsium yang baik untuk tanaman" },
-          { id: 'B', text: "Karena membuat tanaman tidak perlu pupuk lain" },
-          { id: 'C', text: "Karena mengubah tanah menjadi pasir" },
-          { id: 'D', text: "Karena dapat menggantikan fungsi air" }
+          { id: 'A', text: "sama-sama dibuat dari bahan alami" },
+          { id: 'B', text: "sama-sama berbentuk cair" },
+          { id: 'C', text: "sama-sama mengandung bahan kimia berbahaya" },
+          { id: 'D', text: "sama-sama dibuat di pabrik besar" }
         ],
         correctId: 'A'
       },
       {
         id: 19,
-        question: "Apa keuntungan menggunakan pupuk alami dari limbah rumah tangga?",
+        question: "Mengubah sampah dapur menjadi pupuk bermanfaat untuk ...",
         options: [
-          { id: 'A', text: "Mengurangi sampah sekaligus membantu menyuburkan tanah" },
-          { id: 'B', text: "Membuat tanaman tidak perlu dirawat" },
-          { id: 'C', text: "Menghilangkan kebutuhan penyiraman" },
-          { id: 'D', text: "Membuat tanah tidak membutuhkan cahaya matahari" }
+          { id: 'A', text: "menambah jumlah sampah" },
+          { id: 'B', text: "mencemari lingkungan" },
+          { id: 'C', text: "mengurangi sampah dan membantu pertumbuhan tanaman" },
+          { id: 'D', text: "membuat tanah kehilangan unsur hara" }
         ],
-        correctId: 'A'
+        correctId: 'C'
       },
       {
         id: 20,
-        question: "Pelajaran penting yang dapat dipetik dari kegiatan berkebun adalah …",
+        question: "Sikap yang dapat dikembangkan dari kegiatan membuat pupuk sendiri adalah ...",
         options: [
-          { id: 'A', text: "Tanaman dapat tumbuh tanpa perhatian" },
-          { id: 'B', text: "Kesabaran dan tanggung jawab dalam merawat sesuatu" },
-          { id: 'C', text: "Berkebun hanya cocok dilakukan di desa" },
-          { id: 'D', text: "Semua tanaman dapat hidup tanpa pupuk dan air" }
+          { id: 'A', text: "malas dan bergantung pada orang lain" },
+          { id: 'B', text: "kreatif dan mandiri" },
+          { id: 'C', text: "boros dan ceroboh" },
+          { id: 'D', text: "tidak peduli lingkungan" }
         ],
         correctId: 'B'
       }

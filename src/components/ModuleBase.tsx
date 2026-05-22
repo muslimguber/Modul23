@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Play, CheckCircle2, ArrowRight, Lock, ChevronRight, ChevronLeft, Trophy, X } from 'lucide-react';
+import { Play, CheckCircle2, ArrowRight, Lock, ChevronRight, ChevronLeft, Trophy, X, ExternalLink } from 'lucide-react';
 import { Theme } from '../types';
 import { VideoPlayer } from './VideoPlayer';
 import { FinalQuiz } from './FinalQuiz';
 import { Quis1 } from './Quis1';
 import { Quis2 } from './Quis2';
+import { Quis3 } from './Quis3';
 import { Game1 } from './Game1';
 import { Game2 } from './Game2';
+import { Game3 } from './Game3';
 import { MemoryGame } from './MemoryGame';
 import { ThemeButton } from './ThemeButton';
 
@@ -269,6 +271,13 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                   userClass={userClass} 
                   onComplete={() => onComplete()}
                 />
+              ) : Number(moduleNumber) === 3 ? (
+                <Quis3 
+                  theme={theme}
+                  username={username} 
+                  userClass={userClass} 
+                  onComplete={() => onComplete()}
+                />
               ) : (
                 <FinalQuiz 
                   theme={theme}
@@ -379,12 +388,62 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                     </ThemeButton>
                   </div>
                 </div>
+              ) : Number(moduleNumber) === 3 ? (
+                <div className="space-y-6">
+                  <Game3 
+                    searchQuery={searchQuery}
+                    onLevelChange={(lvl) => setGameLevel(lvl)}
+                    onGameComplete={(isFullComplete) => {
+                      setCompletedPages(prev => prev.includes(activePage) ? prev : [...prev, activePage]);
+                      if (isFullComplete) {
+                        setShowPopup({
+                          show: true,
+                          type: 'success',
+                          praise: 'KAMU SANG JUARA',
+                          message: 'Luar biasa! Kamu telah menyelesaikan semua level. Ayo lanjut ke Kuis Akhir Modul 3.'
+                        });
+                      }
+                    }}
+                  />
+                  
+                  <div className="flex flex-row gap-2 justify-center max-w-[400px] mx-auto">
+                    <ThemeButton 
+                      theme={theme}
+                      variant="secondary"
+                      onClick={() => {
+                        setActivePage(activePage - 1);
+                        setQuizActive(false);
+                      }}
+                      className="flex-1 px-2 text-sm sm:text-base py-3"
+                    >
+                      <ChevronLeft size={18} />
+                      <span className="hidden xs:inline">Kembali</span>
+                    </ThemeButton>
+
+                    <ThemeButton
+                      theme={theme}
+                      disabled={gameLevel < 4 || quizDelay}
+                      onClick={() => {
+                        setCompletedPages(prev => prev.includes(activePage) ? prev : [...prev, activePage]);
+                        if (activePage < data.pages.length - 1) {
+                          setActivePage(activePage + 1);
+                        } else {
+                          onComplete();
+                        }
+                      }}
+                      className="flex-1 px-2 text-sm sm:text-base py-3 disabled:opacity-50 disabled:grayscale"
+                    >
+                      <span className="hidden xs:inline text-white">LANJUT</span>
+                      <ChevronRight size={18} className="text-white" />
+                    </ThemeButton>
+                  </div>
+                </div>
               ) : (
                 <MemoryGame 
                   onLevelComplete={() => {}} 
                 />
               )}
-              {moduleNumber !== 1 && Number(moduleNumber) !== 2 && (
+              {moduleNumber !== 1 && Number(moduleNumber) !== 2 && Number(moduleNumber) !== 3 && (
                 <div className="mt-8 flex justify-center">
                   <ThemeButton 
                     theme={theme}
@@ -432,13 +491,27 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                 {currentPage.videoUrl && <VideoPlayer url={currentPage.videoUrl} title={currentPage.title} />}
                 
                 {currentPage.isSheet && currentPage.sheetUrl && (
-                  <div className="relative h-[600px] w-full bg-slate-100 rounded-2xl overflow-hidden border-2 border-slate-200 shadow-inner my-4">
-                    <iframe 
-                      src={currentPage.sheetUrl}
-                      className="absolute inset-0 w-full h-full"
-                      frameBorder="0"
-                      allowFullScreen
-                    />
+                  <div className="space-y-4 my-4">
+                    {isTeacher && (
+                      <div className="flex justify-end">
+                        <ThemeButton 
+                          theme={theme}
+                          onClick={() => window.open(currentPage.sheetUrl, '_blank')}
+                          className="flex items-center gap-2 px-4 py-2 text-xs md:text-sm shadow-md"
+                        >
+                          <ExternalLink size={16} />
+                          <span>BUKA LINK SHEET (GURU)</span>
+                        </ThemeButton>
+                      </div>
+                    )}
+                    <div className="relative h-[600px] w-full bg-slate-100 rounded-2xl overflow-hidden border-2 border-slate-200 shadow-inner">
+                      <iframe 
+                        src={currentPage.sheetUrl}
+                        className="absolute inset-0 w-full h-full"
+                        frameBorder="0"
+                        allowFullScreen
+                      />
+                    </div>
                   </div>
                 )}
 

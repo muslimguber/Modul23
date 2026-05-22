@@ -1,6 +1,6 @@
 export const modul3Service = {
   getIntroduction: () => ({
-    title: "Modul 3: Persiapan Sebelum Berkebun",
+    title: "Modul 3: Cara Membuat Pupuk untuk Tanaman",
     pages: [
       {
         id: 0,
@@ -18,247 +18,115 @@ export const modul3Service = {
       },
       {
         id: 1,
-        title: "📖 PERSIAPAN SEBELUM BERKEBUN",
-        content: "Berkebun tidak dimulai saat menanam benih, tetapi dimulai dari persiapan yang baik. Tanaman akan tumbuh subur jika tanah, pupuk, dan alat yang digunakan dipersiapkan dengan benar. Dengan persiapan yang baik, tanaman menjadi lebih sehat, mudah dirawat, dan hasil panennya lebih bagus.",
+        title: "Apakah Tanaman Bisa Tumbuh Subur Tanpa Dipupuk?",
+        content: "Tanaman memang dapat tumbuh tanpa diberi pupuk, terutama jika tanah tempat tumbuhnya masih subur dan kaya unsur hara. Namun, seiring waktu tanah akan kehilangan zat makanan karena terus digunakan oleh tanaman. Akibatnya, tanaman menjadi kurang sehat, pertumbuhannya lambat, daun menguning, dan hasil panennya sedikit. Oleh karena itu, tanaman membutuhkan tambahan nutrisi agar tetap tumbuh subur dan sehat.\n\nPupuk berfungsi seperti makanan tambahan bagi tanaman. Di dalam pupuk terdapat unsur hara yang membantu pertumbuhan akar, batang, daun, bunga, dan buah. Tanaman yang cukup pupuk biasanya memiliki daun hijau segar, batang kuat, dan lebih tahan terhadap penyakit. Dengan pemberian pupuk yang tepat, tanaman dapat tumbuh lebih baik dan menghasilkan panen yang lebih banyak.",
         quiz: {
-          question: "Mengapa persiapan penting dilakukan sebelum mulai berkebun?",
+          question: "Mengapa tanaman yang ditanam terus-menerus di tanah yang sama tetap memerlukan pupuk?",
           options: [
-            { id: 'A', text: "Agar tanaman bisa tumbuh tanpa air", isCorrect: false },
-            { id: 'B', text: "Karena persiapan membantu tanaman tumbuh lebih sehat dan mudah dirawat", isCorrect: true },
-            { id: 'C', text: "Agar tanaman tidak membutuhkan pupuk", isCorrect: false },
-            { id: 'D', text: "Karena berkebun hanya bisa dilakukan di lahan luas", isCorrect: false }
+            { id: 'A', text: "Karena pupuk membuat tanaman tidak perlu air", isCorrect: false },
+            { id: 'B', text: "Karena unsur hara di dalam tanah lama-kelamaan berkurang", isCorrect: true },
+            { id: 'C', text: "Karena semua tanaman hanya bisa hidup dengan pupuk kimia", isCorrect: false },
+            { id: 'D', text: "Karena pupuk membuat tanah menjadi lebih kering", isCorrect: false }
           ]
         }
       },
       {
         id: 2,
-        title: "🌱 Mengolah Tanah Sebelum Menanam",
-        content: "Tanah adalah tempat hidup tanaman. Karena itu, tanah perlu diolah agar gembur dan memiliki cukup unsur hara.\n\nLangkah sederhana mengolah tanah:\n• Bersihkan rumput liar, batu, atau sampah dari tanah\n• Cangkul atau aduk tanah agar tidak keras\n• Campurkan tanah dengan pupuk kompos atau pupuk kandang\n• Diamkan tanah selama beberapa hari agar unsur haranya menyatu dengan baik\n\nTanah yang gembur membantu akar tanaman tumbuh lebih kuat dan mudah menyerap air.",
+        title: "Pupuk Tidak Harus Dibeli",
+        content: "Banyak orang berpikir bahwa pupuk harus dibeli di toko pertanian. Padahal, pupuk dapat dibuat sendiri menggunakan bahan alami yang ada di sekitar rumah. Misalnya dari sisa sayuran, kulit buah, daun kering, air cucian beras, dan sampah dapur lainnya. Bahan-bahan tersebut dapat diolah menjadi pupuk yang bermanfaat bagi tanaman.\n\nMembuat pupuk sendiri memiliki banyak keuntungan. Selain menghemat biaya, kita juga membantu mengurangi sampah organik di lingkungan. Sampah yang biasanya dibuang ternyata masih dapat dimanfaatkan menjadi sesuatu yang berguna. Dengan begitu, lingkungan menjadi lebih bersih dan tanaman tetap mendapatkan nutrisi yang dibutuhkan.",
         quiz: {
-          question: "Mengapa tanah perlu digemburkan sebelum digunakan untuk menanam?",
+          question: "Mengapa membuat pupuk sendiri di rumah dianggap lebih bermanfaat?",
           options: [
-            { id: 'A', text: "Agar akar tanaman lebih mudah tumbuh dan menyerap air", isCorrect: true },
-            { id: 'B', text: "Agar tanah berubah menjadi pasir", isCorrect: false },
-            { id: 'C', text: "Agar tanaman tidak membutuhkan pupuk", isCorrect: false },
-            { id: 'D', text: "Agar tanah tidak terkena cahaya matahari", isCorrect: false }
+            { id: 'A', text: "Karena semua sampah rumah tangga dapat langsung dijadikan pupuk tanpa dipilih", isCorrect: false },
+            { id: 'B', text: "Karena dapat mengurangi sampah organik sekaligus menghemat biaya", isCorrect: true },
+            { id: 'C', text: "Karena pupuk buatan rumah selalu lebih mahal daripada pupuk pabrik", isCorrect: false },
+            { id: 'D', text: "Karena tanaman hanya dapat tumbuh dengan pupuk buatan sendiri", isCorrect: false }
           ]
         }
       },
       {
         id: 3,
-        title: "♻️ Membuat Pupuk Kompos dari Limbah Rumah Tangga",
-        content: "Sisa dapur ternyata dapat dijadikan pupuk alami yang baik untuk tanaman. Selain mengurangi sampah, kompos juga membuat tanah menjadi lebih subur.\n\nBahan yang bisa dijadikan kompos:\n• Kulit buah\n• Sisa sayuran\n• Daun kering\n• Ampas teh atau kopi\n• Air cucian beras\n\nCara sederhana membuat kompos:\n1. Siapkan ember atau wadah tertutup\n2. Masukkan sampah sayur, daun kering, dan kulit buah\n3. Siram sedikit air cucian beras agar proses pembusukan lebih cepat\n4. Aduk sesekali\n5. Setelah beberapa minggu, bahan akan berubah menjadi kompos berwarna gelap dan tidak berbau menyengat\n\nKompos membantu tanah menjadi lebih subur secara alami.",
+        title: "PUPUK KOMPOS",
+        content: "Pupuk kompos adalah pupuk alami yang berasal dari sisa-sisa makhluk hidup, seperti sisa sayuran, kulit buah, daun kering, ranting kecil, dan kotoran hewan. Bahan-bahan tersebut mengalami proses penguraian secara alami sehingga berubah menjadi tanah yang gembur dan subur. Kompos sangat baik digunakan untuk memperbaiki kualitas tanah.\n\nPupuk kompos memiliki banyak manfaat bagi tanaman. Kompos dapat membuat tanah menjadi gembur sehingga akar mudah tumbuh. Selain itu, kompos juga menyediakan unsur hara lengkap bagi tanaman dan membantu memperbaiki tanah yang keras atau kurang subur. Pupuk kompos mudah dibuat dan aman bagi lingkungan karena tidak mengandung bahan kimia berbahaya.",
         quiz: {
-          question: "Apa manfaat utama penggunaan kompos bagi tanah?",
+          question: "Salah satu manfaat pupuk kompos adalah ...",
           options: [
-            { id: 'A', text: "Membuat tanah menjadi lebih keras", isCorrect: false },
-            { id: 'B', text: "Membantu menyuburkan tanah secara alami", isCorrect: true },
-            { id: 'C', text: "Menghilangkan kebutuhan air pada tanaman", isCorrect: false },
-            { id: 'D', text: "Menggantikan fungsi cahaya matahari", isCorrect: false }
+            { id: 'A', text: "Membuat tanah menjadi keras", isCorrect: false },
+            { id: 'B', text: "Membantu tanah menjadi gembur", isCorrect: true },
+            { id: 'C', text: "Membuat tanaman cepat mati", isCorrect: false },
+            { id: 'D', text: "Mengurangi air dalam tanah", isCorrect: false }
           ]
         }
       },
       {
         id: 4,
-        title: "🌿 MEMBUAT PUPUK ALAMI DARI BAHAN DI SEKITAR RUMAH",
-        content: "Banyak bahan di sekitar rumah yang sebenarnya dapat dimanfaatkan menjadi pupuk alami untuk tanaman. Sisa dapur yang sering dibuang ternyata mengandung zat yang baik untuk membantu pertumbuhan tanaman. Dengan membuat pupuk sendiri, kita dapat mengurangi sampah rumah tangga sekaligus menyuburkan tanaman secara alami.\n\nPupuk alami biasanya lebih aman bagi tanah dan tanaman karena tidak mengandung bahan kimia berlebihan. Selain itu, bahan-bahannya mudah ditemukan dan biaya pembuatannya lebih murah.\n\n🥬 Pupuk dari Sisa Sayur dan Daun\nSisa sayur, daun kering, dan kulit buah dapat diolah menjadi kompos sederhana.\n\nBahan yang digunakan:\n• Sisa sayuran\n• Daun kering\n• Kulit buah\n• Sedikit tanah\n• Air secukupnya\n\nCara membuat:\n1. Siapkan ember atau wadah tertutup\n2. Masukkan sisa sayur dan daun kering secara bergantian\n3. Tambahkan sedikit tanah agar proses pembusukan lebih cepat\n4. Siram sedikit air agar tetap lembap\n5. Tutup wadah dan aduk setiap beberapa hari\n6. Setelah beberapa minggu, bahan akan berubah menjadi kompos berwarna gelap dan tidak berbau menyengat\n\nKompos ini dapat dicampurkan ke tanah agar tanaman tumbuh lebih subur.",
+        title: "Cara Membuat Pupuk Kompos",
+        videoUrl: "https://www.youtube.com/embed/0qfGNQ499JA",
+        content: "Saksikan video di atas tentang cara praktis membuat pupuk kompos di rumah.",
         quiz: {
-          question: "Mengapa sisa sayur dan daun kering dapat dimanfaatkan menjadi kompos?",
+          question: "Langkah yang tepat dalam membuat pupuk kompos adalah ...",
           options: [
-            { id: 'A', text: "Karena bahan tersebut dapat menambah unsur hara pada tanah", isCorrect: true },
-            { id: 'B', text: "Karena membuat tanah menjadi lebih keras", isCorrect: false },
-            { id: 'C', text: "Karena dapat menggantikan cahaya matahari", isCorrect: false },
-            { id: 'D', text: "Karena membuat tanaman tidak membutuhkan air", isCorrect: false }
+            { id: 'A', text: "Mengumpulkan sampah organik, menumpuknya, lalu membiarkannya terurai hingga menjadi kompos", isCorrect: true },
+            { id: 'B', text: "Membakar daun dan sampah dapur agar cepat menjadi pupuk", isCorrect: false },
+            { id: 'C', text: "Mencampur sampah plastik dengan tanah agar kompos lebih banyak", isCorrect: false },
+            { id: 'D', text: "Menjemur semua sampah di bawah matahari tanpa proses penguraian", isCorrect: false }
           ]
         }
       },
       {
         id: 5,
-        title: "🍚 Air Cucian Beras sebagai Pupuk Cair",
-        content: "Air cucian beras mengandung zat yang bermanfaat bagi tanaman. Air ini dapat digunakan sebagai pupuk cair alami.\n\nCara menggunakan:\n• Tampung air cucian beras pertama atau kedua\n• Diamkan selama 1–2 hari\n• Siramkan ke tanah tanaman secukupnya\n\nManfaat air cucian beras:\n• Membantu menyuburkan tanah\n• Membantu pertumbuhan akar tanaman\n• Menambah nutrisi alami bagi tanaman\n\nNamun, air cucian beras tidak boleh digunakan terlalu banyak agar tanah tidak menjadi terlalu lembap.",
+        title: "PUPUK ORGANIK CAIR (POC)",
+        content: "Pupuk organik cair adalah pupuk alami berbentuk cair yang dibuat dari bahan organik seperti kulit buah, air cucian beras, dan daun-daunan tertentu. Bahan-bahan tersebut direndam dalam air dan dibiarkan mengalami proses peragian selama beberapa waktu hingga menjadi pupuk cair yang siap digunakan.\n\nPupuk organik cair memiliki kelebihan karena unsur haranya cepat diserap oleh tanaman melalui akar maupun daun. Pupuk ini sangat praktis digunakan, terutama untuk tanaman di pot atau lahan sempit. Tanaman yang diberi pupuk organik cair biasanya tampak lebih segar, berdaun lebat, dan cepat berbuah. Selain murah, pupuk ini juga aman digunakan pada tanaman sayur dan buah.",
         quiz: {
-          question: "Mengapa air cucian beras dapat dimanfaatkan untuk tanaman?",
+          question: "Pupuk organik cair lebih cepat memberikan manfaat pada tanaman karena ...",
           options: [
-            { id: 'A', text: "Karena mengandung zat yang membantu pertumbuhan tanaman", isCorrect: true },
-            { id: 'B', text: "Karena membuat tanaman tidak membutuhkan pupuk lain", isCorrect: false },
-            { id: 'C', text: "Karena dapat menggantikan fungsi tanah", isCorrect: false },
-            { id: 'D', text: "Karena membuat akar tanaman menjadi kering", isCorrect: false }
+            { id: 'A', text: "bentuk cairnya memudahkan unsur hara cepat diserap tanaman", isCorrect: true },
+            { id: 'B', text: "pupuk cair membuat tanah menjadi keras sehingga akar kuat", isCorrect: false },
+            { id: 'C', text: "semua jenis tanaman hanya membutuhkan pupuk cair", isCorrect: false },
+            { id: 'D', text: "pupuk cair tidak memerlukan proses pembuatan", isCorrect: false }
           ]
         }
       },
       {
         id: 6,
-        title: "🍌 Pupuk dari Kulit Pisang",
-        content: "Kulit pisang mengandung kalium yang baik for pertumbuhan tanaman, terutama membantu pembentukan bunga and buah.\n\nCara membuat:\n1. Potong kecil-kecil kulit pisang\n2. Rendam dalam air selama beberapa hari\n3. Gunakan air rendaman untuk menyiram tanaman\n\nKulit pisang juga dapat dicampurkan langsung ke dalam tanah atau kompos.\n\nManfaat pupuk kulit pisang:\n• Membantu pertumbuhan bunga dan buah\n• Menambah unsur hara pada tanah\n• Mengurangi sampah organik rumah tangga",
+        title: "Cara Membuat Pupuk Organik Cair",
+        videoUrl: "https://www.youtube.com/embed/JRsyeMSsi_A",
+        content: "Saksikan video di atas tentang cara membuat pupuk organik cair (POC) dengan mudah.",
         quiz: {
-          question: "Apa manfaat utama pupuk dari kulit pisang bagi tanaman?",
+          question: "Cara yang benar dalam membuat pupuk organik cair (POC) adalah ...",
           options: [
-            { id: 'A', text: "Membantu pertumbuhan bunga dan buah", isCorrect: true },
-            { id: 'B', text: "Membuat tanah menjadi keras", isCorrect: false },
-            { id: 'C', text: "Menggantikan fungsi air pada tanaman", isCorrect: false },
-            { id: 'D', text: "Mengurangi kebutuhan cahaya matahari", isCorrect: false }
+            { id: 'A', text: "Merendam bahan organik seperti kulit buah atau air cucian beras lalu didiamkan hingga mengalami peragian", isCorrect: true },
+            { id: 'B', text: "Membakar daun kering lalu mencampurnya dengan bensin", isCorrect: false },
+            { id: 'C', text: "Mencampur sampah plastik dengan air agar cepat larut", isCorrect: false },
+            { id: 'D', text: "Me-nyiram tanaman menggunakan air sabun setiap hari", isCorrect: false }
           ]
         }
       },
       {
         id: 7,
-        title: "🥚 Kulit Telur sebagai Sumber Kalsium",
-        content: "Kulit telur dapat dimanfaatkan sebagai pupuk alami karena mengandung kalsium yang baik bagi tanaman.\n\nCara membuat:\n1. Cuci kulit telur hingga bersih\n2. Jemur sampai kering\n3. Tumbuk hingga halus\n4. Taburkan di sekitar tanaman atau campurkan ke tanah\n\nManfaat kulit telur:\n• Menambah kalsium pada tanah\n• Membantu pertumbuhan akar dan batang\n• Membantu mengurangi keasaman tanah tertentu",
+        title: "Persamaan Pupuk Kompos dan Pupuk Organik Cair",
+        content: "Pupuk kompos dan pupuk organik cair memiliki beberapa persamaan. Keduanya sama-sama dibuat dari bahan alami sehingga aman digunakan bagi tanaman dan lingkungan. Selain itu, kedua pupuk ini tidak mengandung zat kimia berbahaya dan dapat dibuat sendiri di rumah dengan bahan yang mudah ditemukan.\n\nPenggunaan pupuk alami membantu tanaman tumbuh sehat dan menghasilkan panen yang aman dimakan. Dengan memanfaatkan sampah organik menjadi pupuk, kita juga belajar bersikap kreatif dan mandiri. Sampah dapur yang sebelumnya dianggap tidak berguna ternyata dapat diubah menjadi sesuatu yang sangat bermanfaat.",
         quiz: {
-          question: "Mengapa kulit telur baik digunakan sebagai pupuk alami?",
+          question: "Mengapa penggunaan pupuk alami dianggap lebih baik bagi lingkungan?",
           options: [
-            { id: 'A', text: "Karena mengandung kalsium yang bermanfaat bagi tanaman", isCorrect: true },
-            { id: 'B', text: "Karena membuat tanaman tidak perlu disiram", isCorrect: false },
-            { id: 'C', text: "Karena menggantikan fungsi pupuk kandang", isCorrect: false },
-            { id: 'D', text: "Karena dapat mengubah tanah menjadi pasir", isCorrect: false }
+            { id: 'A', text: "Karena pupuk alami dapat digunakan berulang kali tanpa habis", isCorrect: false },
+            { id: 'B', text: "Karena pupuk alami membantu memanfaatkan sampah organik menjadi sesuatu yang berguna", isCorrect: true },
+            { id: 'C', text: "Karena pupuk alami membuat tanaman tumbuh tanpa air", isCorrect: false },
+            { id: 'D', text: "Karena semua pupuk alami berbentuk cair", isCorrect: false }
           ]
         }
       },
       {
         id: 8,
-        title: "🌾 Manfaat Menggunakan Pupuk Alami",
-        content: "Menggunakan pupuk alami memiliki banyak manfaat, antara lain:\n• Mengurangi sampah rumah tangga\n• Membantu menyuburkan tanah secara alami\n• Mengurangi penggunaan bahan kimia berlebihan\n• Membantu tanaman tumbuh lebih sehat\n• Menghemat biaya berkebun\n\nDengan memanfaatkan bahan-bahan di sekitar rumah, kita dapat belajar bahwa sampah organik masih memiliki manfaat bagi kehidupan.",
-        quiz: {
-          question: "Apa keuntungan menggunakan pupuk alami dibanding membuang sampah organik begitu saja?",
-          options: [
-            { id: 'A', text: "Sampah organik dapat dimanfaatkan kembali untuk membantu menyuburkan tanaman", isCorrect: true },
-            { id: 'B', text: "Sampah organik membuat tanah menjadi tidak subur", isCorrect: false },
-            { id: 'C', text: "Semua pupuk alami dapat menggantikan air sepenuhnya", isCorrect: false },
-            { id: 'D', text: "Tanaman tidak memerlukan perawatan lagi", isCorrect: false }
-          ]
-        }
+        title: "Istirahat Sejenak: Mengasah Ingatan",
+        content: "Ayo segarkan ingatanmu dengan bermain game Game 3!",
+        isGame: true
       },
       {
         id: 9,
-        title: "🌾 Mengenal Sekam dan Manfaatnya",
-        content: "Sekam adalah kulit padi yang terpisah saat padi digiling. Sekam sering dicampurkan ke tanah untuk membantu tanaman tumbuh lebih baik.\n\nManfaat sekam:\n• Membuat tanah lebih gembur\n• Membantu tanah menyimpan air\n• Membuat akar tanaman lebih mudah berkembang\n• Mengurangi tanah menjadi terlalu padat\n\nSekam biasanya dicampurkan bersama tanah dan pupuk kompos.",
-        quiz: {
-          question: "Mengapa sekam sering dicampurkan ke media tanam?",
-          options: [
-            { id: 'A', text: "Karena sekam membuat tanah lebih padat", isCorrect: false },
-            { id: 'B', text: "Karena sekam membantu tanah menjadi lebih gembur dan menyimpan air", isCorrect: true },
-            { id: 'C', text: "Karena sekam menggantikan fungsi pupuk sepenuhnya", isCorrect: false },
-            { id: 'D', text: "Karena sekam membuat tanaman tidak membutuhkan sinar matahari", isCorrect: false }
-          ]
-        }
-      },
-      {
-        id: 10,
-        title: "🐄 Mengenal Pupuk Kandang",
-        content: "Pupuk kandang berasal dari kotoran hewan seperti sapi, kambing, atau ayam yang sudah difermentasi atau dikeringkan.\n\nManfaat pupuk kandang:\n• Menambah unsur hara pada tanah\n• Membantu tanaman tumbuh lebih cepat\n• Membuat tanah lebih subur dalam waktu lama\n\nPupuk kandang yang digunakan sebaiknya sudah matang agar tidak merusak tanaman.",
-        quiz: {
-          question: "Mengapa pupuk kandang yang digunakan harus sudah matang atau kering?",
-          options: [
-            { id: 'A', text: "Agar warna pupuk menjadi lebih cerah", isCorrect: false },
-            { id: 'B', text: "Agar tidak merusak tanaman dan akar", isCorrect: true },
-            { id: 'C', text: "Agar pupuk berubah menjadi tanah", isCorrect: false },
-            { id: 'D', text: "Agar tanaman tidak perlu disiram lagi", isCorrect: false }
-          ]
-        }
-      },
-      {
-        id: 11,
-        title: "🛠️ Alat-Alat yang Perlu Disiapkan untuk Berkebun",
-        content: "Beberapa alat sederhana yang biasa digunakan dalam berkebun:\n• Cangkul kecil atau sekop tangan — untuk menggemburkan tanah\n• Pot atau polybag — tempat menanam tanaman\n• Gembor atau penyiram air — untuk menyiram tanaman\n• Sarung tangan — melindungi tangan saat berkebun\n• Ember — tempat mencampur tanah dan pupuk\n• Sprayer kecil — untuk menyemprot pupuk cair atau mengatasi hama ringan\n\nDengan alat yang sederhana, berkebun tetap bisa dilakukan di rumah.",
-        quiz: {
-          question: "Apa fungsi utama pot atau polybag dalam kegiatan berkebun?",
-          options: [
-            { id: 'A', text: "Sebagai alat menyiram tanaman", isCorrect: false },
-            { id: 'B', text: "Sebagai tempat menanam dan menampung media tanam", isCorrect: true },
-            { id: 'C', text: "Sebagai alat memotong rumput", isCorrect: false },
-            { id: 'D', text: "Sebagai tempat menyimpan pupuk cair", isCorrect: false }
-          ]
-        }
-      },
-      {
-        id: 12,
-        title: "🌿 Langkah-Langkah Dasar Berkebun",
-        content: "1. Menentukan tanaman yang akan ditanam\n2. Menyiapkan pot atau polybag\n3. Mengolah tanah dan mencampur pupuk\n4. Menanam benih\n5. Menyiram tanaman secara teratur\n6. Memberi pupuk tambahan jika diperlukan\n7. Membersihkan rumput liar atau daun kering\n8. Memanen tanaman saat sudah siap dipetik",
-        quiz: {
-          question: "Mengapa tanaman perlu disiram secara teratur setelah ditanam?",
-          options: [
-            { id: 'A', text: "Agar tanah selalu tergenang air", isCorrect: false },
-            { id: 'B', text: "Agar tanaman memperoleh air yang dibutuhkan untuk tumbuh", isCorrect: true },
-            { id: 'C', text: "Agar pupuk cepat hilang dari tanah", isCorrect: false },
-            { id: 'D', text: "Agar tanaman tidak terkena cahaya matahari", isCorrect: false }
-          ]
-        }
-      },
-      {
-        id: 13,
-        title: "🥬 Contoh Praktik Berkebun: Menanam Bayam di Pot",
-        content: "Bayam termasuk tanaman yang mudah ditanam dan cepat dipanen. Tanaman ini cocok untuk anak-anak yang baru belajar berkebun.\n\n🌱 Menyiapkan Media Tanam\nBahan yang diperlukan:\n• Tanah gembur\n• Sekam\n• Pupuk kompos atau pupuk kandang\n• Pot atau polybag\n\nCampurkan:\n• 2 bagian tanah\n• 1 bagian sekam\n• 1 bagian kompos atau pupuk kandang\nAduk hingga merata lalu masukkan ke dalam pot.",
-        quiz: {
-          question: "Mengapa media tanam bayam dicampur dengan sekam dan kompos?",
-          options: [
-            { id: 'A', text: "Agar media tanam lebih subur dan tidak terlalu padat", isCorrect: true },
-            { id: 'B', text: "Agar tanaman tidak perlu disiram", isCorrect: false },
-            { id: 'C', text: "Agar bayam tumbuh tanpa cahaya matahari", isCorrect: false },
-            { id: 'D', text: "Agar tanah berubah menjadi pasir", isCorrect: false }
-          ]
-        }
-      },
-      {
-        id: 14,
-        title: "🛒 Membeli Benih",
-        content: "Benih bayam dapat dibeli di toko pertanian dengan harga yang terjangkau. Pilih benih yang masih baru dan kemasannya tidak rusak.",
-        quiz: {
-          question: "Mengapa benih yang dipilih sebaiknya masih baru dan kemasannya baik?",
-          options: [
-            { id: 'A', text: "Agar peluang tumbuh tanaman lebih baik", isCorrect: true },
-            { id: 'B', text: "Agar warna benih lebih menarik", isCorrect: false },
-            { id: 'C', text: "Agar tanaman tidak membutuhkan pupuk", isCorrect: false },
-            { id: 'D', text: "Agar benih dapat tumbuh tanpa air", isCorrect: false }
-          ]
-        }
-      },
-      {
-        id: 15,
-        title: "🌱 Cara Menanam Bayam",
-        content: "1. Buat lubang kecil di permukaan tanah\n2. Taburkan beberapa benih bayam secara merata\n3. Tutup tipis dengan tanah\n4. Siram perlahan menggunakan air secukupnya\n\nLetakkan pot di tempat yang terkena sinar matahari.",
-        quiz: {
-          question: "Mengapa benih bayam perlu ditutup tipis dengan tanah setelah ditanam?",
-          options: [
-            { id: 'A', text: "Agar benih mudah terbawa angin", isCorrect: false },
-            { id: 'B', text: "Agar benih tetap terlindungi dan dapat tumbuh dengan baik", isCorrect: true },
-            { id: 'C', text: "Agar tanah menjadi lebih keras", isCorrect: false },
-            { id: 'D', text: "Agar tanaman tidak terkena air", isCorrect: false }
-          ]
-        }
-      },
-      {
-        id: 16,
-        title: "💧 Perawatan Tanaman Bayam",
-        content: "• Siram pagi atau sore hari agar tanah tetap lembap\n• Jangan menyiram terlalu banyak agar akar tidak membusuk\n• Bersihkan rumput liar di sekitar tanaman\n• Tambahkan kompos atau pupuk cair alami setiap 1–2 minggu sekali\n• Pastikan tanaman mendapat cahaya matahari yang cukup\n\nBayam biasanya sudah dapat dipanen dalam waktu sekitar 3–4 minggu setelah ditanam.",
-        quiz: {
-          question: "Mengapa tanaman bayam tidak boleh disiram terlalu banyak?",
-          options: [
-            { id: 'A', text: "Karena akar tanaman dapat membusuk jika terlalu banyak air", isCorrect: true },
-            { id: 'B', text: "Karena bayam tidak membutuhkan air sama sekali", isCorrect: false },
-            { id: 'C', text: "Karena air membuat daun berubah warna menjadi putih", isCorrect: false },
-            { id: 'D', text: "Karena penyiraman hanya boleh dilakukan saat panen", isCorrect: false }
-          ]
-        }
-      },
-      {
-        id: 17,
-        title: "🌟 Pelajaran dari Berkebun",
-        content: "Berkebun mengajarkan kita untuk sabar, disiplin, dan bertanggung jawab. Dari sebuah benih kecil, kita belajar bahwa tanaman membutuhkan perhatian dan perawatan agar dapat tumbuh dengan baik dan memberi manfaat bagi kehidupan manusia.",
-        quiz: {
-          question: "Nilai penting apa yang dapat dipelajari dari kegiatan berkebun?",
-          options: [
-            { id: 'A', text: "Kesabaran dan tanggung jawab dalam merawat tanaman", isCorrect: true },
-            { id: 'B', text: "Cara menghindari pekerjaan rumah", isCorrect: false },
-            { id: 'C', text: "Kebiasaan membiarkan tanaman tumbuh sendiri", isCorrect: false },
-            { id: 'D', text: "Kemampuan memanen tanpa menanam", isCorrect: false }
-          ]
-        }
-      },
-      {
-        id: 18,
         title: "Kuis Akhir Modul 3",
         isFinalQuiz: true,
-        content: "Selamat! Kamu telah menyelesaikan materi Persiapan Sebelum Berkebun. Mari uji pemahamanmu secara menyeluruh."
+        content: "Selamat! Kamu telah menyelesaikan materi Modul 3: Cara Membuat Pupuk untuk Tanaman. Mari uji pemahamanmu secara menyeluruh dengan menjawab kuis di bawah ini."
       }
     ]
   })
