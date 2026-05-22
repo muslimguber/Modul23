@@ -565,10 +565,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                       disabled={quizDelay}
                       onClick={() => setQuizActive(!quizActive)}
                       className="flex-[2] px-2 text-sm sm:text-base py-3 disabled:opacity-50"
-                      style={completedPages.includes(activePage)
-                        ? { backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }
-                        : {}
-                      }
+                      style={{ backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }}
                     >
                       {completedPages.includes(activePage) 
                         ? (quizActive ? 'Tutup Tantangan' : 'Lihat Tantangan')
