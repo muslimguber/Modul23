@@ -343,7 +343,7 @@ const App = () => {
   };
 
   const openModule = (num: number) => {
-    if (isTeacher || unlockedModules.has(num) || num === 1 || num === 2) {
+    if (isTeacher || unlockedModules.has(num) || num === 1 || num === 2 || num === 3) {
       setActiveModule(num);
       setCurrentView('modul');
       setSidebarOpen(false);
@@ -489,16 +489,6 @@ const App = () => {
                 <HomeIcon size={16} />
               </button>
             )}
-            <button 
-              onClick={() => {
-                setCurrentView('resume');
-                setSidebarOpen(false);
-              }}
-              className={`flex-1 flex items-center justify-center p-1.5 rounded-lg transition-all ${currentView === 'resume' ? 'bg-white/20 shadow-lg' : 'hover:bg-white/5 opacity-60 hover:opacity-100'}`}
-              title="Hasil Belajar"
-            >
-              <BarChart3 size={16} />
-            </button>
             {isTeacher && (
               <button 
                 onClick={() => {
@@ -551,7 +541,7 @@ const App = () => {
                 >
                   <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${currentView === 'modul' && activeModule === num ? 'bg-white text-indigo-600' : 'bg-white/10'}`}>
                     {currentView === 'modul' && activeModule === num ? <Icons.BookOpen size={18} /> : (
-                      !isTeacher && !unlockedModules.has(num) && num !== 1 && num !== 2 ? <Icons.Lock size={14} className="opacity-40" /> : (
+                      !isTeacher && !unlockedModules.has(num) && num !== 1 && num !== 2 && num !== 3 ? <Icons.Lock size={14} className="opacity-40" /> : (
                         !logoError ? (
                           <img 
                             src="https://i.ibb.co.com/kVLW5n61/logo-smpn-1-bengkalis-kecil-Copy.png" 
@@ -567,7 +557,7 @@ const App = () => {
                   </div>
                   <div className="flex flex-col items-start">
                     <span className="font-bold text-sm">MODUL {num}</span>
-                    {isTeacher && num !== 1 && num !== 2 && (
+                    {isTeacher && num !== 1 && num !== 2 && num !== 3 && (
                       <span className="text-[10px] opacity-80 font-mono text-amber-400">pass : {modulePasswords[num]}</span>
                     )}
                   </div>
