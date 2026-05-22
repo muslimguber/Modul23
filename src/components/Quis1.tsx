@@ -186,6 +186,10 @@ export const Quis1: React.FC<Quis1Props> = ({ theme, username, userClass, onComp
 
     if (result.success) {
       setShowSuccessPopup(true);
+      localStorage.removeItem(KEY_INDEX);
+      localStorage.removeItem(KEY_ANSWERS);
+      localStorage.removeItem(KEY_SHUFFLED);
+      localStorage.removeItem(KEY_SHOW_RESULT);
     } else {
       console.error("Submission failed:", result.message);
     }
@@ -223,12 +227,8 @@ export const Quis1: React.FC<Quis1Props> = ({ theme, username, userClass, onComp
               {percentage}
             </div>
 
-            <div className="bg-slate-50 p-8 rounded-[2rem] border-2 border-slate-100">
-              <h3 className={`text-2xl font-black mb-3 ${motivation.color}`}>{motivation.title}</h3>
-              <p className="text-slate-600 font-bold leading-relaxed">{motivation.message}</p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-4 max-w-xs mx-auto">
+            {/* Tombol kirim nilai tepat di bawah angka nilai */}
+            <div className="max-w-xs mx-auto space-y-3">
               {(percentage >= 0 || isTeacher) && !submitStatus && (
                 <ThemeButton
                   theme={theme}
@@ -251,7 +251,15 @@ export const Quis1: React.FC<Quis1Props> = ({ theme, username, userClass, onComp
                   {submitStatus.message}
                 </div>
               )}
+            </div>
 
+            {/* Ucapan motivasi barulah di bawahnya */}
+            <div className="bg-slate-50 p-8 rounded-[2rem] border-2 border-slate-100">
+              <h3 className={`text-2xl font-black mb-3 ${motivation.color}`}>{motivation.title}</h3>
+              <p className="text-slate-600 font-bold leading-relaxed">{motivation.message}</p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 max-w-xs mx-auto">
               {isTeacher && (
                 <ThemeButton
                   theme={theme}

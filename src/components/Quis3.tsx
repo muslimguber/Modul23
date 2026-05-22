@@ -206,6 +206,10 @@ export const Quis3: React.FC<Quis3Props> = ({ theme, username, userClass, onComp
 
     if (result.success) {
       setShowSuccessPopup(true);
+      localStorage.removeItem(KEY_INDEX);
+      localStorage.removeItem(KEY_ANSWERS);
+      localStorage.removeItem(KEY_SHUFFLED);
+      localStorage.removeItem(KEY_SHOW_RESULT);
     } else {
       console.error("Submission failed:", result.message);
     }
@@ -243,12 +247,8 @@ export const Quis3: React.FC<Quis3Props> = ({ theme, username, userClass, onComp
               {percentage}
             </div>
 
-            <div className="bg-slate-50 p-8 rounded-[2rem] border-2 border-slate-100">
-              <h3 className={`text-2xl font-black mb-3 ${motivation.color}`}>{motivation.title}</h3>
-              <p className="text-slate-600 font-bold leading-relaxed">{motivation.message}</p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-4 max-w-xs mx-auto">
+            {/* Tombol kirim nilai tepat di bawah angka nilai */}
+            <div className="max-w-xs mx-auto space-y-3">
               {(percentage >= 0 || isTeacher) && !submitStatus && (
                 <ThemeButton
                   theme={theme}
@@ -271,7 +271,15 @@ export const Quis3: React.FC<Quis3Props> = ({ theme, username, userClass, onComp
                   {submitStatus.message}
                 </div>
               )}
+            </div>
 
+            {/* Ucapan motivasi barulah di bawahnya */}
+            <div className="bg-slate-50 p-8 rounded-[2rem] border-2 border-slate-100">
+              <h3 className={`text-2xl font-black mb-3 ${motivation.color}`}>{motivation.title}</h3>
+              <p className="text-slate-600 font-bold leading-relaxed">{motivation.message}</p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 max-w-xs mx-auto">
               {isTeacher && (
                 <ThemeButton
                   theme={theme}
@@ -348,18 +356,13 @@ export const Quis3: React.FC<Quis3Props> = ({ theme, username, userClass, onComp
                     theme={theme}
                     variant={isSelected ? 'primary' : 'secondary'}
                     onClick={() => handleAnswer(option.id)}
-                    className="w-full relative overflow-hidden group flex items-start gap-3 p-4 text-left justify-start"
+                    className="w-full relative overflow-hidden group flex items-start gap-3 p-4 text-left justify-start transition-all"
+                    style={isSelected 
+                      ? { backgroundColor: theme.bgMain, background: theme.bgMain, color: '#ffffff', border: `2px solid ${theme.bgMain}` } 
+                      : { color: '#1e293b', border: '2px solid #e2e8f0', backgroundColor: '#ffffff' }
+                    }
                   >
-                    <span className="w-6 h-6 rounded-full flex items-center justify-center border-2 shrink-0 font-black text-xs group-hover:bg-white group-hover:text-black transition-colors"
-                      style={{ 
-                        borderColor: isSelected ? '#ffffff' : theme.accent,
-                        backgroundColor: isSelected ? '#ffffff' : 'transparent',
-                        color: isSelected ? theme.bgSidebar : 'inherit'
-                      }}
-                    >
-                      {option.id}
-                    </span>
-                    <span className="text-xs md:text-sm font-bold leading-normal relative z-10">{option.text}</span>
+                    <span className="text-xs md:text-sm font-bold leading-normal relative z-10" style={isSelected ? { color: '#ffffff' } : { color: '#1e293b' }}>{option.text}</span>
                   </ThemeButton>
                 );
               })}
@@ -375,6 +378,7 @@ export const Quis3: React.FC<Quis3Props> = ({ theme, username, userClass, onComp
           onClick={prevQuestion}
           disabled={currentIndex === 0}
           className={`${currentIndex === 0 ? 'opacity-50 grayscale cursor-not-allowed' : ''} flex items-center gap-2`}
+          style={{ color: theme.bgMain, border: '2px solid #e2e8f0', backgroundColor: '#ffffff' }}
         >
           <ChevronLeft size={16} />
           <span>Sebelumnya</span>
@@ -386,6 +390,7 @@ export const Quis3: React.FC<Quis3Props> = ({ theme, username, userClass, onComp
             onClick={handleFinish}
             disabled={answeredCount < totalQuestions && !isTeacher}
             className={`${answeredCount < totalQuestions && !isTeacher ? 'opacity-50 grayscale cursor-not-allowed' : ''} flex items-center gap-2 shadow-lg scale-105`}
+            style={{ backgroundColor: theme.bgMain, background: theme.bgMain, color: '#ffffff' }}
           >
             <span>SELESAI KUIS</span>
             <CheckCircle2 size={16} />
@@ -397,6 +402,7 @@ export const Quis3: React.FC<Quis3Props> = ({ theme, username, userClass, onComp
             onClick={nextQuestion}
             disabled={!answers[currentQuestion.id] && !isTeacher}
             className={`${!answers[currentQuestion.id] && !isTeacher ? 'opacity-50 grayscale cursor-not-allowed' : ''} flex items-center gap-2`}
+            style={{ backgroundColor: theme.bgMain, background: theme.bgMain, color: '#ffffff' }}
           >
             <span>Selanjutnya</span>
             <ChevronRight size={16} />
@@ -409,6 +415,66 @@ export const Quis3: React.FC<Quis3Props> = ({ theme, username, userClass, onComp
           💡 Selesaikan semua pertanyaan untuk mengirim jawabanmu. (Sedang dikerjakan {answeredCount} dari {totalQuestions})
         </div>
       )}
+
+      {/* Navigation Grid */}
+      <div className="bg-white/50 p-6 rounded-3xl border-2 border-white/60">
+        <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
+          {shuffledQuestions.map((q, idx) => (
+            <button
+              key={q.id}
+              onClick={() => setCurrentIndex(idx)}
+              className={`h-10 rounded-xl font-black text-xs transition-all ${
+                currentIndex === idx 
+                  ? 'text-white scale-110 shadow-lg' 
+                  : answers[q.id] 
+                    ? 'bg-emerald-200 text-emerald-700' 
+                    : 'bg-white text-slate-400'
+              }`}
+              style={currentIndex === idx ? { backgroundColor: theme.bgMain } : {}}
+            >
+              {idx + 1}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Success Popup */}
+      <AnimatePresence>
+        {showSuccessPopup && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-md z-[100] flex items-center justify-center p-6"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              className="bg-white rounded-[2.5rem] p-8 max-w-xs w-full text-center space-y-6 shadow-2xl"
+            >
+              <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto text-emerald-600">
+                <CheckCircle2 size={48} />
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-2xl font-black text-slate-900">Berhasil!</h3>
+                <p className="text-slate-700 font-bold">Nilai sudah terkirim</p>
+              </div>
+              <ThemeButton 
+                theme={theme}
+                onClick={() => {
+                  setShowSuccessPopup(false);
+                  window.open('https://s.shopee.co.id/9ALT8cHtu6', '_blank');
+                  onComplete(calculateScore());
+                }}
+                fullWidth
+                style={{ backgroundColor: theme.bgMain, background: theme.bgMain, color: '#ffffff' }}
+              >
+                Tutup & Selesai
+              </ThemeButton>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -477,16 +477,18 @@ const App = () => {
 
           {/* Header Quick Menu (Icons Only) */}
           <div className="flex gap-1 mb-2">
-            <button 
-              onClick={() => {
-                setCurrentView('home');
-                setSidebarOpen(false);
-              }}
-              className={`flex-1 flex items-center justify-center p-1.5 rounded-lg transition-all ${currentView === 'home' ? 'bg-white/20 shadow-lg' : 'hover:bg-white/5 opacity-60 hover:opacity-100'}`}
-              title="Halaman Utama"
-            >
-              <HomeIcon size={16} />
-            </button>
+            {isTeacher && (
+              <button 
+                onClick={() => {
+                  setCurrentView('home');
+                  setSidebarOpen(false);
+                }}
+                className={`flex-1 flex items-center justify-center p-1.5 rounded-lg transition-all ${currentView === 'home' ? 'bg-white/20 shadow-lg' : 'hover:bg-white/5 opacity-60 hover:opacity-100'}`}
+                title="Halaman Utama"
+              >
+                <HomeIcon size={16} />
+              </button>
+            )}
             <button 
               onClick={() => {
                 setCurrentView('resume');
