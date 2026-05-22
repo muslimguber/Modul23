@@ -243,7 +243,7 @@ export const Quis3: React.FC<Quis3Props> = ({ theme, username, userClass, onComp
           </div>
 
           <div className="p-10 text-center space-y-8">
-            <div className={`text-9xl font-black ${motivation.color}`}>
+            <div className="text-9xl font-black" style={{ color: theme.bgMain }}>
               {percentage}
             </div>
 
@@ -256,6 +256,7 @@ export const Quis3: React.FC<Quis3Props> = ({ theme, username, userClass, onComp
                   disabled={isSubmitting}
                   size="lg"
                   fullWidth
+                  style={{ backgroundColor: theme.bgMain, background: theme.bgMain, color: '#ffffff' }}
                 >
                   {isSubmitting ? <Loader2 className="animate-spin" /> : <CheckCircle2 size={24} />}
                   <span>{isSubmitting ? 'Mengirim...' : 'KIRIM NILAI'}</span>
@@ -275,7 +276,7 @@ export const Quis3: React.FC<Quis3Props> = ({ theme, username, userClass, onComp
 
             {/* Ucapan motivasi barulah di bawahnya */}
             <div className="bg-slate-50 p-8 rounded-[2rem] border-2 border-slate-100">
-              <h3 className={`text-2xl font-black mb-3 ${motivation.color}`}>{motivation.title}</h3>
+              <h3 className="text-2xl font-black mb-3" style={{ color: theme.bgMain }}>{motivation.title}</h3>
               <p className="text-slate-600 font-bold leading-relaxed">{motivation.message}</p>
             </div>
 
@@ -413,11 +414,7 @@ export const Quis3: React.FC<Quis3Props> = ({ theme, username, userClass, onComp
         )}
       </div>
 
-      {answeredCount < totalQuestions && !isTeacher && (
-        <div className="p-4 bg-amber-50 rounded-2xl border border-amber-100 flex items-center gap-3 text-amber-800 text-[10px] md:text-xs font-bold leading-normal text-center justify-center">
-          💡 Selesaikan semua pertanyaan untuk mengirim jawabanmu. (Sedang dikerjakan {answeredCount} dari {totalQuestions})
-        </div>
-      )}
+
 
       {/* Navigation Grid */}
       <div className="bg-white/50 p-6 rounded-3xl border-2 border-white/60">

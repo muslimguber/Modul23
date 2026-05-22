@@ -294,7 +294,8 @@ export const FinalQuiz: React.FC<FinalQuizProps> = ({ theme, moduleNumber, usern
                 initial={{ scale: 0.5, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ type: "spring", damping: 12, delay: 0.4 }}
-                className={`text-9xl font-black ${motivation.color}`}
+                className="text-9xl font-black"
+                style={{ color: theme.bgMain }}
               >
                 {percentage}
               </motion.div>
@@ -307,6 +308,7 @@ export const FinalQuiz: React.FC<FinalQuizProps> = ({ theme, moduleNumber, usern
                       theme={theme}
                       onClick={handleSendToSheet}
                       fullWidth
+                      style={{ backgroundColor: theme.bgMain, background: theme.bgMain, color: '#ffffff' }}
                     >
                       <CheckCircle2 size={20} />
                       <span>KIRIM NILAI</span>
@@ -359,7 +361,7 @@ export const FinalQuiz: React.FC<FinalQuizProps> = ({ theme, moduleNumber, usern
             </div>
 
             <div className="space-y-4 bg-slate-50 p-6 rounded-3xl border-2 border-slate-100">
-              <h3 className={`text-xl font-black ${motivation.color}`}>{motivation.title}</h3>
+              <h3 className="text-xl font-black" style={{ color: theme.bgMain }}>{motivation.title}</h3>
               <p className="text-slate-600 font-medium leading-relaxed text-sm">
                 {motivation.message}
               </p>
@@ -396,6 +398,7 @@ export const FinalQuiz: React.FC<FinalQuizProps> = ({ theme, moduleNumber, usern
                   theme={theme}
                   onClick={handleSuccessOk}
                   fullWidth
+                  style={{ backgroundColor: theme.bgMain, background: theme.bgMain, color: '#ffffff' }}
                 >
                   OK
                 </ThemeButton>

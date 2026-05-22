@@ -24,6 +24,17 @@ const PRAISES = [
   'Kamu Brilian!'
 ];
 
+const darkenColor = (hex: string, amount: number = 0.25) => {
+  if (!hex || !hex.startsWith('#')) return hex;
+  let r = parseInt(hex.substring(1, 3), 16);
+  let g = parseInt(hex.substring(3, 5), 16);
+  let b = parseInt(hex.substring(5, 7), 16);
+  r = Math.max(0, Math.floor(r * (1 - amount)));
+  g = Math.max(0, Math.floor(g * (1 - amount)));
+  b = Math.max(0, Math.floor(b * (1 - amount)));
+  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+};
+
 interface Page {
   id: number;
   title: string;
@@ -309,12 +320,12 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                   <div className="flex flex-row gap-2 justify-center max-w-[400px] mx-auto">
                     <ThemeButton 
                       theme={theme}
-                      variant="secondary"
                       onClick={() => {
                         setActivePage(activePage - 1);
                         setQuizActive(false);
                       }}
                       className="flex-1 px-2 text-sm sm:text-base py-3"
+                      style={{ backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }}
                     >
                       <ChevronLeft size={18} />
                       <span className="hidden xs:inline">Kembali</span>
@@ -332,6 +343,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                         }
                       }}
                       className="flex-1 px-2 text-sm sm:text-base py-3 disabled:opacity-50 disabled:grayscale"
+                      style={gameLevel >= 4 ? { backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' } : {}}
                     >
                       <span className="hidden xs:inline text-white">LANJUT</span>
                       <ChevronRight size={18} className="text-white" />
@@ -359,12 +371,12 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                   <div className="flex flex-row gap-2 justify-center max-w-[400px] mx-auto">
                     <ThemeButton 
                       theme={theme}
-                      variant="secondary"
                       onClick={() => {
                         setActivePage(activePage - 1);
                         setQuizActive(false);
                       }}
                       className="flex-1 px-2 text-sm sm:text-base py-3"
+                      style={{ backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }}
                     >
                       <ChevronLeft size={18} />
                       <span className="hidden xs:inline">Kembali</span>
@@ -382,6 +394,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                         }
                       }}
                       className="flex-1 px-2 text-sm sm:text-base py-3 disabled:opacity-50 disabled:grayscale"
+                      style={gameLevel >= 4 ? { backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' } : {}}
                     >
                       <span className="hidden xs:inline text-white">LANJUT</span>
                       <ChevronRight size={18} className="text-white" />
@@ -409,12 +422,12 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                   <div className="flex flex-row gap-2 justify-center max-w-[400px] mx-auto">
                     <ThemeButton 
                       theme={theme}
-                      variant="secondary"
                       onClick={() => {
                         setActivePage(activePage - 1);
                         setQuizActive(false);
                       }}
                       className="flex-1 px-2 text-sm sm:text-base py-3"
+                      style={{ backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }}
                     >
                       <ChevronLeft size={18} />
                       <span className="hidden xs:inline">Kembali</span>
@@ -432,6 +445,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                         }
                       }}
                       className="flex-1 px-2 text-sm sm:text-base py-3 disabled:opacity-50 disabled:grayscale"
+                      style={gameLevel >= 4 ? { backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' } : {}}
                     >
                       <span className="hidden xs:inline text-white">LANJUT</span>
                       <ChevronRight size={18} className="text-white" />
@@ -532,12 +546,12 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                   {activePage > 0 && (
                     <ThemeButton 
                       theme={theme}
-                      variant="secondary"
                       onClick={() => {
                         setActivePage(activePage - 1);
                         setQuizActive(false);
                       }}
                       className="flex-1 px-2 text-sm sm:text-base py-3"
+                      style={{ backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }}
                     >
                       <ChevronLeft size={18} />
                       <span className="hidden xs:inline">Kembali</span>
@@ -551,6 +565,10 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                       disabled={quizDelay}
                       onClick={() => setQuizActive(!quizActive)}
                       className="flex-[2] px-2 text-sm sm:text-base py-3 disabled:opacity-50"
+                      style={completedPages.includes(activePage)
+                        ? { backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }
+                        : {}
+                      }
                     >
                       {completedPages.includes(activePage) 
                         ? (quizActive ? 'Tutup Tantangan' : 'Lihat Tantangan')
@@ -569,6 +587,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                         setQuizActive(false);
                       }}
                       className="flex-1 px-2 text-sm sm:text-base py-3 disabled:opacity-50"
+                      style={{ backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }}
                     >
                       <span className="hidden xs:inline text-white">LANJUT</span>
                       <ChevronRight size={18} className="text-white" />
@@ -648,7 +667,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                       </motion.div>
                       
                       <div className="relative -ml-2">
-                        <span className="text-8xl font-black italic tracking-tighter" style={{ color: theme.accent, filter: 'brightness(0.8)' }}>100</span>
+                        <span className="text-8xl font-black italic tracking-tighter" style={{ color: darkenColor(theme.bgMain, 0.25) }}>100</span>
                       </div>
 
                       <motion.div
@@ -666,7 +685,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                   )
                 ) : <X size={48} />}
               </div>
-              <h3 className={`text-4xl font-black mb-2`} style={{ color: showPopup.type === 'success' ? theme.accent : '#9f1239', filter: showPopup.type === 'success' ? 'brightness(0.6)' : 'none' }}>
+              <h3 className={`text-4xl font-black mb-2`} style={{ color: showPopup.type === 'success' ? darkenColor(theme.bgMain, 0.25) : '#9f1239' }}>
                 {showPopup.praise || (showPopup.type === 'success' ? 'Berhasil!' : 'Ups!')}
               </h3>
               {showPopup.message && (
@@ -679,7 +698,10 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                 fullWidth
                 size="lg"
                 className="py-5 text-xl tracking-widest"
-                style={showPopup.type === 'error' ? { backgroundColor: '#f43f5e' } : {}}
+                style={showPopup.type === 'success' 
+                  ? { backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' } 
+                  : { backgroundColor: '#f43f5e' }
+                }
               >
                 {showPopup.type === 'success' ? 'LANJUT' : 'COBA LAGI'}
               </ThemeButton>

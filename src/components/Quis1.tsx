@@ -223,7 +223,7 @@ export const Quis1: React.FC<Quis1Props> = ({ theme, username, userClass, onComp
           </div>
 
           <div className="p-10 text-center space-y-8">
-            <div className={`text-9xl font-black ${motivation.color}`}>
+            <div className="text-9xl font-black" style={{ color: theme.bgMain }}>
               {percentage}
             </div>
 
@@ -236,6 +236,7 @@ export const Quis1: React.FC<Quis1Props> = ({ theme, username, userClass, onComp
                   disabled={isSubmitting}
                   size="lg"
                   fullWidth
+                  style={{ backgroundColor: theme.bgMain, background: theme.bgMain, color: '#ffffff' }}
                 >
                   {isSubmitting ? <Loader2 className="animate-spin" /> : <CheckCircle2 size={24} />}
                   <span>{isSubmitting ? 'Mengirim...' : 'KIRIM NILAI'}</span>
@@ -255,7 +256,7 @@ export const Quis1: React.FC<Quis1Props> = ({ theme, username, userClass, onComp
 
             {/* Ucapan motivasi barulah di bawahnya */}
             <div className="bg-slate-50 p-8 rounded-[2rem] border-2 border-slate-100">
-              <h3 className={`text-2xl font-black mb-3 ${motivation.color}`}>{motivation.title}</h3>
+              <h3 className="text-2xl font-black mb-3" style={{ color: theme.bgMain }}>{motivation.title}</h3>
               <p className="text-slate-600 font-bold leading-relaxed">{motivation.message}</p>
             </div>
 
