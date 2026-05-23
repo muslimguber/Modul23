@@ -480,8 +480,8 @@ const App = () => {
                   <User size={14} className="opacity-70" />
                 </div>
                 <div className="flex flex-col overflow-hidden text-left">
-                  <span className="text-[8px] opacity-40 font-black uppercase tracking-widest leading-none mb-0.5">Kelas {userClass || '-'}</span>
-                  <span className="text-xs font-black truncate opacity-90 leading-none">{username}</span>
+                  <span className="text-xs font-black truncate opacity-95 leading-none mb-1">{username}</span>
+                  <span className="text-[8px] opacity-40 font-black uppercase tracking-widest leading-none">Kelas {userClass || '-'}</span>
                 </div>
               </div>
               <button 
@@ -503,13 +503,13 @@ const App = () => {
               setCurrentView('rekap');
               setSidebarOpen(false);
             }}
-            className={`w-full mb-3 py-2 px-3 rounded-xl flex items-center gap-3 transition-all font-black text-[11px] uppercase tracking-wider relative ${
+            className={`w-full mb-1 py-2 px-3 rounded-xl flex items-center gap-3 transition-all font-black text-[11px] uppercase tracking-wider relative ${
               currentView === 'rekap' 
-                ? 'bg-white shadow-lg text-slate-800' 
-                : 'hover:bg-white/5 opacity-80 hover:opacity-100 text-white border border-white/10'
+                ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/10 scale-[1.01]' 
+                : 'bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-100 border border-emerald-500/35 hover:shadow-md transition-all active:scale-95'
             }`}
           >
-            <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${currentView === 'rekap' ? 'bg-slate-100 text-slate-800' : 'bg-white/10 text-white'}`}>
+            <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${currentView === 'rekap' ? 'bg-white/20 text-white' : 'bg-emerald-500/20 text-emerald-300'}`}>
               <Icons.GraduationCap size={13} />
             </div>
             <span>Daftar Nilai</span>
@@ -520,48 +520,50 @@ const App = () => {
           </button>
 
           {/* Header Quick Menu (Icons Only) */}
-          <div className="flex gap-1 mb-2">
-            {isTeacher && (
-              <button 
-                onClick={() => {
-                  setCurrentView('home');
-                  setSidebarOpen(false);
-                }}
-                className={`flex-1 flex items-center justify-center p-1.5 rounded-lg transition-all ${currentView === 'home' ? 'bg-white/20 shadow-lg' : 'hover:bg-white/5 opacity-60 hover:opacity-100'}`}
-                title="Halaman Utama"
-              >
-                <HomeIcon size={16} />
-              </button>
-            )}
-            {isTeacher && (
-              <button 
-                onClick={() => {
-                  setCurrentView('rekap');
-                  setSidebarOpen(false);
-                }}
-                className={`flex-1 flex items-center justify-center p-1.5 rounded-lg transition-all ${currentView === 'rekap' ? 'bg-white/20 shadow-lg' : 'hover:bg-white/5 opacity-60 hover:opacity-100'}`}
-                title="Rekap Nilai Guru"
-              >
-                <LayoutDashboard size={16} />
-              </button>
-            )}
-            {searchQuery === '1111' && (
-              <a 
-                href="https://accounts.google.com/SignOutOptions?continue=https://aistudio.google.com/apps/1d64e8db-7e15-4e52-8a3d-96a86eb7f1b2?showAssistant=true"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setSidebarOpen(false)}
-                className="flex-1 flex items-center justify-center p-1.5 rounded-lg transition-all hover:bg-white/5 opacity-60 hover:opacity-100"
-                title="Login Akun"
-              >
-                <User size={16} />
-              </a>
-            )}
-          </div>
+          {(isTeacher || searchQuery === '1111') && (
+            <div className="flex gap-1 mb-1">
+              {isTeacher && (
+                <button 
+                  onClick={() => {
+                    setCurrentView('home');
+                    setSidebarOpen(false);
+                  }}
+                  className={`flex-1 flex items-center justify-center p-1.5 rounded-lg transition-all ${currentView === 'home' ? 'bg-white/20 shadow-lg' : 'hover:bg-white/5 opacity-60 hover:opacity-100'}`}
+                  title="Halaman Utama"
+                >
+                  <HomeIcon size={16} />
+                </button>
+              )}
+              {isTeacher && (
+                <button 
+                  onClick={() => {
+                    setCurrentView('rekap');
+                    setSidebarOpen(false);
+                  }}
+                  className={`flex-1 flex items-center justify-center p-1.5 rounded-lg transition-all ${currentView === 'rekap' ? 'bg-white/20 shadow-lg' : 'hover:bg-white/5 opacity-60 hover:opacity-100'}`}
+                  title="Rekap Nilai Guru"
+                >
+                  <LayoutDashboard size={16} />
+                </button>
+              )}
+              {searchQuery === '1111' && (
+                <a 
+                  href="https://accounts.google.com/SignOutOptions?continue=https://aistudio.google.com/apps/1d64e8db-7e15-4e52-8a3d-96a86eb7f1b2?showAssistant=true"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setSidebarOpen(false)}
+                  className="flex-1 flex items-center justify-center p-1.5 rounded-lg transition-all hover:bg-white/5 opacity-60 hover:opacity-100"
+                  title="Login Akun"
+                >
+                  <User size={16} />
+                </a>
+              )}
+            </div>
+          )}
 
           {/* Search Bar - Toggleable */}
           {showSearch && (
-            <div className="relative mb-3 animate-in fade-in slide-in-from-top-1 duration-200">
+            <div className="relative mb-1.5 animate-in fade-in slide-in-from-top-1 duration-200">
               <Icons.Search size={12} className="absolute left-2.5 top-1/2 -translate-y-1/2 opacity-40" />
               <input 
                 type="text"
