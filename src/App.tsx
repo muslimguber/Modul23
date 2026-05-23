@@ -43,7 +43,7 @@ import { Modul7 } from './components/Modul7';
 import { Modul8 } from './components/Modul8';
 import { VideoPlayer } from './components/VideoPlayer';
 import { googleFormService } from './services/googleFormService';
-import { RekapNilai } from './components/RekapNilai';
+import { Rekap } from './components/Rekap';
 
 const App = () => {
   // --- State ---
@@ -64,6 +64,7 @@ const App = () => {
   const [showLogoutConfirm, setShowLogoutConfirm] = useState<boolean>(false);
   const [logoError, setLogoError] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [showSearch, setShowSearch] = useState<boolean>(false);
   
   // Progress State
   const [progress, setProgress] = useState<UserProgress>({
@@ -452,28 +453,71 @@ const App = () => {
             </button>
           </div>
 
-          {/* User Profile */}
-          <div className="flex items-center justify-between mb-3 px-2 py-1.5 bg-white/5 rounded-xl border border-white/5 shadow-inner">
-            <div className="flex items-center gap-2 overflow-hidden">
-              <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
-                <User size={14} className="opacity-70" />
-              </div>
-              <div className="flex flex-col overflow-hidden text-left">
-                <span className="text-[8px] opacity-40 font-black uppercase tracking-widest leading-none mb-0.5">Pengguna</span>
-                <span className="text-xs font-black truncate opacity-90 leading-none">{username}</span>
-              </div>
-            </div>
+          {/* User Profile and Search Toggle */}
+          <div className="flex items-center gap-1.5 mb-3">
+            {/* Logo kaca pembesar */}
             <button 
               onClick={() => {
-                setShowLogoutConfirm(true);
-                setSidebarOpen(false);
+                setShowSearch(!showSearch);
+                if (showSearch) {
+                  setSearchQuery('');
+                }
               }}
-              className="p-1.5 rounded-lg hover:bg-rose-500/20 text-rose-400/60 hover:text-rose-400 transition-all flex-shrink-0"
-              title="Keluar Sesi"
+              className={`p-2 rounded-xl transition-all flex-shrink-0 ${
+                showSearch || searchQuery 
+                  ? 'bg-white/15 text-white shadow-sm' 
+                  : 'hover:bg-white/5 text-white/50 hover:text-white'
+              }`}
+              title="Cari Materi"
             >
-              <LogOut size={16} />
+              <Icons.Search size={15} />
             </button>
+
+            {/* Profile (Tombol Nama) */}
+            <div className="flex-1 flex items-center justify-between px-2 py-1.5 bg-white/5 rounded-xl border border-white/5 shadow-inner overflow-hidden">
+              <div className="flex items-center gap-2 overflow-hidden">
+                <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                  <User size={14} className="opacity-70" />
+                </div>
+                <div className="flex flex-col overflow-hidden text-left">
+                  <span className="text-[8px] opacity-40 font-black uppercase tracking-widest leading-none mb-0.5">Pengguna</span>
+                  <span className="text-xs font-black truncate opacity-90 leading-none">{username}</span>
+                </div>
+              </div>
+              <button 
+                onClick={() => {
+                  setShowLogoutConfirm(true);
+                  setSidebarOpen(false);
+                }}
+                className="p-1.5 rounded-lg hover:bg-rose-500/20 text-rose-400/60 hover:text-rose-400 transition-all flex-shrink-0"
+                title="Keluar Sesi"
+              >
+                <LogOut size={16} />
+              </button>
+            </div>
           </div>
+
+          {/* Tombol Nilai di Bawah Nama */}
+          <button 
+            onClick={() => {
+              setCurrentView('rekap');
+              setSidebarOpen(false);
+            }}
+            className={`w-full mb-3 py-2 px-3 rounded-xl flex items-center gap-3 transition-all font-black text-[11px] uppercase tracking-wider relative ${
+              currentView === 'rekap' 
+                ? 'bg-white shadow-lg text-slate-800' 
+                : 'hover:bg-white/5 opacity-80 hover:opacity-100 text-white border border-white/10'
+            }`}
+          >
+            <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${currentView === 'rekap' ? 'bg-slate-100 text-slate-800' : 'bg-white/10 text-white'}`}>
+              <Icons.GraduationCap size={13} />
+            </div>
+            <span>Daftar Nilai</span>
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </div>
+          </button>
 
           {/* Header Quick Menu (Icons Only) */}
           <div className="flex gap-1 mb-2">
@@ -515,17 +559,20 @@ const App = () => {
             )}
           </div>
 
-          {/* Search Bar */}
-          <div className="relative">
-            <Icons.Search size={12} className="absolute left-2.5 top-1/2 -translate-y-1/2 opacity-40" />
-            <input 
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Cari materi..."
-              className="w-full bg-white/5 border border-white/10 rounded-lg py-1.5 pl-8 pr-2.5 text-[10px] font-bold outline-none focus:border-white/20 transition-all placeholder:opacity-40"
-            />
-          </div>
+          {/* Search Bar - Toggleable */}
+          {showSearch && (
+            <div className="relative mb-3 animate-in fade-in slide-in-from-top-1 duration-200">
+              <Icons.Search size={12} className="absolute left-2.5 top-1/2 -translate-y-1/2 opacity-40" />
+              <input 
+                type="text"
+                autoFocus
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Cari materi..."
+                className="w-full bg-white/5 border border-white/10 rounded-lg py-1.5 pl-8 pr-2.5 text-[10px] font-bold outline-none focus:border-white/20 transition-all placeholder:opacity-40"
+              />
+            </div>
+          )}
         </div>
 
         {/* Sidebar Menu */}
@@ -925,7 +972,7 @@ const App = () => {
                 exit={{ opacity: 0, y: -20 }}
                 className="relative z-10 w-full"
               >
-                <RekapNilai onBack={() => setCurrentView('home')} />
+                <Rekap onBack={() => setCurrentView('home')} theme={theme} />
               </motion.div>
             )}
           </AnimatePresence>
