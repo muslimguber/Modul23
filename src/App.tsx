@@ -475,24 +475,20 @@ const App = () => {
 
             {/* Profile (Tombol Nama) */}
             <div className="flex-1 flex items-center justify-between px-2 py-1.5 bg-white/5 rounded-xl border border-white/5 shadow-inner overflow-hidden">
-              <div className="flex items-center gap-2 overflow-hidden">
-                <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
-                  <User size={14} className="opacity-70" />
-                </div>
-                <div className="flex flex-col overflow-hidden text-left">
-                  <span className="text-xs font-black truncate opacity-95 leading-none mb-1">{username}</span>
-                  <span className="text-[8px] opacity-40 font-black uppercase tracking-widest leading-none">Kelas {userClass || '-'}</span>
-                </div>
+              <div className="flex flex-col overflow-hidden text-left pl-1">
+                <span className="text-xs font-black truncate opacity-95 leading-none mb-1">{username}</span>
+                <span className="text-[8px] opacity-40 font-black uppercase tracking-widest leading-none">Kelas {userClass || '-'}</span>
               </div>
               <button 
                 onClick={() => {
                   setShowLogoutConfirm(true);
                   setSidebarOpen(false);
                 }}
-                className="p-1.5 rounded-lg hover:bg-rose-500/20 text-rose-400/60 hover:text-rose-400 transition-all flex-shrink-0"
+                className="px-2.5 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg transition-all flex-shrink-0 flex items-center justify-center shadow-md shadow-rose-900/40 font-black text-[9px] uppercase tracking-wider gap-1"
                 title="Keluar Sesi"
               >
-                <LogOut size={16} />
+                <LogOut size={11} />
+                <span>EXIT</span>
               </button>
             </div>
           </div>

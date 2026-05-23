@@ -276,10 +276,18 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
 
   const currentPage = data.pages[activePage];
 
+  // Clean title to avoid "MODUL 2 : Modul 2" duplicates
+  const getCleanTitle = () => {
+    let clean = data.title;
+    const prefixRegex = new RegExp(`^modul\\s*${moduleNumber}\\s*[:\\-]?\\s*`, 'i');
+    clean = clean.replace(prefixRegex, '');
+    return `MODUL ${moduleNumber} : ${clean}`;
+  };
+
   return (
     <div className="max-w-3xl mx-auto min-h-[80vh] flex flex-col pb-10">
       {/* Navbar Tabs */}
-      <div className="flex justify-center w-full gap-1 md:gap-2 mb-8 px-2 py-2">
+      <div className="flex justify-center w-full gap-1 md:gap-2 mb-2 px-2 py-1.5">
         {data.pages.map((page, index) => {
           const isUnlocked = index === 0 || completedPages.includes(index - 1) || isUnlockedGlobally;
           const isActive = activePage === index;
@@ -314,6 +322,21 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
             </motion.button>
           );
         })}
+      </div>
+
+      {/* Centered Module Title with Minimal Frame */}
+      <div className="flex justify-center mb-3 px-4 animate-in fade-in duration-300">
+        <div 
+          className="px-5 py-1 rounded-xl border font-black tracking-[0.14em] text-[10px] md:text-xs uppercase text-center flex items-center justify-center gap-2.5 shadow-md backdrop-blur-md text-white"
+          style={{ 
+            borderColor: `${theme.accent}45`, 
+            backgroundColor: `${theme.accent}1c`, 
+          }}
+        >
+          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 animate-pulse bg-white"></span>
+          <span>{getCleanTitle()}</span>
+          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 animate-pulse bg-white"></span>
+        </div>
       </div>
 
       <div className="flex-1 flex flex-col justify-center">
@@ -539,7 +562,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
               className="space-y-6"
             >
               <div className="bg-white/70 backdrop-blur-md p-6 md:p-8 rounded-[2rem] border-2 border-white/60 shadow-xl max-w-2xl mx-auto space-y-6">
-                <div className="text-center space-y-3">
+                <div className="text-center space-y-3 font-sans">
                   <h1 className={`font-black text-slate-800 uppercase tracking-tight ${
                     currentPage.titleSize === 'sm' ? 'text-sm' :
                     currentPage.titleSize === 'base' ? 'text-base' :
@@ -549,6 +572,9 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                   }`}>
                     {currentPage.title}
                   </h1>
+                  {((moduleNumber === 2 || moduleNumber === 3) && activePage === 0) && (
+                    <p className="text-xs font-bold text-slate-500 tracking-wide mt-1 block">Cek Apakah Nilai Kamu sudah masuk.</p>
+                  )}
                   {currentPage.triggerQuestion && (
                     <p className="text-sm font-bold italic text-slate-800">"{currentPage.triggerQuestion}"</p>
                   )}
@@ -599,26 +625,25 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                     <div className="flex gap-4 justify-center">
                       <button 
                         onClick={() => {
+                          if (onRedirect) {
+                            onRedirect(moduleNumber - 1, 0);
+                          }
+                        }}
+                        className="flex-1 py-3 bg-amber-500 hover:bg-amber-600 hover:shadow-md text-white font-black rounded-xl transition-all text-sm active:scale-95 flex items-center justify-center"
+                      >
+                        <span>BELUM</span>
+                      </button>
+                      <button 
+                        onClick={() => {
                           setCompletedPages(prev => prev.includes(0) ? prev : [...prev, 0]);
                           setActivePage(1);
                           setQuizActive(false);
                           setQuizSelected(null);
                         }}
-                        className="flex-1 py-3 bg-emerald-500 hover:bg-emerald-600 hover:shadow-md text-white font-black rounded-xl transition-all text-sm active:scale-95 flex items-center justify-center gap-1"
+                        className="flex-1 py-3 text-white font-black rounded-xl transition-all text-sm active:scale-95 flex items-center justify-center hover:shadow-md hover:brightness-105"
+                        style={{ backgroundColor: darkenColor(theme.accent, 0.2) }}
                       >
                         <span>SUDAH</span>
-                        <ChevronRight size={14} />
-                      </button>
-                      <button 
-                        onClick={() => {
-                          if (onRedirect) {
-                            onRedirect(moduleNumber - 1, 0);
-                          }
-                        }}
-                        className="flex-1 py-3 bg-slate-200 hover:bg-slate-300 hover:shadow-sm text-slate-700 font-black rounded-xl transition-all text-sm active:scale-95 flex items-center justify-center gap-1"
-                      >
-                        <ChevronLeft size={14} />
-                        <span>BELUM</span>
                       </button>
                     </div>
                   </div>
@@ -649,13 +674,10 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                         className="flex-[2] px-2 text-sm sm:text-base py-3 disabled:opacity-50"
                         style={{ backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }}
                       >
-                        {quizDelay && countdownSeconds > 0 ? (
-                          `Tunggu ${countdownSeconds}d...`
-                        ) : (
-                          completedPages.includes(activePage) 
-                            ? (quizActive ? 'Tutup Tantangan' : 'Lihat Tantangan')
-                            : 'Jawab Tantangan'
-                        )}
+                        {completedPages.includes(activePage) 
+                          ? (quizActive ? 'Tutup Tantangan' : 'Lihat Tantangan')
+                          : 'Jawab Tantangan'
+                        }
                       </ThemeButton>
                     )}
 
@@ -749,9 +771,14 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                         <Trophy size={48} className="text-amber-400 fill-amber-400/20" />
                       </motion.div>
                       
-                      <div className="relative -ml-2">
-                        <span className="text-8xl font-black italic tracking-tighter" style={{ color: darkenColor(theme.bgMain, 0.25) }}>100</span>
-                      </div>
+                      <motion.div 
+                        className="relative -ml-2"
+                        initial={{ scale: 0.5, y: 15 }}
+                        animate={{ scale: 1, y: 0 }}
+                        transition={{ type: 'spring', stiffness: 200, damping: 10, delay: 0.2 }}
+                      >
+                        <span className="text-8xl font-black italic tracking-tighter drop-shadow-[0_4px_6px_rgba(217,119,6,0.2)]" style={{ color: '#d97706' }}>100</span>
+                      </motion.div>
 
                       <motion.div
                         initial={{ rotate: 20, scale: 0.5 }}
@@ -768,11 +795,11 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                   )
                 ) : <X size={48} />}
               </div>
-              <h3 className={`text-4xl font-black mb-2`} style={{ color: showPopup.type === 'success' ? darkenColor(theme.bgMain, 0.25) : '#9f1239' }}>
+              <h3 className={`text-4xl font-black mb-2`} style={{ color: showPopup.type === 'success' ? '#0f172a' : '#881337' }}>
                 {showPopup.praise || (showPopup.type === 'success' ? 'Berhasil!' : 'Ups!')}
               </h3>
               {showPopup.message && (
-                <p className="text-slate-900 font-bold mb-8 leading-relaxed text-lg">{showPopup.message}</p>
+                <p className="text-slate-600 font-extrabold mb-8 leading-relaxed text-lg">{showPopup.message}</p>
               )}
               {!showPopup.message && <div className="mb-10" />}
               <ThemeButton 
