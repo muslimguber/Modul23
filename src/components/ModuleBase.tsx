@@ -247,8 +247,9 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
         praise: 'Baca lagi!',
         message: 'Coba perhatikan kembali materinya ya.'
       });
+      setQuizActive(false);
       setQuizDelay(true);
-      setCountdownSeconds(5);
+      setCountdownSeconds(10);
     }
   };
 
