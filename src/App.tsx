@@ -516,44 +516,18 @@ const App = () => {
           </button>
 
           {/* Header Quick Menu (Icons Only) */}
-          {(isTeacher || searchQuery === '1111') && (
+          {searchQuery === '1111' && (
             <div className="flex gap-1 mb-1">
-              {isTeacher && (
-                <button 
-                  onClick={() => {
-                    setCurrentView('home');
-                    setSidebarOpen(false);
-                  }}
-                  className={`flex-1 flex items-center justify-center p-1.5 rounded-lg transition-all ${currentView === 'home' ? 'bg-white/20 shadow-lg' : 'hover:bg-white/5 opacity-60 hover:opacity-100'}`}
-                  title="Halaman Utama"
-                >
-                  <HomeIcon size={16} />
-                </button>
-              )}
-              {isTeacher && (
-                <button 
-                  onClick={() => {
-                    setCurrentView('rekap');
-                    setSidebarOpen(false);
-                  }}
-                  className={`flex-1 flex items-center justify-center p-1.5 rounded-lg transition-all ${currentView === 'rekap' ? 'bg-white/20 shadow-lg' : 'hover:bg-white/5 opacity-60 hover:opacity-100'}`}
-                  title="Rekap Nilai Guru"
-                >
-                  <LayoutDashboard size={16} />
-                </button>
-              )}
-              {searchQuery === '1111' && (
-                <a 
-                  href="https://accounts.google.com/SignOutOptions?continue=https://aistudio.google.com/apps/1d64e8db-7e15-4e52-8a3d-96a86eb7f1b2?showAssistant=true"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setSidebarOpen(false)}
-                  className="flex-1 flex items-center justify-center p-1.5 rounded-lg transition-all hover:bg-white/5 opacity-60 hover:opacity-100"
-                  title="Login Akun"
-                >
-                  <User size={16} />
-                </a>
-              )}
+              <a 
+                href="https://accounts.google.com/SignOutOptions?continue=https://aistudio.google.com/apps/1d64e8db-7e15-4e52-8a3d-96a86eb7f1b2?showAssistant=true"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setSidebarOpen(false)}
+                className="flex-1 flex items-center justify-center p-1.5 rounded-lg transition-all hover:bg-white/5 opacity-60 hover:opacity-100"
+                title="Login Akun"
+              >
+                <User size={16} />
+              </a>
             </div>
           )}
 

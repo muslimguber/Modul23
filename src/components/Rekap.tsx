@@ -86,12 +86,9 @@ export const Rekap: React.FC<RekapProps> = ({ onBack, theme }) => {
                   <ClipboardList size={22} />
                 </div>
                 <div>
-                  <h1 className="text-xl font-black tracking-tight text-slate-850">
+                  <h1 className="text-xl font-black tracking-tight text-slate-950">
                     Rekap Nilai Siswa
                   </h1>
-                  <p className="text-xs font-semibold text-slate-500">
-                    Pilih modul di bawah untuk melihat nilai kuis dan capaian belajar secara langsung.
-                  </p>
                 </div>
               </div>
             </div>

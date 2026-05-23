@@ -31,7 +31,7 @@ const ITEMS = [
   { name: 'Mangga', emoji: '🥭', color: 'bg-orange-50' },
   { name: 'Lemon', emoji: '🍋', color: 'bg-yellow-50' },
   { name: 'Manggis', emoji: '🟣', color: 'bg-purple-50' },
-  { name: 'Durian', emoji: '🍈', color: 'bg-yellow-50' },
+  { name: 'Alpukat', emoji: '🥑', color: 'bg-green-50' },
   { name: 'Melon', emoji: '🍈', color: 'bg-green-50' },
   { name: 'Jamur', emoji: '🍄', color: 'bg-stone-50' },
   { name: 'Paprika', emoji: '🫑', color: 'bg-red-50' },
