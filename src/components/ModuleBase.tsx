@@ -91,6 +91,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
   const [activePage, setActivePage] = useState(0);
   const [gameLevel, setGameLevel] = useState(1);
   const [completedPages, setCompletedPages] = useState<number[]>([]);
+  const [openedPages, setOpenedPages] = useState<number[]>([]);
   const [quizActive, setQuizActive] = useState<boolean>(false);
   const [quizSelected, setQuizSelected] = useState<string | null>(null);
   const [quizDelay, setQuizDelay] = useState(false);
@@ -98,12 +99,20 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
   const quizRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setQuizDelay(true);
-    const timer = setTimeout(() => {
+    const isAlreadyCompleted = completedPages.includes(activePage);
+    const isAlreadyOpened = openedPages.includes(activePage);
+
+    if (isAlreadyCompleted || isAlreadyOpened) {
       setQuizDelay(false);
-    }, 10000);
-    return () => clearTimeout(timer);
-  }, [activePage, moduleNumber]);
+    } else {
+      setQuizDelay(true);
+      const timer = setTimeout(() => {
+        setQuizDelay(false);
+        setOpenedPages(prev => prev.includes(activePage) ? prev : [...prev, activePage]);
+      }, 10000);
+      return () => clearTimeout(timer);
+    }
+  }, [activePage, moduleNumber, completedPages, openedPages]);
 
   useEffect(() => {
     if (quizActive && quizRef.current) {
@@ -133,6 +142,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
   useEffect(() => {
     const savedActivePage = localStorage.getItem(`ipa_modul_${moduleNumber}_active_page`);
     const savedCompletedPages = localStorage.getItem(`ipa_modul_${moduleNumber}_completed_pages`);
+    const savedOpenedPages = localStorage.getItem(`ipa_modul_${moduleNumber}_opened_pages`);
 
     if (savedActivePage) setActivePage(parseInt(savedActivePage, 10));
     else setActivePage(0);
@@ -145,6 +155,16 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
       }
     } else {
       setCompletedPages([]);
+    }
+
+    if (savedOpenedPages) {
+      try {
+        setOpenedPages(JSON.parse(savedOpenedPages));
+      } catch (e) {
+        setOpenedPages([]);
+      }
+    } else {
+      setOpenedPages([]);
     }
     
     setQuizActive(false);
@@ -159,6 +179,10 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
   useEffect(() => {
     localStorage.setItem(`ipa_modul_${moduleNumber}_completed_pages`, JSON.stringify(completedPages));
   }, [completedPages, moduleNumber]);
+
+  useEffect(() => {
+    localStorage.setItem(`ipa_modul_${moduleNumber}_opened_pages`, JSON.stringify(openedPages));
+  }, [openedPages, moduleNumber]);
 
   const handleQuiz = (optionId: string) => {
     setQuizSelected(optionId);
