@@ -564,15 +564,26 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
             >
               <div className="bg-white/70 backdrop-blur-md p-6 md:p-8 rounded-[2rem] border-2 border-white/60 shadow-xl max-w-2xl mx-auto space-y-6">
                 <div className="text-center space-y-3 font-sans">
-                  <h1 className={`font-black text-slate-800 uppercase tracking-tight ${
-                    currentPage.titleSize === 'sm' ? 'text-sm' :
-                    currentPage.titleSize === 'base' ? 'text-base' :
-                    currentPage.titleSize === 'lg' ? 'text-lg' :
-                    currentPage.titleSize === 'xl' ? 'text-xl' :
-                    'text-2xl'
-                  }`}>
-                    {currentPage.title}
-                  </h1>
+                  <div className="relative flex items-center justify-center gap-2">
+                    <h1 className={`font-black text-slate-800 uppercase tracking-tight ${
+                      currentPage.titleSize === 'sm' ? 'text-sm' :
+                      currentPage.titleSize === 'base' ? 'text-base' :
+                      currentPage.titleSize === 'lg' ? 'text-lg' :
+                      currentPage.titleSize === 'xl' ? 'text-xl' :
+                      'text-2xl'
+                    }`}>
+                      {currentPage.title}
+                    </h1>
+                    {currentPage.isSheet && currentPage.sheetUrl && isTeacher && (
+                      <button
+                        onClick={() => window.open(currentPage.sheetUrl, '_blank')}
+                        className="inline-flex items-center justify-center p-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm hover:shadow transition-all active:scale-95 cursor-pointer"
+                        title="Buka Link Sheet (Guru)"
+                      >
+                        <ExternalLink size={16} />
+                      </button>
+                    )}
+                  </div>
                   {((moduleNumber === 2 || moduleNumber === 3) && activePage === 0) && (
                     <p className="text-xs font-bold text-slate-500 tracking-wide mt-1 block">Cek Apakah Nilai Kamu sudah masuk.</p>
                   )}
@@ -591,18 +602,6 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
 
                 {currentPage.isSheet && currentPage.sheetUrl && (
                   <div className="space-y-4 my-4">
-                    {isTeacher && (
-                      <div className="flex justify-end">
-                        <ThemeButton 
-                          theme={theme}
-                          onClick={() => window.open(currentPage.sheetUrl, '_blank')}
-                          className="flex items-center gap-2 px-4 py-2 text-xs md:text-sm shadow-md"
-                        >
-                          <ExternalLink size={16} />
-                          <span>BUKA LINK SHEET (GURU)</span>
-                        </ThemeButton>
-                      </div>
-                    )}
                     <div className="relative h-[600px] w-full bg-slate-100 rounded-2xl overflow-hidden border-2 border-slate-200 shadow-inner">
                       <iframe 
                         src={currentPage.sheetUrl}
