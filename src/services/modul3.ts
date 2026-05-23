@@ -7,7 +7,7 @@ export const modul3Service = {
         title: "NILAI MODUL 2",
         isSheet: true,
         sheetUrl: "https://docs.google.com/spreadsheets/d/1BzZ1lxqbmbY36KLjKMpIdItHvcj0S4RR2CgXVhf8f3w/preview",
-        content: "Jika belum ada nilai modul 2 maka kerjakan modul 2 terlebih dahulu",
+        content: "",
         quiz: {
           question: "Apakah kamu sudah mengecek namamu?",
           options: [

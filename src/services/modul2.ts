@@ -8,11 +8,10 @@ export const modul2Service = {
     pages: [
       {
         id: 0,
-        title: "APAKAH NILAI MODUL 1 MU SUDAH ADA? JIKA BELUM ADA SEGERA SELESAIKAN MODUL 1",
-        titleSize: 'sm',
+        title: "NILAI MODUL 1",
         isSheet: true,
         sheetUrl: "https://docs.google.com/spreadsheets/d/1PQywXD1s-NPxnJPzw_vinTG-lvYn24FBQsLP-_LazeY/preview",
-        content: "Jika Nilaimu belum masuk, kerjakan MODUL 1 terlebih dahulu hingga selesai...",
+        content: "",
         quiz: {
           question: "Apakah kamu sudah mengecek namamu?",
           options: [

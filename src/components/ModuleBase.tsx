@@ -95,24 +95,50 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
   const [quizActive, setQuizActive] = useState<boolean>(false);
   const [quizSelected, setQuizSelected] = useState<string | null>(null);
   const [quizDelay, setQuizDelay] = useState(false);
+  const [countdownSeconds, setCountdownSeconds] = useState(0);
   
   const quizRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if ((moduleNumber === 2 || moduleNumber === 3) && activePage === 0) {
+      setQuizDelay(false);
+      setCountdownSeconds(0);
+      return;
+    }
     const isAlreadyCompleted = completedPages.includes(activePage);
     const isAlreadyOpened = openedPages.includes(activePage);
 
     if (isAlreadyCompleted || isAlreadyOpened) {
       setQuizDelay(false);
+      setCountdownSeconds(0);
     } else {
       setQuizDelay(true);
+      const isVideoPage = !!data.pages[activePage]?.videoUrl;
+      const totalSeconds = isVideoPage ? 30 : 10;
+      setCountdownSeconds(totalSeconds);
+
       const timer = setTimeout(() => {
         setQuizDelay(false);
         setOpenedPages(prev => prev.includes(activePage) ? prev : [...prev, activePage]);
-      }, 10000);
+      }, totalSeconds * 1000);
       return () => clearTimeout(timer);
     }
-  }, [activePage, moduleNumber, completedPages, openedPages]);
+  }, [activePage, moduleNumber, completedPages, openedPages, data.pages]);
+
+  useEffect(() => {
+    if (countdownSeconds > 0) {
+      const timer = setTimeout(() => {
+        setCountdownSeconds(prev => {
+          const next = prev - 1;
+          if (next === 0) {
+            setQuizDelay(false);
+          }
+          return next;
+        });
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [countdownSeconds]);
 
   useEffect(() => {
     if (quizActive && quizRef.current) {
@@ -218,9 +244,11 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
       setShowPopup({
         show: true,
         type: 'error',
-        praise: 'Ayo Coba Lagi!',
-        message: 'Coba perhatikan lagi materinya ya.'
+        praise: 'Baca lagi!',
+        message: 'Coba perhatikan kembali materinya ya.'
       });
+      setQuizDelay(true);
+      setCountdownSeconds(5);
     }
   };
 
@@ -565,56 +593,90 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                   </div>
                 )}
 
-                <div className="flex flex-row gap-2 justify-center">
-                  {/* Always show back button if not first page */}
-                  {activePage > 0 && (
-                    <ThemeButton 
-                      theme={theme}
-                      onClick={() => {
-                        setActivePage(activePage - 1);
-                        setQuizActive(false);
-                      }}
-                      className="flex-1 px-2 text-sm sm:text-base py-3"
-                      style={{ backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }}
-                    >
-                      <ChevronLeft size={18} />
-                      <span className="hidden xs:inline">Kembali</span>
-                    </ThemeButton>
-                  )}
-                  
-                  {/* Challenge Button logic */}
-                  {currentPage.quiz && (
-                    <ThemeButton 
-                      theme={theme}
-                      disabled={quizDelay}
-                      onClick={() => setQuizActive(!quizActive)}
-                      className="flex-[2] px-2 text-sm sm:text-base py-3 disabled:opacity-50"
-                      style={{ backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }}
-                    >
-                      {completedPages.includes(activePage) 
-                        ? (quizActive ? 'Tutup Tantangan' : 'Lihat Tantangan')
-                        : 'Jawab Tantangan'
-                      }
-                    </ThemeButton>
-                  )}
+                {((moduleNumber === 2 || moduleNumber === 3) && activePage === 0) ? (
+                  <div className="bg-slate-50 border border-slate-100 p-6 rounded-2xl text-center space-y-4 max-w-sm mx-auto shadow-sm">
+                    <p className="text-slate-800 font-extrabold text-base md:text-lg">Nilaimu sudah ada?</p>
+                    <div className="flex gap-4 justify-center">
+                      <button 
+                        onClick={() => {
+                          setCompletedPages(prev => prev.includes(0) ? prev : [...prev, 0]);
+                          setActivePage(1);
+                          setQuizActive(false);
+                          setQuizSelected(null);
+                        }}
+                        className="flex-1 py-3 bg-emerald-500 hover:bg-emerald-600 hover:shadow-md text-white font-black rounded-xl transition-all text-sm active:scale-95 flex items-center justify-center gap-1"
+                      >
+                        <span>SUDAH</span>
+                        <ChevronRight size={14} />
+                      </button>
+                      <button 
+                        onClick={() => {
+                          if (onRedirect) {
+                            onRedirect(moduleNumber - 1, 0);
+                          }
+                        }}
+                        className="flex-1 py-3 bg-slate-200 hover:bg-slate-300 hover:shadow-sm text-slate-700 font-black rounded-xl transition-all text-sm active:scale-95 flex items-center justify-center gap-1"
+                      >
+                        <ChevronLeft size={14} />
+                        <span>BELUM</span>
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex flex-row gap-2 justify-center">
+                    {/* Always show back button if not first page */}
+                    {activePage > 0 && (
+                      <ThemeButton 
+                        theme={theme}
+                        onClick={() => {
+                          setActivePage(activePage - 1);
+                          setQuizActive(false);
+                        }}
+                        className="flex-1 px-2 text-sm sm:text-base py-3"
+                        style={{ backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }}
+                      >
+                        <ChevronLeft size={18} />
+                        <span className="hidden xs:inline">Kembali</span>
+                      </ThemeButton>
+                    )}
+                    
+                    {/* Challenge Button logic */}
+                    {currentPage.quiz && (
+                      <ThemeButton 
+                        theme={theme}
+                        disabled={quizDelay}
+                        onClick={() => setQuizActive(!quizActive)}
+                        className="flex-[2] px-2 text-sm sm:text-base py-3 disabled:opacity-50"
+                        style={{ backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }}
+                      >
+                        {quizDelay && countdownSeconds > 0 ? (
+                          `Tunggu ${countdownSeconds}d...`
+                        ) : (
+                          completedPages.includes(activePage) 
+                            ? (quizActive ? 'Tutup Tantangan' : 'Lihat Tantangan')
+                            : 'Jawab Tantangan'
+                        )}
+                      </ThemeButton>
+                    )}
 
-                  {/* Next Button logic (only if completed and not last page) */}
-                  {completedPages.includes(activePage) && activePage < data.pages.length - 1 && (
-                    <ThemeButton
-                      theme={theme}
-                      disabled={quizDelay}
-                      onClick={() => {
-                        setActivePage(activePage + 1);
-                        setQuizActive(false);
-                      }}
-                      className="flex-1 px-2 text-sm sm:text-base py-3 disabled:opacity-50"
-                      style={{ backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }}
-                    >
-                      <span className="hidden xs:inline text-white">LANJUT</span>
-                      <ChevronRight size={18} className="text-white" />
-                    </ThemeButton>
-                  )}
-                </div>
+                    {/* Next Button logic (only if completed and not last page) */}
+                    {completedPages.includes(activePage) && activePage < data.pages.length - 1 && (
+                      <ThemeButton
+                        theme={theme}
+                        disabled={quizDelay}
+                        onClick={() => {
+                          setActivePage(activePage + 1);
+                          setQuizActive(false);
+                        }}
+                        className="flex-1 px-2 text-sm sm:text-base py-3 disabled:opacity-50"
+                        style={{ backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }}
+                      >
+                        <span className="hidden xs:inline text-white">LANJUT</span>
+                        <ChevronRight size={18} className="text-white" />
+                      </ThemeButton>
+                    )}
+                  </div>
+                )}
               </div>
 
               {(quizActive || (!completedPages.includes(activePage) && quizActive)) && currentPage.quiz && (
