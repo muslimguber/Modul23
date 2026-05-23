@@ -480,7 +480,7 @@ const App = () => {
                   <User size={14} className="opacity-70" />
                 </div>
                 <div className="flex flex-col overflow-hidden text-left">
-                  <span className="text-[8px] opacity-40 font-black uppercase tracking-widest leading-none mb-0.5">Pengguna</span>
+                  <span className="text-[8px] opacity-40 font-black uppercase tracking-widest leading-none mb-0.5">Kelas {userClass || '-'}</span>
                   <span className="text-xs font-black truncate opacity-90 leading-none">{username}</span>
                 </div>
               </div>
