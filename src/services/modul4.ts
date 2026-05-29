@@ -138,6 +138,7 @@ export const modul4Service = {
         title: "CONTOH DESAIN POSTER KEBUN KITA",
         content: "Berikut adalah salah satu contoh visual poster kebun sehat hasil olahan AI.\n\nSilakan kreasikan sendiri karyamu agar terlihat menarik dan merepresentasikan ide rancangan kebun impianmu di rumah!",
         imageUrl: "https://i.ibb.co.com/rRhR4WJC/file-000000001d487208b16baff8a804e103.png",
+        imagePreviewUrl: "https://i.ibb.co.com/TxyyM7LG/1000283955-1.png",
         quiz: {
           question: "Apakah gambaran poster contoh di atas menarik untuk dijadikan referensi postermu?",
           options: [

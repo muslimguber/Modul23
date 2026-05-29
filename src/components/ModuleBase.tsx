@@ -50,6 +50,7 @@ interface Page {
   isForm?: boolean;
   formUrl?: string;
   imageUrl?: string;
+  imagePreviewUrl?: string;
   isDriveFolder?: boolean;
   driveFolderUrl?: string;
   quiz?: {
@@ -119,6 +120,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
   const [quizDelay, setQuizDelay] = useState(false);
   const [countdownSeconds, setCountdownSeconds] = useState(0);
   const [copied, setCopied] = useState(false);
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
   
   const quizRef = React.useRef<HTMLDivElement>(null);
 
@@ -681,13 +683,45 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                 )}
 
                 {currentPage.imageUrl && (
-                  <div className="my-5 flex flex-col items-center justify-center space-y-3">
-                    <img 
-                      src={currentPage.imageUrl} 
-                      alt={currentPage.title} 
-                      className="rounded-2xl border-4 border-white shadow-xl max-h-[480px] w-auto object-contain hover:scale-[1.02] transition-transform duration-300"
-                      referrerPolicy="no-referrer"
-                    />
+                  <div className="space-y-4 my-6">
+                    <div className="flex flex-col sm:flex-row gap-3 items-center justify-between p-4 bg-amber-50 border border-amber-200/80 rounded-2xl shadow-sm">
+                      <div className="text-left space-y-1">
+                        <p className="text-xs font-black text-amber-800 uppercase tracking-widest flex items-center gap-1.5">
+                          <span>🖼️ CONTOH POSTER KARYA AI</span>
+                        </p>
+                        <p className="text-xs text-amber-700 font-medium leading-relaxed">
+                          Klik gambar di bawah untuk memperbesar secara penuh, atau buka langsung di tab baru untuk mengunduh dan menyalin desainnya.
+                        </p>
+                      </div>
+                      <a 
+                        href={currentPage.imageUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 active:scale-95 text-white text-xs font-black shadow transition-all whitespace-nowrap cursor-pointer hover:shadow-md"
+                      >
+                        <ExternalLink size={14} />
+                        <span>Buka Gambar (Tab Baru)</span>
+                      </a>
+                    </div>
+
+                    <div className="my-5 flex flex-col items-center justify-center">
+                      <div 
+                        onClick={() => setZoomedImage(currentPage.imageUrl || null)}
+                        className="relative group cursor-pointer overflow-hidden rounded-2xl border-4 border-white shadow-xl hover:shadow-2xl transition-all duration-300 max-w-full"
+                      >
+                        <img 
+                          src={currentPage.imagePreviewUrl || currentPage.imageUrl} 
+                          alt={currentPage.title} 
+                          className="max-h-[480px] w-auto object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                          referrerPolicy="no-referrer"
+                        />
+                        <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <span className="px-4 py-2 rounded-xl bg-white/95 text-slate-900 text-xs font-black shadow-lg flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                            🔍 Klik untuk Memperbesar
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )}
 
@@ -966,6 +1000,57 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
               </ThemeButton>
             </motion.div>
           </div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {zoomedImage && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setZoomedImage(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 p-4 backdrop-blur-md cursor-zoom-out"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 10 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 10 }}
+              className="relative max-w-5xl max-h-[90vh] flex flex-col items-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                onClick={() => setZoomedImage(null)}
+                className="absolute -top-12 right-0 sm:-right-4 text-white hover:text-rose-400 p-2 rounded-full hover:bg-white/10 transition-colors cursor-pointer"
+                title="Tutup"
+              >
+                <X size={28} />
+              </button>
+              <img 
+                src={zoomedImage} 
+                alt="Zoomed Poster Preview" 
+                className="rounded-2xl border-4 border-white/20 max-h-[80vh] w-auto object-contain shadow-2xl"
+                referrerPolicy="no-referrer"
+              />
+              <div className="mt-4 flex gap-4">
+                <a 
+                  href={zoomedImage} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-bold text-sm shadow transition-all whitespace-nowrap cursor-pointer active:scale-95"
+                >
+                  <ExternalLink size={16} />
+                  <span>Buka di Tab Baru</span>
+                </a>
+                <button
+                  onClick={() => setZoomedImage(null)}
+                  className="px-5 py-2.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-sm transition-all cursor-pointer"
+                >
+                  Tutup
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>
