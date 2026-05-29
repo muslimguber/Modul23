@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Play, CheckCircle2, ArrowRight, Lock, ChevronRight, ChevronLeft, Trophy, X, ExternalLink } from 'lucide-react';
+import { Play, CheckCircle2, ArrowRight, Lock, ChevronRight, ChevronLeft, Trophy, X, ExternalLink, Copy } from 'lucide-react';
 import { Theme } from '../types';
 import { VideoPlayer } from './VideoPlayer';
 import { FinalQuiz } from './FinalQuiz';
@@ -40,6 +40,7 @@ interface Page {
   title: string;
   titleSize?: 'sm' | 'base' | 'lg' | 'xl' | '2xl';
   content: string;
+  copyablePrompt?: string;
   triggerQuestion?: string;
   videoUrl?: string;
   isGame?: boolean;
@@ -96,11 +97,12 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
   const [quizSelected, setQuizSelected] = useState<string | null>(null);
   const [quizDelay, setQuizDelay] = useState(false);
   const [countdownSeconds, setCountdownSeconds] = useState(0);
+  const [copied, setCopied] = useState(false);
   
   const quizRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if ((moduleNumber === 2 || moduleNumber === 3) && activePage === 0) {
+    if ((moduleNumber === 2 || moduleNumber === 3 || moduleNumber === 4) && activePage === 0) {
       setQuizDelay(false);
       setCountdownSeconds(0);
       return;
@@ -584,7 +586,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                       </button>
                     )}
                   </div>
-                  {((moduleNumber === 2 || moduleNumber === 3) && activePage === 0) && (
+                  {((moduleNumber === 2 || moduleNumber === 3 || moduleNumber === 4) && activePage === 0) && (
                     <p className="text-xs font-bold text-slate-500 tracking-wide mt-1 block">Cek Apakah Nilai Kamu sudah masuk.</p>
                   )}
                   {currentPage.triggerQuestion && (
@@ -619,7 +621,45 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                   </div>
                 )}
 
-                {((moduleNumber === 2 || moduleNumber === 3) && activePage === 0) ? (
+                {currentPage.copyablePrompt && (
+                  <div className="mt-4 p-4 bg-slate-50 border-2 border-slate-200/80 rounded-2xl space-y-3 shadow-inner">
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs font-black text-slate-500 uppercase tracking-widest flex items-center gap-1">
+                        Prompt ChatGPT / Gemini
+                      </span>
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(currentPage.copyablePrompt || '');
+                          setCopied(true);
+                          setTimeout(() => setCopied(false), 2000);
+                        }}
+                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-black rounded-xl transition-all shadow-sm ${
+                          copied 
+                            ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' 
+                            : 'bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 active:scale-95 cursor-pointer hover:shadow'
+                        }`}
+                        title="Klik untuk menyalin"
+                      >
+                        {copied ? (
+                          <>
+                            <CheckCircle2 size={13} className="text-emerald-600" />
+                            <span>Tersalin!</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy size={13} className="text-slate-500" />
+                            <span>Salin Prompt</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                    <div className="p-3 bg-white font-mono text-xs text-slate-700 border border-slate-100 rounded-xl leading-relaxed whitespace-pre-wrap select-all cursor-pointer hover:bg-slate-50/50 transition-colors" title="Klik ganda untuk memilih semua">
+                      {currentPage.copyablePrompt}
+                    </div>
+                  </div>
+                )}
+
+                {((moduleNumber === 2 || moduleNumber === 3 || moduleNumber === 4) && activePage === 0) ? (
                   <div className="bg-slate-50 border border-slate-100 p-6 rounded-2xl text-center space-y-4 max-w-sm mx-auto shadow-sm">
                     <p className="text-slate-800 font-extrabold text-base md:text-lg">Nilaimu sudah ada?</p>
                     <div className="flex gap-4 justify-center">
