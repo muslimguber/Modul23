@@ -1,6 +1,6 @@
 export const modul4Service = {
   getIntroduction: () => ({
-    title: "Modul 4: Menanam di Lahan Sempit",
+    title: "Modul 4: Mendesain Kebun di Rumah",
     pages: [
       {
         id: 0,
@@ -130,6 +130,33 @@ export const modul4Service = {
           options: [
             { id: 'A', text: "Ya, saya sudah mengisi form dan mengunggah poster", isCorrect: true },
             { id: 'B', text: "Belum, saya mau mengunggahnya sekarang", isCorrect: true }
+          ]
+        }
+      },
+      {
+        id: 10,
+        title: "CONTOH DESAIN POSTER KEBUN KITA",
+        content: "Berikut adalah salah satu contoh visual poster kebun sehat hasil olahan AI.\n\nSilakan kreasikan sendiri karyamu agar terlihat menarik dan merepresentasikan ide rancangan kebun impianmu di rumah!",
+        imageUrl: "https://i.ibb.co.com/rRhR4WJC/file-000000001d487208b16baff8a804e103.png",
+        quiz: {
+          question: "Apakah gambaran poster contoh di atas menarik untuk dijadikan referensi postermu?",
+          options: [
+            { id: 'A', text: "Ya, sangat informatif dan keren!", isCorrect: true },
+            { id: 'B', text: "Ya, dan saya punya ide yang lebih unik lagi!", isCorrect: true }
+          ]
+        }
+      },
+      {
+        id: 11,
+        title: "FOLDER KUMPULAN KARYA KELAS",
+        content: "Di bawah ini adalah piringan folder Google Drive tempat melihat seluruh kiriman berkas poster milik teman-teman kelas lainnya.\n\nMari saling menginspirasi dan melihat estetika kreativitas kebun lahan sempit milik seluruh siswa SMPN 1 Bengkalis!",
+        isDriveFolder: true,
+        driveFolderUrl: "https://drive.google.com/drive/u/1/mobile/folders/1XeA08AexxTCjuY6hQU7Ue9WaJhNgDzYwH5QSn71FZiOl2oK5q7mGfWPi7ZPLr7WUFYfrcPeJ/1MbmVzJ_wrWG543eiTp7BeDUcYZAWhXJsFuPbvyMS6q6iWPaRRUrjbR39OtxoOrjIE3wS89K2?hl=ID&sort=15&direction=d",
+        quiz: {
+          question: "Apakah kamu bersemangat melihat hasil rancangan karya teman-teman sekelasmu?",
+          options: [
+            { id: 'A', text: "Ya, ayo kita sama-sama berkarya dan menjaga kekompakan!", isCorrect: true },
+            { id: 'B', text: "Ya, sangat terinspirasi untuk mulai menanam di polibag!", isCorrect: true }
           ]
         }
       }

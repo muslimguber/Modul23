@@ -49,6 +49,9 @@ interface Page {
   sheetUrl?: string;
   isForm?: boolean;
   formUrl?: string;
+  imageUrl?: string;
+  isDriveFolder?: boolean;
+  driveFolderUrl?: string;
   quiz?: {
     question: string;
     options: { 
@@ -674,6 +677,41 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                 {!currentPage.isSheet && (
                   <div className="prose prose-slate max-w-none text-slate-700 whitespace-pre-line font-medium leading-relaxed text-justify">
                     {renderFormattedText(currentPage.content)}
+                  </div>
+                )}
+
+                {currentPage.imageUrl && (
+                  <div className="my-5 flex flex-col items-center justify-center space-y-3">
+                    <img 
+                      src={currentPage.imageUrl} 
+                      alt={currentPage.title} 
+                      className="rounded-2xl border-4 border-white shadow-xl max-h-[480px] w-auto object-contain hover:scale-[1.02] transition-transform duration-300"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                )}
+
+                {currentPage.isDriveFolder && currentPage.driveFolderUrl && (
+                  <div className="space-y-4 my-4">
+                    <div className="flex flex-col sm:flex-row gap-3 items-center justify-between p-4 bg-blue-50 border border-blue-200/80 rounded-2xl shadow-sm">
+                      <div className="text-left space-y-1">
+                        <p className="text-xs font-black text-blue-800 uppercase tracking-widest flex items-center gap-1.5">
+                          <span>📁 GOOGLE DRIVE KELAS</span>
+                        </p>
+                        <p className="text-xs text-blue-700 font-medium leading-relaxed">
+                          Kamu dapat melihat kumpulan karya dan hasil desain teman-teman sekelas lainnya langsung di folder Google Drive ini.
+                        </p>
+                      </div>
+                      <a 
+                        href={currentPage.driveFolderUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs font-black shadow transition-all whitespace-nowrap cursor-pointer hover:shadow-md"
+                      >
+                        <ExternalLink size={14} />
+                        <span>Buka Folder Drive (Tab Baru)</span>
+                      </a>
+                    </div>
                   </div>
                 )}
 
