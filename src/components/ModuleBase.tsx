@@ -683,45 +683,35 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                 )}
 
                 {currentPage.imageUrl && (
-                  <div className="space-y-4 my-6">
-                    <div className="flex flex-col sm:flex-row gap-3 items-center justify-between p-4 bg-amber-50 border border-amber-200/80 rounded-2xl shadow-sm">
-                      <div className="text-left space-y-1">
-                        <p className="text-xs font-black text-amber-800 uppercase tracking-widest flex items-center gap-1.5">
-                          <span>🖼️ CONTOH POSTER KARYA AI</span>
-                        </p>
-                        <p className="text-xs text-amber-700 font-medium leading-relaxed">
-                          Klik gambar di bawah untuk memperbesar secara penuh, atau buka langsung di tab baru untuk mengunduh dan menyalin desainnya.
-                        </p>
+                  <div className="space-y-5 my-6 flex flex-col items-center justify-center">
+                    <div 
+                      onClick={() => setZoomedImage(currentPage.imageUrl || null)}
+                      className="relative group cursor-pointer overflow-hidden rounded-2xl border-4 border-white shadow-xl hover:shadow-2xl transition-all duration-300 max-w-full"
+                      title="Klik untuk memperbesar gambar"
+                    >
+                      <img 
+                        src={currentPage.imagePreviewUrl || currentPage.imageUrl} 
+                        alt={currentPage.title} 
+                        className="max-h-[480px] w-auto object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                        referrerPolicy="no-referrer"
+                      />
+                      <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span className="px-4 py-2 rounded-xl bg-white/95 text-slate-900 text-xs font-black shadow-lg flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                          🔍 Klik untuk Memperbesar
+                        </span>
                       </div>
-                      <a 
-                        href={currentPage.imageUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 active:scale-95 text-white text-xs font-black shadow transition-all whitespace-nowrap cursor-pointer hover:shadow-md"
-                      >
-                        <ExternalLink size={14} />
-                        <span>Buka Gambar (Tab Baru)</span>
-                      </a>
                     </div>
 
-                    <div className="my-5 flex flex-col items-center justify-center">
-                      <div 
-                        onClick={() => setZoomedImage(currentPage.imageUrl || null)}
-                        className="relative group cursor-pointer overflow-hidden rounded-2xl border-4 border-white shadow-xl hover:shadow-2xl transition-all duration-300 max-w-full"
-                      >
-                        <img 
-                          src={currentPage.imagePreviewUrl || currentPage.imageUrl} 
-                          alt={currentPage.title} 
-                          className="max-h-[480px] w-auto object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-                          referrerPolicy="no-referrer"
-                        />
-                        <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                          <span className="px-4 py-2 rounded-xl bg-white/95 text-slate-900 text-xs font-black shadow-lg flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                            🔍 Klik untuk Memperbesar
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+                    <a 
+                      href={currentPage.imageUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-white text-xs sm:text-sm font-black shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer"
+                      style={{ backgroundColor: theme.accent }}
+                    >
+                      <ExternalLink size={14} />
+                      <span>Buka Gambar (Tab Baru)</span>
+                    </a>
                   </div>
                 )}
 

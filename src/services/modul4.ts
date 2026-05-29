@@ -121,20 +121,6 @@ export const modul4Service = {
       },
       {
         id: 9,
-        title: "UNGGAH POSTER DESAIN KEBUNMU",
-        content: "Unggah hasil poster kreatif yang telah kamu buat menggunakan ChatGPT, Gemini, Canva, rujukan AI, atau aplikasi desain lainnya.\n\nFormulir di bawah ini terhubung langsung ke Google Drive melalui Google Form yang disediakan. Pastikan kamu mengisi data dengan benar dan mengunggah berkas poster gambarmu.",
-        isForm: true,
-        formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdpSLs5OIrhBkmNzvRZUfrpqKDXTnDb4d4ebjRzFBFtSo6Myw/viewform?usp=sharing",
-        quiz: {
-          question: "Apakah kamu sudah berhasil mengirimkan hasil desain postermu?",
-          options: [
-            { id: 'A', text: "Ya, saya sudah mengisi form dan mengunggah poster", isCorrect: true },
-            { id: 'B', text: "Belum, saya mau mengunggahnya sekarang", isCorrect: true }
-          ]
-        }
-      },
-      {
-        id: 10,
         title: "CONTOH DESAIN POSTER KEBUN KITA",
         content: "Berikut adalah salah satu contoh visual poster kebun sehat hasil olahan AI.\n\nSilakan kreasikan sendiri karyamu agar terlihat menarik dan merepresentasikan ide rancangan kebun impianmu di rumah!",
         imageUrl: "https://i.ibb.co.com/rRhR4WJC/file-000000001d487208b16baff8a804e103.png",
@@ -144,6 +130,20 @@ export const modul4Service = {
           options: [
             { id: 'A', text: "Ya, sangat informatif dan keren!", isCorrect: true },
             { id: 'B', text: "Ya, dan saya punya ide yang lebih unik lagi!", isCorrect: true }
+          ]
+        }
+      },
+      {
+        id: 10,
+        title: "UNGGAH POSTER DESAIN KEBUNMU",
+        content: "Unggah hasil poster kreatif yang telah kamu buat menggunakan ChatGPT, Gemini, Canva, rujukan AI, atau aplikasi desain lainnya.\n\nFormulir di bawah ini terhubung langsung ke Google Drive melalui Google Form yang disediakan. Pastikan kamu mengisi data dengan benar dan mengunggah berkas poster gambarmu.",
+        isForm: true,
+        formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdpSLs5OIrhBkmNzvRZUfrpqKDXTnDb4d4ebjRzFBFtSo6Myw/viewform?usp=sharing",
+        quiz: {
+          question: "Apakah kamu sudah berhasil mengirimkan hasil desain postermu?",
+          options: [
+            { id: 'A', text: "Ya, saya sudah mengisi form dan mengunggah poster", isCorrect: true },
+            { id: 'B', text: "Belum, saya mau mengunggahnya sekarang", isCorrect: true }
           ]
         }
       },
