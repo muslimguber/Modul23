@@ -109,8 +109,8 @@ export const modul4Service = {
       {
         id: 8,
         title: "PANDUAN MEMBUAT POSTER DENGAN AI",
-        content: "Gunakan prompt berikut untuk membantu membuat ide poster di ChatGPT atau Gemini.\n\nSalinlah prompt atau teks di bawah ini, lalu ubahlah isinya sesuai data dirimu. Lalu tempelkan di ChatGPT ataupun Gemini, tunggu beberapa saat maka posterpun jadi.",
-        copyablePrompt: "Buatlah desain poster kebun rumahku dengan judul “Kebunku Sehat, Akupun Sehat”. Tanaman yang akan ditanam adalah bayam di polibag, langkah berkebun sederhana, dan desain disertai ilustrasi 3D yang menarik penuh warna hijau. Sertakan juga foto saya yang saya unggah, nama saya adalah Hendrix Wong Kelas 8C, Siswa SMPN 1 Bengkalis.",
+        content: "Gunakan prompt berikut untuk membantu membuat ide poster di ChatGPT atau Gemini.\n\n*Catatan: Bagian berlatar kuning/tebal di bawah ini dapat kamu ubah sesuai kondisi masing-masing sebelum mengirimkannya ke AI!*\n\nSalinlah prompt atau teks di bawah ini dengan mengklik tombol **Salin Prompt**, lalu ubahlah isinya sesuai data dirimu. Kemudian tempelkan di ChatGPT ataupun Gemini, tunggu beberapa saat maka posterpun jadi.",
+        copyablePrompt: "Buatkan desain poster portrait ukuran A4, judul **“KEBUNKU SEHAT, AKUPUN SEHAT”**. tanaman yang akan saya tanam adalah **BAYAM** di **POLIBAG**, langkah berkebun sederhana, dan desain **DISERTAI ILUSTRASI 3D** yang menarik **WARNA BIRU DAN HIJAU**, sertakan juga foto saya yang saya unggah ( **UBAH POSE FOTO SAYA DAN BUAT AGAR BERPAKAIAN SEPERTI PETANI SUKSES** ), nama saya adalah **HENDRIX WONG** Kelas **8C**, Siswa **SMPN 1 Bengkalis**. Sloganku adalah **AYO BERKEBUN, HIJAUKAN RUMAHMU**.",
         quiz: {
           question: "Apa isi data penting di dalam teks prompt salinan di atas yang harus kamu sesuaikan sebelum dikirimkan ke AI?",
           options: [
@@ -121,9 +121,17 @@ export const modul4Service = {
       },
       {
         id: 9,
-        title: "Kuis Akhir Modul 4",
-        isFinalQuiz: true,
-        content: "Mari uji pemahamanmu tentang wadah tanam!"
+        title: "UNGGAH POSTER DESAIN KEBUNMU",
+        content: "Unggah hasil poster kreatif yang telah kamu buat menggunakan ChatGPT, Gemini, Canva, rujukan AI, atau aplikasi desain lainnya.\n\nFormulir di bawah ini terhubung langsung ke Google Drive melalui Google Form yang disediakan. Pastikan kamu mengisi data dengan benar dan mengunggah berkas poster gambarmu.",
+        isForm: true,
+        formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdpSLs5OIrhBkmNzvRZUfrpqKDXTnDb4d4ebjRzFBFtSo6Myw/viewform?usp=sharing",
+        quiz: {
+          question: "Apakah kamu sudah berhasil mengirimkan hasil desain postermu?",
+          options: [
+            { id: 'A', text: "Ya, saya sudah mengisi form dan mengunggah poster", isCorrect: true },
+            { id: 'B', text: "Belum, saya mau mengunggahnya sekarang", isCorrect: true }
+          ]
+        }
       }
     ]
   })

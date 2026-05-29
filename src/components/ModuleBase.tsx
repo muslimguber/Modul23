@@ -47,6 +47,8 @@ interface Page {
   isFinalQuiz?: boolean;
   isSheet?: boolean;
   sheetUrl?: string;
+  isForm?: boolean;
+  formUrl?: string;
   quiz?: {
     question: string;
     options: { 
@@ -78,6 +80,21 @@ interface ModuleBaseProps {
   };
 }
 
+const renderFormattedText = (text?: string) => {
+  if (!text) return null;
+  const parts = text.split('**');
+  return parts.map((part, index) => {
+    if (index % 2 === 1) {
+      return (
+        <strong key={index} className="font-extrabold text-slate-900 bg-amber-100 hover:bg-amber-200 border border-amber-300 px-1 py-0.5 rounded shadow-sm text-xs sm:text-sm inline mx-0.5 select-all font-sans">
+          {part}
+        </strong>
+      );
+    }
+    return part;
+  });
+};
+
 export const ModuleBase: React.FC<ModuleBaseProps> = ({ 
   theme, 
   username, 
@@ -90,6 +107,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
 }) => {
   const data = React.useMemo(() => service.getIntroduction(), [service]);
   const [activePage, setActivePage] = useState(0);
+  const isScoreCheckPage = (moduleNumber === 2 || moduleNumber === 3 || moduleNumber === 4) && activePage === 0;
   const [gameLevel, setGameLevel] = useState(1);
   const [completedPages, setCompletedPages] = useState<number[]>([]);
   const [openedPages, setOpenedPages] = useState<number[]>([]);
@@ -562,10 +580,12 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              className="space-y-6"
+              className={isScoreCheckPage ? "space-y-3" : "space-y-6"}
             >
-              <div className="bg-white/70 backdrop-blur-md p-6 md:p-8 rounded-[2rem] border-2 border-white/60 shadow-xl max-w-2xl mx-auto space-y-6">
-                <div className="text-center space-y-3 font-sans">
+              <div className={`bg-white/70 backdrop-blur-md p-6 md:p-8 rounded-[2rem] border-2 border-white/60 shadow-xl max-w-2xl mx-auto ${
+                isScoreCheckPage ? 'p-4 md:p-6 space-y-3' : 'space-y-6'
+              }`}>
+                <div className={`text-center font-sans ${isScoreCheckPage ? 'space-y-1' : 'space-y-3'}`}>
                   <div className="relative flex items-center justify-center gap-2">
                     <h1 className={`font-black text-slate-800 uppercase tracking-tight ${
                       currentPage.titleSize === 'sm' ? 'text-sm' :
@@ -587,7 +607,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                     )}
                   </div>
                   {((moduleNumber === 2 || moduleNumber === 3 || moduleNumber === 4) && activePage === 0) && (
-                    <p className="text-xs font-bold text-slate-500 tracking-wide mt-1 block">Cek Apakah Nilai Kamu sudah masuk.</p>
+                    <p className="text-xs font-bold text-slate-500 tracking-wide mt-0.5 block">Cek Apakah Nilai Kamu sudah masuk.</p>
                   )}
                   {currentPage.triggerQuestion && (
                     <p className="text-sm font-bold italic text-slate-800">"{currentPage.triggerQuestion}"</p>
@@ -597,13 +617,15 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                 {currentPage.videoUrl && <VideoPlayer url={currentPage.videoUrl} title={currentPage.title} />}
                 
                 {currentPage.isSheet && currentPage.content && (
-                  <div className="prose prose-slate max-w-none text-rose-600 bg-rose-50 border border-rose-100 p-4 rounded-2xl whitespace-pre-line font-bold text-center leading-relaxed">
+                  <div className={`prose prose-slate max-w-none text-rose-600 bg-rose-50 border border-rose-100 rounded-2xl whitespace-pre-line font-bold text-center leading-relaxed ${
+                    isScoreCheckPage ? 'p-3 text-xs md:text-sm' : 'p-4'
+                  }`}>
                     {currentPage.content}
                   </div>
                 )}
 
                 {currentPage.isSheet && currentPage.sheetUrl && (
-                  <div className="space-y-4 my-4">
+                  <div className={`space-y-4 ${isScoreCheckPage ? 'my-2' : 'my-4'}`}>
                     <div className="relative h-[600px] w-full bg-slate-100 rounded-2xl overflow-hidden border-2 border-slate-200 shadow-inner">
                       <iframe 
                         src={currentPage.sheetUrl}
@@ -615,9 +637,43 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                   </div>
                 )}
 
+                {currentPage.isForm && currentPage.formUrl && (
+                  <div className="space-y-4 my-4">
+                    <div className="flex flex-col sm:flex-row gap-3 items-center justify-between p-4 bg-emerald-50 border border-emerald-200/80 rounded-2xl shadow-sm">
+                      <div className="text-left space-y-1">
+                        <p className="text-xs font-black text-emerald-800 uppercase tracking-widest flex items-center gap-1.5">
+                          <span>💡 PETUNJUK UNGGAH POSTER</span>
+                        </p>
+                        <p className="text-xs text-emerald-700 font-medium leading-relaxed">
+                          Jika formulir di bawah meminta login atau tidak muncul tombol unggah file, klik tombol di samping untuk mengunggah poster langsung di tab baru.
+                        </p>
+                      </div>
+                      <a 
+                        href={currentPage.formUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs font-black shadow transition-all whitespace-nowrap cursor-pointer hover:shadow-md"
+                      >
+                        <ExternalLink size={14} />
+                        <span>Buka Form (Tab Baru)</span>
+                      </a>
+                    </div>
+                    <div className="relative h-[700px] w-full bg-slate-100 rounded-2xl overflow-hidden border-2 border-slate-200 shadow-inner">
+                      <iframe 
+                        src={currentPage.formUrl.includes('embedded=true') ? currentPage.formUrl : `${currentPage.formUrl}${currentPage.formUrl.includes('?') ? '&' : '?'}embedded=true`}
+                        className="absolute inset-0 w-full h-full"
+                        frameBorder="0"
+                        allowFullScreen
+                      >
+                        Memuat Formulir Google...
+                      </iframe>
+                    </div>
+                  </div>
+                )}
+
                 {!currentPage.isSheet && (
                   <div className="prose prose-slate max-w-none text-slate-700 whitespace-pre-line font-medium leading-relaxed text-justify">
-                    {currentPage.content}
+                    {renderFormattedText(currentPage.content)}
                   </div>
                 )}
 
@@ -653,8 +709,8 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                         )}
                       </button>
                     </div>
-                    <div className="p-3 bg-white font-mono text-xs text-slate-700 border border-slate-100 rounded-xl leading-relaxed whitespace-pre-wrap select-all cursor-pointer hover:bg-slate-50/50 transition-colors" title="Klik ganda untuk memilih semua">
-                      {currentPage.copyablePrompt}
+                    <div className="p-3 bg-white font-mono text-xs text-slate-700 border border-slate-100 rounded-xl leading-relaxed whitespace-pre-wrap select-all cursor-pointer hover:bg-slate-50/50 transition-colors/50 shadow-inner" title="Klik ganda untuk memilih semua">
+                      {renderFormattedText(currentPage.copyablePrompt)}
                     </div>
                   </div>
                 )}
@@ -721,21 +777,36 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                       </ThemeButton>
                     )}
 
-                    {/* Next Button logic (only if completed and not last page) */}
-                    {completedPages.includes(activePage) && activePage < data.pages.length - 1 && (
-                      <ThemeButton
-                        theme={theme}
-                        disabled={quizDelay}
-                        onClick={() => {
-                          setActivePage(activePage + 1);
-                          setQuizActive(false);
-                        }}
-                        className="flex-1 px-2 text-sm sm:text-base py-3 disabled:opacity-50"
-                        style={{ backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }}
-                      >
-                        <span className="hidden xs:inline text-white">LANJUT</span>
-                        <ChevronRight size={18} className="text-white" />
-                      </ThemeButton>
+                    {/* Next Button / Complete Button logic */}
+                    {completedPages.includes(activePage) && (
+                      activePage < data.pages.length - 1 ? (
+                        <ThemeButton
+                          theme={theme}
+                          disabled={quizDelay}
+                          onClick={() => {
+                            setActivePage(activePage + 1);
+                            setQuizActive(false);
+                          }}
+                          className="flex-1 px-2 text-sm sm:text-base py-3 disabled:opacity-50"
+                          style={{ backgroundColor: darkenColor(theme.bgMain, 0.25), background: darkenColor(theme.bgMain, 0.25), color: '#ffffff' }}
+                        >
+                          <span className="hidden xs:inline text-white">LANJUT</span>
+                          <ChevronRight size={18} className="text-white" />
+                        </ThemeButton>
+                      ) : (
+                        <ThemeButton
+                          theme={theme}
+                          disabled={quizDelay}
+                          onClick={() => {
+                            onComplete();
+                          }}
+                          className="flex-1 px-2 text-sm sm:text-base py-3 disabled:opacity-50"
+                          style={{ backgroundColor: '#10b981', color: '#ffffff' }}
+                        >
+                          <span className="text-white font-bold">SELESAI</span>
+                          <CheckCircle2 size={18} className="text-white ml-1.5 inline" />
+                        </ThemeButton>
+                      )
                     )}
                   </div>
                 )}
