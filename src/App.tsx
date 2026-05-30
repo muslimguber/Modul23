@@ -998,7 +998,7 @@ const App = () => {
       <Dialog 
         show={showThemeEditor} 
         onClose={() => setShowThemeEditor(false)} 
-        title="PILIH WARNA TAMPILAN"
+        title="PILIH WARNA"
         icon={<Palette size={24} className="text-white" />}
         maxWidth="max-w-md"
       >

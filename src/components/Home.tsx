@@ -52,7 +52,7 @@ export const Home: React.FC<HomeProps> = ({ username, userClass, setSidebarOpen,
       <div className="flex flex-col items-center gap-4 md:gap-6 pt-0">
         <button 
           onClick={() => setSidebarOpen(true)}
-          className="group px-8 py-3 md:px-10 md:py-4 bg-white text-emerald-700 rounded-full font-black text-lg md:text-xl shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-3"
+          className="group px-8 py-3 md:px-10 md:py-4 bg-white text-[#008db0] rounded-2xl font-black text-lg md:text-xl shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-3"
         >
           <span>MULAI BELAJAR</span>
         </button>
@@ -67,14 +67,14 @@ export const Home: React.FC<HomeProps> = ({ username, userClass, setSidebarOpen,
           <div className="flex items-center gap-2">
             <button 
               onClick={onOpenThemeEditor}
-              className="px-4 py-2 bg-white/5 hover:bg-white/10 active:scale-95 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-full border border-white/10 transition-all flex items-center gap-2"
+              className="px-4 py-2 bg-amber-500 hover:bg-amber-600 active:scale-95 text-[10px] md:text-xs font-black uppercase text-slate-950 tracking-widest rounded-xl border border-amber-400 shadow-md transition-all flex items-center gap-2 cursor-pointer"
             >
               <Icons.Palette size={14} />
-              <span>Tema</span>
+              <span>UBAH WARNA</span>
             </button>
             <button 
               onClick={onLogout}
-              className="px-4 py-2 bg-rose-500/10 hover:bg-rose-500/20 active:scale-95 text-[10px] md:text-xs font-bold uppercase text-rose-400 tracking-widest rounded-full border border-rose-500/20 transition-all flex items-center gap-2"
+              className="px-4 py-2 bg-rose-600 hover:bg-rose-700 active:scale-95 text-[10px] md:text-xs font-black uppercase text-white tracking-widest rounded-xl border border-rose-500 shadow-md transition-all flex items-center gap-2 cursor-pointer"
             >
               <Icons.LogOut size={14} />
               <span>Keluar</span>

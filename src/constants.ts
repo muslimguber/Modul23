@@ -3,9 +3,9 @@ import { Theme, Material } from './types';
 export const THEME_PRESETS: Theme[] = [
   {
     name: 'Berkebun',
-    bgMain: '#007A5c',
-    bgSidebar: '#005c45',
-    accent: '#81e6c3',
+    bgMain: '#008db0',
+    bgSidebar: '#00627d',
+    accent: '#cdf4ff',
     textMain: '#ffffff',
     textSidebar: '#ffffff',
     isDark: true,
