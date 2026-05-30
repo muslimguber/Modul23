@@ -1182,7 +1182,7 @@ const App = () => {
 
       {/* Refleksi Dialog */}
       <Dialog 
-        show={showRefleksiModal && currentView === 'home'} 
+        show={showRefleksiModal} 
         onClose={() => setShowRefleksiModal(false)}
         title="REFLEKSI PROJEK"
         icon={<Icons.Award size={24} className="text-white animate-pulse" />}
@@ -1210,12 +1210,6 @@ const App = () => {
             >
               <Icons.FileText size={16} />
               <span>KERJAKAN REFLEKSI SEKARANG</span>
-            </button>
-            <button 
-              onClick={() => setShowRefleksiModal(false)}
-              className="mt-3 w-full py-2.5 bg-white/10 hover:bg-white/15 text-slate-300 hover:text-white font-black text-[10px] uppercase tracking-widest rounded-2xl transition-all cursor-pointer"
-            >
-              Nanti Saja
             </button>
           </div>
         </div>
