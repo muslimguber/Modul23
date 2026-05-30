@@ -11,6 +11,8 @@ interface DialogProps {
   maxWidth?: string;
   hideHeader?: boolean;
   customBg?: string;
+  disableBackdropClose?: boolean;
+  hideCloseButton?: boolean;
 }
 
 export const Dialog = ({ 
@@ -21,7 +23,9 @@ export const Dialog = ({
   children, 
   maxWidth = 'max-w-lg',
   hideHeader = false,
-  customBg = 'bg-white'
+  customBg = 'bg-white',
+  disableBackdropClose = false,
+  hideCloseButton = false
 }: DialogProps) => (
   <AnimatePresence>
     {show && (
@@ -30,7 +34,7 @@ export const Dialog = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onClick={onClose}
+          onClick={disableBackdropClose ? undefined : onClose}
           className="absolute inset-0 bg-slate-900/40 backdrop-blur-md"
         />
         <motion.div 
@@ -47,9 +51,11 @@ export const Dialog = ({
                 </div>
                 <h3 className="text-lg font-black text-white tracking-tight">{title}</h3>
               </div>
-              <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-xl transition-colors">
-                <X size={20} className="text-white/60" />
-              </button>
+              {!hideCloseButton && (
+                <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-xl transition-colors">
+                  <X size={20} className="text-white/60" />
+                </button>
+              )}
             </div>
           )}
           <div className={`${hideHeader ? '' : 'p-8'} bg-gradient-to-br from-white/5 to-transparent`}>

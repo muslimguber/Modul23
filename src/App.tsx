@@ -44,13 +44,14 @@ import { Modul8 } from './components/Modul8';
 import { VideoPlayer } from './components/VideoPlayer';
 import { googleFormService } from './services/googleFormService';
 import { Rekap } from './components/Rekap';
+import { Refleksi } from './components/Refleksi';
 
 const App = () => {
   // --- State ---
   const [username, setUsername] = useState<string>('');
   const [userClass, setUserClass] = useState<string>('');
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [currentView, setCurrentView] = useState<'home' | 'material' | 'quiz' | 'resume' | 'modul' | 'rekap'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'material' | 'quiz' | 'resume' | 'modul' | 'rekap' | 'refleksi'>('home');
   const [activeModule, setActiveModule] = useState<number>(1);
   const [selectedMaterialId, setSelectedMaterialId] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
@@ -349,6 +350,7 @@ const App = () => {
       setActiveModule(num);
       setCurrentView('modul');
       setSidebarOpen(false);
+      setShowRefleksiModal(true);
     } else {
       setShowPasswordModal(num);
       setPasswordInput('');
@@ -371,6 +373,7 @@ const App = () => {
       setCurrentView('modul');
       setShowPasswordModal(null);
       setSidebarOpen(false);
+      setShowRefleksiModal(true);
     } else {
       setPasswordError(true);
     }
@@ -948,6 +951,23 @@ const App = () => {
                 <Rekap onBack={() => setCurrentView('home')} theme={theme} />
               </motion.div>
             )}
+
+            {currentView === 'refleksi' && (
+              <motion.div 
+                key="refleksi"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="relative z-10 w-full"
+              >
+                <Refleksi 
+                  theme={theme} 
+                  username={username} 
+                  userClass={userClass} 
+                  onComplete={() => setCurrentView('home')} 
+                />
+              </motion.div>
+            )}
           </AnimatePresence>
         </div>
       </main>
@@ -1180,37 +1200,55 @@ const App = () => {
         </div>
       </Dialog>
 
-      {/* Refleksi Dialog */}
+      {/* Refleksi Dialog (Emergency Alarm Broadcast) */}
       <Dialog 
-        show={showRefleksiModal} 
-        onClose={() => setShowRefleksiModal(false)}
-        title="REFLEKSI PROJEK"
-        icon={<Icons.Award size={24} className="text-white animate-pulse" />}
+        show={showRefleksiModal && currentView !== 'refleksi'} 
+        onClose={() => {}}
+        title="PENGUMUMAN DARURAT PROJEK"
+        icon={<Icons.AlertOctagon size={24} className="text-rose-500 animate-[bounce_1s_infinite]" />}
         maxWidth="max-w-md"
+        disableBackdropClose={true}
+        hideCloseButton={true}
       >
-        <div className="space-y-6 text-center text-white">
+        <div className="space-y-6 text-center text-white relative">
+          {/* Top critical lights */}
+          <div className="absolute inset-x-0 -top-12 flex justify-center gap-1.5 pointer-events-none">
+            <div className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping" />
+            <div className="w-2.5 h-2.5 rounded-full bg-rose-600" />
+            <div className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
+          </div>
+
           <div className="flex flex-col items-center">
-            <div className="w-16 h-16 rounded-3xl bg-[#008db0]/20 flex items-center justify-center mb-4 border border-[#cdf4ff]/30 relative">
-              <span className="text-3xl">🌱</span>
-              <div className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-rose-500 rounded-full border-2 border-slate-900 animate-ping" />
-              <div className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-rose-500 rounded-full border-2 border-slate-900" />
+            <div className="w-20 h-20 rounded-[2rem] bg-rose-500/15 border-2 border-rose-500/45 flex items-center justify-center mb-5 animate-pulse relative">
+              <span className="text-4xl">🚨</span>
             </div>
-            <h4 className="text-xl font-black mb-2 uppercase tracking-wide">Refleksi Individu Projek</h4>
-            <p className="text-sm text-slate-200 leading-relaxed font-semibold">
-              Selamat! Kita telah mencapai pertemuan terakhir projek berkebun. Silakan isi Lembar Refleksi Individu untuk mengevaluasi seluruh pembelajaran projek yang telah diselesaikan. Kerjakan di selembar kertas!
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-500/20 text-rose-400 text-[10px] md:text-xs font-black uppercase tracking-widest border border-rose-500/30 mb-3">
+              WAJIB DIKERJAKAN
+            </span>
+            <h4 className="text-xl font-black mb-3.5 uppercase tracking-wide text-rose-400">
+              INSTRUKSI DARURAT AKHIR PROJEK!
+            </h4>
+            <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-bold px-1 text-center">
+              Perhatian seluruh siswa! Hari ini adalah pertemuan terakhir seluruh rangkaian kegiatan projek berkebun kita. 
+              <br /><br />
+              Kamu <strong className="text-rose-400 underline decoration-wavy">diwajibkan</strong> mengisi <strong className="text-amber-400 font-extrabold">LEMBAR REFLEKSI INDIVIDU</strong> di atas kertas selembar saat ini juga. Selesaikan tugas penting ini sebelum meninggalkan kelas atau mengakhiri modul!
             </p>
           </div>
-          <div className="pt-2">
+
+          <div className="pt-2 border-t border-white/5 space-y-3">
             <button 
               onClick={() => {
                 setShowRefleksiModal(false);
-                handleModuleRedirect(4, 12);
+                setCurrentView('refleksi');
               }}
-              className="w-full py-4 bg-gradient-to-r from-[#008db0] to-amber-500 hover:scale-[1.02] active:scale-95 text-white font-black text-xs uppercase tracking-widest rounded-2xl shadow-lg border border-white/10 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-4 bg-gradient-to-r from-rose-600 via-amber-500 to-rose-600 hover:scale-[1.02] active:scale-95 text-white font-black text-xs sm:text-sm uppercase tracking-widest rounded-2xl shadow-[0_10px_25px_rgba(244,63,94,0.3)] hover:shadow-[0_12px_30px_rgba(244,63,94,0.5)] border border-rose-400/30 transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
-              <Icons.FileText size={16} />
-              <span>KERJAKAN REFLEKSI SEKARANG</span>
+              <Icons.FileText size={18} className="animate-pulse" />
+              <span>KERJAKAN HALAMAN REFLEKSI SEKARANG</span>
             </button>
+            <p className="text-[10px] font-black uppercase text-slate-500 tracking-widest text-center animate-pulse">
+              [ AKSES FITUR LAIN TERKUNCI SEMENTARA ]
+            </p>
           </div>
         </div>
       </Dialog>
