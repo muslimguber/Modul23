@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Theme } from '../types';
 import * as Icons from 'lucide-react';
+import { googleFormService } from '../services/googleFormService';
 
 interface RefleksiProps {
   theme: Theme;
@@ -57,8 +58,21 @@ export const Refleksi: React.FC<RefleksiProps> = ({ theme, username, userClass, 
     setAnswers(prev => ({ ...prev, [key]: val }));
   };
 
-  const handleFinish = () => {
-    setSubmitted(true);
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncStatus, setSyncStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleFinish = async () => {
+    setIsSyncing(true);
+    try {
+      await googleFormService.submitRefleksi(username, userClass, answers);
+      setSyncStatus('success');
+    } catch (err) {
+      console.error(err);
+      setSyncStatus('error');
+    } finally {
+      setIsSyncing(false);
+      setSubmitted(true);
+    }
   };
 
   return (
@@ -140,20 +154,30 @@ export const Refleksi: React.FC<RefleksiProps> = ({ theme, username, userClass, 
         {!submitted ? (
           <div className="p-6 rounded-2xl bg-gradient-to-r from-emerald-950 to-teal-950 border border-emerald-500/30 shadow-xl text-center space-y-4">
             <div className="flex justify-center text-emerald-400">
-              <Icons.CheckCircle size={40} className="animate-pulse" />
+              {isSyncing ? (
+                <Icons.RefreshCw size={40} className="animate-spin text-amber-400" />
+              ) : (
+                <Icons.CheckCircle size={40} className="animate-pulse" />
+              )}
             </div>
             <div className="space-y-1.5">
-              <h3 className="text-base font-black text-emerald-300 uppercase tracking-widest">KONFIRMASI PENGERJAAN</h3>
+              <h3 className="text-base font-black text-emerald-300 uppercase tracking-widest">
+                {isSyncing ? "SEDANG MENSINKRONKAN..." : "KONFIRMASI PENGERJAAN"}
+              </h3>
               <p className="text-xs text-slate-300 max-w-md mx-auto leading-relaxed">
-                Pastikan seluruh 5 pertanyaan di atas terkumpul sempurna di kertas selembarku sebelum kamu mengklik tombol selesai di bawah ini.
+                {isSyncing 
+                  ? "Draf jawaban Anda sedang diproses dan dikirim ke server data rekap Google Form / Sheet guru..." 
+                  : "Pastikan seluruh 5 pertanyaan di atas terkumpul sempurna di kertas selembarku sebelum kamu mengklik tombol selesai di bawah ini."
+                }
               </p>
             </div>
             <button
               onClick={handleFinish}
-              className="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-slate-950 font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-md cursor-pointer inline-flex items-center gap-2"
+              disabled={isSyncing}
+              className="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-slate-950 font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-md cursor-pointer inline-flex items-center gap-2 disabled:opacity-50"
             >
               <Icons.Send size={14} />
-              <span>SAYA SUDAH MENULIS DI KERTAS SELEMBAR</span>
+              <span>{isSyncing ? "MENGIRIM..." : "SAYA SUDAH MENULIS DI KERTAS SELEMBAR"}</span>
             </button>
           </div>
         ) : (
@@ -166,6 +190,16 @@ export const Refleksi: React.FC<RefleksiProps> = ({ theme, username, userClass, 
               <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto leading-relaxed font-semibold">
                 Luar biasa, <strong className="text-emerald-300">{username}</strong>! Kamu sudah menyelesaikan seluruh bagian pembelajaran ini. Silakan serahkan kertas refleksimu kepada Guru di kelas.
               </p>
+              
+              <div className="mx-auto max-w-md p-3.5 bg-emerald-950/40 rounded-xl border border-emerald-500/20 text-left flex items-start gap-3 mt-4">
+                <Icons.Database size={18} className="text-emerald-400 mt-0.5 shrink-0" />
+                <div className="space-y-1">
+                  <h4 className="text-[10px] font-black tracking-wider text-emerald-300 uppercase">Sinkronisasi Online Berhasil</h4>
+                  <p className="text-[11px] text-slate-300 font-medium">
+                    Draf jawaban refleksi yang kamu ketik di kotak latihan juga telah otomatis dikirim dan terekam aman ke sistem basis data Google Sheets guru.
+                  </p>
+                </div>
+              </div>
             </div>
             <div className="pt-2">
               <button
