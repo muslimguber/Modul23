@@ -63,6 +63,7 @@ const App = () => {
   const [showAbout, setShowAbout] = useState<boolean>(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState<boolean>(false);
   const [logoError, setLogoError] = useState<boolean>(false);
+  const [showRefleksiModal, setShowRefleksiModal] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [showSearch, setShowSearch] = useState<boolean>(false);
   
@@ -1174,6 +1175,47 @@ const App = () => {
               className="w-full py-3 text-slate-400 font-bold hover:text-white transition-colors text-xs uppercase tracking-widest"
             >
               Kembali Belajar
+            </button>
+          </div>
+        </div>
+      </Dialog>
+
+      {/* Refleksi Dialog */}
+      <Dialog 
+        show={showRefleksiModal && currentView === 'home'} 
+        onClose={() => setShowRefleksiModal(false)}
+        title="REFLEKSI PROJEK"
+        icon={<Icons.Award size={24} className="text-white animate-pulse" />}
+        maxWidth="max-w-md"
+      >
+        <div className="space-y-6 text-center text-white">
+          <div className="flex flex-col items-center">
+            <div className="w-16 h-16 rounded-3xl bg-[#008db0]/20 flex items-center justify-center mb-4 border border-[#cdf4ff]/30 relative">
+              <span className="text-3xl">🌱</span>
+              <div className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-rose-500 rounded-full border-2 border-slate-900 animate-ping" />
+              <div className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-rose-500 rounded-full border-2 border-slate-900" />
+            </div>
+            <h4 className="text-xl font-black mb-2 uppercase tracking-wide">Refleksi Individu Projek</h4>
+            <p className="text-sm text-slate-200 leading-relaxed font-semibold">
+              Selamat! Kita telah mencapai pertemuan terakhir projek berkebun. Silakan isi Lembar Refleksi Individu untuk mengevaluasi seluruh pembelajaran projek yang telah diselesaikan. Kerjakan di selembar kertas!
+            </p>
+          </div>
+          <div className="pt-2">
+            <button 
+              onClick={() => {
+                setShowRefleksiModal(false);
+                handleModuleRedirect(4, 12);
+              }}
+              className="w-full py-4 bg-gradient-to-r from-[#008db0] to-amber-500 hover:scale-[1.02] active:scale-95 text-white font-black text-xs uppercase tracking-widest rounded-2xl shadow-lg border border-white/10 transition-all flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <Icons.FileText size={16} />
+              <span>KERJAKAN REFLEKSI SEKARANG</span>
+            </button>
+            <button 
+              onClick={() => setShowRefleksiModal(false)}
+              className="mt-3 w-full py-2.5 bg-white/10 hover:bg-white/15 text-slate-300 hover:text-white font-black text-[10px] uppercase tracking-widest rounded-2xl transition-all cursor-pointer"
+            >
+              Nanti Saja
             </button>
           </div>
         </div>

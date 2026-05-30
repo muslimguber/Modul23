@@ -160,6 +160,18 @@ export const modul4Service = {
             { id: 'B', text: "Ya, sangat terinspirasi untuk mulai menanam di polibag!", isCorrect: true }
           ]
         }
+      },
+      {
+        id: 12,
+        title: "LEMBAR REFLEKSI INDIVIDU",
+        content: "Silakan jawab pertanyaan refleksi berikut pada **kertas selembar**:\n\n1. Setelah mengikuti pembelajaran hari ini, apa saja manfaat berkebun yang kamu ketahui bagi diri sendiri, keluarga, dan lingkungan?\n2. Apakah kamu tertarik untuk mulai berkebun di rumah? Jelaskan alasanmu.\n3. Jika kamu memiliki kesempatan membuat kebun di rumah, tanaman apa yang ingin kamu tanam? Mengapa memilih tanaman tersebut?\n4. Tuliskan langkah-langkah yang akan kamu lakukan mulai dari persiapan hingga menanam tanaman di rumah.\n5. Menurutmu, apa tantangan atau kesulitan yang mungkin kamu hadapi saat berkebun? Bagaimana cara mengatasinya?\n\n*Jangan lupa mengumpulkan hasil refleksimu pada kertas selembar ke Guru Pengampu.*",
+        quiz: {
+          question: "Apakah kamu sudah menyelesaikan lembar refleksi individu ini di kertas selembar?",
+          options: [
+            { id: 'A', text: "Ya, saya sudah mengisinya dengan jujur di kertas selembar", isCorrect: true },
+            { id: 'B', text: "Sedang saya kerjakan sekarang", isCorrect: true }
+          ]
+        }
       }
     ]
   })
